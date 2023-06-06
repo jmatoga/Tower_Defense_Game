@@ -27,10 +27,10 @@ public class GameScreen extends JPanel{
 
 
 
-//        for(int x = 0; x < 40; x++) {
-//            for (int y = 0; y < 30; y++) {
+//        for(int x = 0; x < 24; x++) {
+//            for (int y = 0; y < 19; y++) {
 //                g.setColor(getRandomColor());
-//                g.fillRect(x * 32, y*32, 32, 32);
+//                g.fillRect(x * 50, y*50, 50, 50);
 //            }
 //        }
     }
