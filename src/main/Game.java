@@ -22,7 +22,7 @@ public class Game extends JFrame
         importImgage();
 
 
-            setSize(1280, 960); //Robimy na takich wymairach
+            setSize(1200, 950); //Robimy na takich wymairach
             setVisible(true);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setLocationRelativeTo(null);
