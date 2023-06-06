@@ -12,11 +12,10 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_A)
-            System.out.printf("A is pressed");
-        else if (e.getKeyCode() == KeyEvent.VK_B)
-             System.out.printf("B is pressed");
-
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+            System.out.println("Escape is pressed");
+        else if (e.getKeyCode() == KeyEvent.VK_P)
+             System.out.println("P is pressed");
     }
 
     @Override

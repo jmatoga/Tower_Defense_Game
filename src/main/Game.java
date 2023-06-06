@@ -1,10 +1,10 @@
+package main;
+
 import inputs.KeyboardListener;
 import inputs.MyMouseListener;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
