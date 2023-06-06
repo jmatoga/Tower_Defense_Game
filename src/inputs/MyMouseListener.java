@@ -8,7 +8,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        if(e.getButton() == MouseEvent.BUTTON1) // lewy przycisk
+            System.out.println("LPM is pressed");
+        else if(e.getButton() == MouseEvent.BUTTON3) // prawy przycisk
+            System.out.println("PPM is pressed");
     }
 
     @Override
