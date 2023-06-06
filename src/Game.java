@@ -1,3 +1,6 @@
+import inputs.KeyboardListener;
+import inputs.MyMouseListener;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,6 +13,9 @@ public class Game extends JFrame
 {
     private GameScreen gameScreen;
     private BufferedImage img;
+
+    private MyMouseListener myMouseListener;
+    private KeyboardListener keyboardListener;
 
     public Game() {
 
@@ -26,6 +32,17 @@ public class Game extends JFrame
             add(gameScreen);
     }
 
+    private void initInputs() {
+        myMouseListener = new MyMouseListener();
+        keyboardListener = new KeyboardListener();
+
+        addMouseListener(myMouseListener);
+        addMouseMotionListener(myMouseListener);
+        addKeyListener(keyboardListener);
+
+        requestFocus(); // żeby nie było błędów że nie ma focusa i nie pobiera inputów
+    }
+
     private void importImgage() {
         InputStream is = getClass().getResourceAsStream("/res/tlo.png");
 
@@ -39,8 +56,9 @@ public class Game extends JFrame
     public static void main(String[] args) {
 
         System.out.println("New game");
-
         Game game = new Game();
+        game.initInputs();
+
 
     }
 
