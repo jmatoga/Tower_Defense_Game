@@ -10,9 +10,12 @@ public class GameScreen extends JPanel{
     private Random random;
     private BufferedImage img;
 
-    public GameScreen(BufferedImage img)
-    {
+    private Render render;
+
+    public GameScreen(BufferedImage img) {
         this.img = img;
+        render = new Render(this);
+
         random = new Random();
     }
 
