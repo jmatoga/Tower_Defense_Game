@@ -2,9 +2,13 @@ package main;
 
 import inputs.KeyboardListener;
 import inputs.MyMouseListener;
+import scenes.Menu;
+import scenes.Playing;
+import scenes.Settings;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,24 +16,34 @@ import java.io.InputStream;
 public class Game extends JFrame
 {
     private GameScreen gameScreen;
-    private BufferedImage img;
-
     private MyMouseListener myMouseListener;
     private KeyboardListener keyboardListener;
 
+    // Classes
+    private Render render;
+    private Menu menu;
+    private Playing playing;
+    private Settings settings;
+
     public Game() {
+        setSize(1200, 950); //Robimy na takich wymairach
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
 
-        importImgage();
+        initClasses();
 
+        add(gameScreen);
+    }
 
-            setSize(1200, 950); //Robimy na takich wymairach
-            setVisible(true);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
-            setResizable(false);
+    private void initClasses() {
+        render = new Render(this);
+        gameScreen = new GameScreen(this);
+        menu = new Menu(this);
+        playing = new Playing(this);
+        settings = new Settings(this);
 
-            gameScreen = new GameScreen(img);
-            add(gameScreen);
     }
 
     private void initInputs() {
@@ -43,15 +57,7 @@ public class Game extends JFrame
         requestFocus(); // żeby nie było błędów że nie ma focusa i nie pobiera inputów
     }
 
-    private void importImgage() {
-        InputStream is = getClass().getResourceAsStream("/res/tlo.png");
 
-        try {
-            img = ImageIO.read(is);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 
     public static void main(String[] args) {
 
@@ -60,6 +66,24 @@ public class Game extends JFrame
         game.initInputs();
 
 
+    }
+
+    // Getters and setters
+
+    public Render getRender() {
+        return render;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public Playing getPlaying() {
+        return playing;
+    }
+
+    public Settings getSettings() {
+        return settings;
     }
 
 }
