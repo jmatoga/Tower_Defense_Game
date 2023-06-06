@@ -13,9 +13,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Game extends JFrame
+public class Game extends JFrame implements Runnable
 {
+    private final double setFPS = 120.0;
+    private final double setUPS = 60.0;
+
     private GameScreen gameScreen;
+    private Thread gameThread;
+
     private MyMouseListener myMouseListener;
     private KeyboardListener keyboardListener;
 
@@ -25,9 +30,11 @@ public class Game extends JFrame
     private Playing playing;
     private Settings settings;
 
+
+
+
     public Game() {
-        setSize(1200, 950); //Robimy na takich wymairach
-        setVisible(true);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -35,6 +42,24 @@ public class Game extends JFrame
         initClasses();
 
         add(gameScreen);
+        pack();
+
+        setVisible(true);
+    }
+
+
+
+    public void start()
+    {
+        gameThread = new Thread(this){};
+
+        gameThread.start();
+    }
+
+
+    private void updateGame(){
+
+        //System.out.println("Game Updated!");
     }
 
     private void initClasses() {
@@ -64,9 +89,13 @@ public class Game extends JFrame
         System.out.println("New game");
         Game game = new Game();
         game.initInputs();
+        game.start();
+
 
 
     }
+
+
 
     // Getters and setters
 
@@ -86,6 +115,55 @@ public class Game extends JFrame
         return settings;
     }
 
+    @Override
+    public void run()
+    {
+
+
+        long lastFrame = System.nanoTime();
+        long lastUpdate = System.nanoTime();
+        long lastTimeCheck = System.currentTimeMillis();
+
+        double timePerFrame = 1000000000.0/setFPS; //bilonnanosekund - tutaj 60 oznacza ile stałych fpsów chcemy mieć w grze
+        double timePerUpdate = 1000000000.0/setUPS;
+
+        int frames = 0;
+        int updates = 0;
+
+
+        long now;
+
+
+        while(true) {
+
+            now = System.nanoTime();
+
+            //render
+            if (now - lastFrame >= timePerFrame) {
+                lastFrame = now;
+                repaint();
+                lastFrame = now;
+                frames++;
+            }
+
+            if (now - lastUpdate >= timePerUpdate) {
+                updateGame();
+                lastUpdate = now;
+                updates++;
+            }
+
+            if(System.currentTimeMillis() - lastTimeCheck >= 1000)
+            {
+                System.out.println("FPS: " + frames + " | UPS: " + updates);
+                frames = 0;
+                updates = 0;
+                lastTimeCheck = System.currentTimeMillis();
+            }
+
+        }
+
+
+    }
 }
 
 

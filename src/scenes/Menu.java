@@ -12,35 +12,28 @@ import java.util.Random;
 
 public class Menu extends GameScene implements SceneMethods {
     private BufferedImage img;
+    private BufferedImage img_bg;
     private ArrayList<BufferedImage> spirites = new ArrayList<>();
     private Random random;
     public Menu(Game game) {
         super(game);
         random = new Random();
         importImgage();
-        loadSprites();
+        importBG();
+        loadSpirites();
     }
 
     @Override
     public void render(Graphics g) {
-        // do zrobienia @Krzysiu
-        //public void paintComponent (Graphics g){
-        //   super.paintComponent(g);
-
-        // g.drawImage(img, 0, 0, null);
-
-
-        //        for(int x = 0; x < 24; x++) {
-        //            for (int y = 0; y < 19; y++) {
-        //                g.setColor(getRandomColor());
-        //                g.fillRect(x * 50, y*50, 50, 50);
-        //            }
-        //        }
-        // }
+        g.drawImage(img_bg, 0, 0, null);
+        for (int y = 0; y < 15; y++) {
+            for (int x = 0; x < 24; x++) {
+                g.drawImage(spirites.get(getRndInt()), x * 50, y * 50, null);
+            }
+        }
     }
-
     private void importImgage() {
-        InputStream is = getClass().getResourceAsStream("/res/tlo.png");
+        InputStream is = getClass().getResourceAsStream("/res/texture_pack_1.png");
 
         try {
             img = ImageIO.read(is);
@@ -49,10 +42,30 @@ public class Menu extends GameScene implements SceneMethods {
         }
     }
 
-    private void loadSprites() {
-        for(int y=0; y<10;y++) {
-            //spirites.add @Krzsiu
+    private void importBG() {
+        InputStream is = getClass().getResourceAsStream("/res/tlo.png");
+
+        try {
+            img_bg = ImageIO.read(is);
+        }catch (IOException e){
+            e.printStackTrace();
         }
+    }
+
+    private void loadSpirites()
+    {
+        for(int y = 0; y < 10; y++)
+        {
+            for(int x = 0; x < 10; x++)
+            {
+                spirites.add(img.getSubimage(x*50, y*50, 50,50));
+            }
+        }
+    }
+
+    private int getRndInt()
+    {
+        return random.nextInt(20);
     }
 
 

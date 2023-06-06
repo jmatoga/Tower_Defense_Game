@@ -2,17 +2,26 @@ package main;
 
 import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Random;
+
 
 public class GameScreen extends JPanel{
+
     private Game game;
+    private  Dimension size;
+
 
     public GameScreen(Game game) {
         this.game = game;
 
+        setPanelSize();
+    }
 
-        //setPanelSize();
+    private void setPanelSize() {
+        size = new Dimension(1200, 950);
+        setMinimumSize(size);
+        setPreferredSize(size);
+        setMaximumSize(size);
+
     }
 
     // private void setPanelSize() {}
@@ -20,4 +29,5 @@ public class GameScreen extends JPanel{
         super.paintComponent(g);
         game.getRender().render(g); // renderujemy klase render
     }
+
 }
