@@ -21,15 +21,11 @@ public class Game extends JFrame implements Runnable
     private GameScreen gameScreen;
     private Thread gameThread;
 
-    private MyMouseListener myMouseListener;
-    private KeyboardListener keyboardListener;
-
     // Classes
     private Render render;
     private Menu menu;
     private Playing playing;
     private Settings settings;
-
 
 
 
@@ -71,24 +67,13 @@ public class Game extends JFrame implements Runnable
 
     }
 
-    private void initInputs() {
-        myMouseListener = new MyMouseListener();
-        keyboardListener = new KeyboardListener();
-
-        addMouseListener(myMouseListener);
-        addMouseMotionListener(myMouseListener);
-        addKeyListener(keyboardListener);
-
-        requestFocus(); // żeby nie było błędów że nie ma focusa i nie pobiera inputów
-    }
-
 
 
     public static void main(String[] args) {
 
         System.out.println("New game");
         Game game = new Game();
-        game.initInputs();
+        game.gameScreen.initInputs();
         game.start();
 
 
