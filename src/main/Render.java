@@ -11,7 +11,8 @@ import java.util.Random;
 public class Render {
     private Game game;
 
-    public Render(Game game) {
+    public Render(Game game)
+    {
         this.game = game;
     }
 
