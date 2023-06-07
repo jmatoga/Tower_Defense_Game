@@ -29,8 +29,8 @@ public class BottomBar {
     private void intButtons() {
         bMENU = new MyButton("MENU", 1040, 890, 150, 50);
 
-        int w = 100;
-        int h = 50;
+        int w = 70;
+        int h = 70;
         int xStart = 12;
         int yStart = 765;
         int xOffset = (int) (w * 1.1f);
@@ -81,9 +81,6 @@ public class BottomBar {
 
     // TODO: wybór koloru
     public void draw(Graphics g) {
-        // Background
-        g.setColor(new Color(220, 123, 15));
-        g.fillRect(x, y, width, height);
 
         // Buttons
         drawButtons(g);

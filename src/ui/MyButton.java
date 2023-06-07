@@ -64,17 +64,19 @@ public class MyButton {
     }
 
     private void drawBody(Graphics g) {
-        if (mouseOver)
-            g.setColor(Color.gray);
-        else
+        if (mouseOver) {
             g.setColor(Color.white);
+            g.fillRect(x, y, width, height);
+        }
 
-        g.fillRect(x, y, width, height);
+
+
     }
 
     private void drawText(Graphics g) {
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
+
         g.drawString(text, x - w / 2 + width / 2, y + height / 2);
 
         //TODO ogarnać to zeby działało vvvv

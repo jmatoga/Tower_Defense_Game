@@ -23,7 +23,7 @@ public class Playing extends GameScene implements SceneMethods {
         tileManager = new TileManager();
 
         // TODO: sprawdzic czy dobre rozmiary
-        bottomBar = new BottomBar(0, 1200, 750, 200, this);
+        bottomBar = new BottomBar(0, 750, 1200, 200, this);
     }
 
     @Override
@@ -44,22 +44,21 @@ public class Playing extends GameScene implements SceneMethods {
         return tileManager;
     }
 
-    // TODO: idk czy takie wymiary
     @Override
     public void mouseClicked(int x, int y) {
-        if (y >= 200)
+        if (y >= 750)
             bottomBar.mouseClicked(x, y);
     }
 
     @Override
     public void mouseMoved(int x, int y) {
-        if (y >= 200)
+        if (y >= 750)
             bottomBar.mouseMoved(x, y);
     }
 
     @Override
     public void mousePressed(int x, int y) {
-        if (y >= 200)
+        if (y >= 750)
             bottomBar.mousePressed(x, y);
     }
 
