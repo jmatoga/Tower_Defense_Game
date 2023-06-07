@@ -7,35 +7,27 @@ import java.io.InputStream;
 
 public class LoadSave {
 
-    public static BufferedImage getSpriteResource()
-    {
-
+    public static BufferedImage getSpriteResource() {
         BufferedImage img = null;
         InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("res/texture_pack_1.png");
 
         try {
             img = ImageIO.read(is);
-        }catch (IOException e){
+        } catch (IOException e){
             e.printStackTrace();
         }
         return img;
     }
 
-    public static BufferedImage getImageBG()
-    {
-
+    public static BufferedImage getImageBG() {
         BufferedImage img_bg = null;
         InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("res/tlo.png");
 
         try {
             img_bg = ImageIO.read(is);
-        }catch (IOException e){
+        } catch (IOException e){
             e.printStackTrace();
         }
         return img_bg;
     }
-
-
 }
-
-

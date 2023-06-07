@@ -11,14 +11,12 @@ import java.util.Random;
 public class Render {
     private Game game;
 
-    public Render(Game game)
-    {
+    public Render(Game game) {
         this.game = game;
     }
 
     public void render(Graphics g) {
-        switch(GameStates.gameState) {
-
+        switch (GameStates.gameState) {
             case MENU:
                 game.getMenu().render(g);
                 break;
@@ -28,9 +26,6 @@ public class Render {
             case SETTINGS:
                 game.getSettings().render(g);
                 break;
-
         }
     }
-
-
 }

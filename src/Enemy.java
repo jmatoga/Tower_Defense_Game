@@ -36,8 +36,7 @@ public class Enemy {
     //private double armor;
     private double rewardForDefeating;
 
-    private enum EnemyType
-    {
+    private enum EnemyType {
         TUTORIAL_UNIT,
         EASY_UNIT,
         NORMAL_UNIT,
@@ -49,44 +48,36 @@ public class Enemy {
 
     private EnemyType enemyType;
 
-    public Enemy (EnemyType enemyType)
-    {
+    public Enemy(EnemyType enemyType) {
         this.enemyType = enemyType;
 
-        switch(enemyType)
-        {
-            case TUTORIAL_UNIT ->
-            {
+        switch (enemyType) {
+            case TUTORIAL_UNIT -> {
                 this.speed = 60.0;
                 this.hp = 20.0;
                 this.rewardForDefeating = 1.0;
             }
-            case EASY_UNIT ->
-            {
+            case EASY_UNIT -> {
                 this.speed = 100.0;
                 this.hp = 35.0;
                 this.rewardForDefeating = 3.0;
             }
-            case NORMAL_UNIT ->
-            {
+            case NORMAL_UNIT -> {
                 this.speed = 200.0;
                 this.hp = 60.0;
                 this.rewardForDefeating = 9.0;
             }
-            case HARD_UNIT ->
-            {
+            case HARD_UNIT -> {
                 this.speed = 250.0;
                 this.hp = 85.0;
                 this.rewardForDefeating = 15.0;
             }
-            case SUPER_UNIT ->
-            {
+            case SUPER_UNIT -> {
                 this.speed = 100.0;
                 this.hp = 115.0;
                 this.rewardForDefeating = 20.0;
             }
-            case TURBO_HARD_UNIT ->
-            {
+            case TURBO_HARD_UNIT -> {
                 this.speed = 300.0;
                 this.hp = 100.0;
                 this.rewardForDefeating = 30.0;
@@ -94,14 +85,10 @@ public class Enemy {
         }
     }
 
-    public Enemy (double speed, double hp, double rewardForDefeating) {
-
+    public Enemy(double speed, double hp, double rewardForDefeating) {
         this.enemyType = EnemyType.OWN_UNIT;
         this.speed = speed;
         this.hp = hp;
         this.rewardForDefeating = rewardForDefeating;
-
     }
-
-
 }

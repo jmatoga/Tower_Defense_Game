@@ -1,5 +1,4 @@
 public class Tower {
-
     private double fireSpeed; //okreslnae ile razy na sekunde
     private double fireDamage;
     private double cost;
@@ -113,18 +112,14 @@ public class Tower {
                 this.fireRange = 100.0;
             }
             default -> throw new IllegalArgumentException("Nieznany typ wieży");
-
         }
     }
 
-    public Tower (double fireSpeed, double fireDamage, double cost, double fireRange)
-    {
+    public Tower (double fireSpeed, double fireDamage, double cost, double fireRange) {
         this.towerType = TowerType.OWN_TOWER;
         this.fireSpeed = fireSpeed;
         this.fireDamage = fireDamage;
         this.cost = cost;
         this.fireRange = fireRange;
     }
-
-
 }

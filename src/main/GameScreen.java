@@ -7,18 +7,15 @@ import javax.swing.JPanel;
 import java.awt.*;
 
 
-public class GameScreen extends JPanel{
-
+public class GameScreen extends JPanel {
     private Game game;
-    private  Dimension size;
+    private Dimension size;
 
     private MyMouseListener myMouseListener;
     private KeyboardListener keyboardListener;
 
-
     public GameScreen(Game game) {
         this.game = game;
-
         setPanelSize();
     }
 
@@ -46,5 +43,4 @@ public class GameScreen extends JPanel{
         super.paintComponent(g);
         game.getRender().render(g); // renderujemy klase render
     }
-
 }
