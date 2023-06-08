@@ -14,7 +14,9 @@ public class MyButton {
 
     Font Inkfree;
 
-    // For normal buttons
+    /*
+    Funckja dla normalnych przycisków
+     */
     public MyButton(String text, int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -26,7 +28,9 @@ public class MyButton {
         setBorders();
     }
 
-    // For tile buttons
+    /*
+    Funkcja dla kafelkowych przyckisków
+     */
     public MyButton(String text, int x, int y, int width, int height, int id) {
         this.x = x;
         this.y = y;
@@ -64,17 +68,19 @@ public class MyButton {
     }
 
     private void drawBody(Graphics g) {
-        if (mouseOver)
-            g.setColor(Color.gray);
-        else
+        if (mouseOver) {
             g.setColor(Color.white);
+            g.fillRect(x, y, width, height);
+        }
 
-        g.fillRect(x, y, width, height);
+
+
     }
 
     private void drawText(Graphics g) {
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
+
         g.drawString(text, x - w / 2 + width / 2, y + height / 2);
 
         //TODO ogarnać to zeby działało vvvv

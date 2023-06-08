@@ -16,6 +16,8 @@ public class BottomBar {
     private Playing playing;
     private ArrayList<MyButton> tileButtons = new ArrayList<>();
 
+    private Tile selectedTile;
+
     public BottomBar(int x, int y, int width, int height, Playing playing) {
         this.x = x;
         this.y = y;
@@ -29,8 +31,8 @@ public class BottomBar {
     private void intButtons() {
         bMENU = new MyButton("MENU", 1040, 890, 150, 50);
 
-        int w = 100;
-        int h = 50;
+        int w = 70;
+        int h = 70;
         int xStart = 12;
         int yStart = 765;
         int xOffset = (int) (w * 1.1f);
@@ -44,8 +46,18 @@ public class BottomBar {
 
     private void drawButtons(Graphics g) {
         bMENU.draw(g);
+
         drawTileButtons(g);
+        drawSelectedTile(g);
     }
+
+    private void drawSelectedTile(Graphics g) {
+
+        if (selectedTile != null){
+            //g.drawImage(selectedTile.getSprite(),)
+        }
+    }
+
     boolean flag=false;
 
     private void drawTileButtons(Graphics g) {
@@ -81,9 +93,6 @@ public class BottomBar {
 
     // TODO: wybór koloru
     public void draw(Graphics g) {
-        // Background
-        g.setColor(new Color(220, 123, 15));
-        g.fillRect(x, y, width, height);
 
         // Buttons
         drawButtons(g);
@@ -92,6 +101,17 @@ public class BottomBar {
     public void mouseClicked(int x, int y) {
         if (bMENU.getBorders().contains(x, y))
             SetGameState(MENU);
+        else
+        {
+            for(MyButton b : tileButtons)
+            {
+                if(b.getBorders().contains(x,y))
+                {
+                    selectedTile = playing.getTileManager().getTile(b.getId());
+                    return;
+                }
+            }
+        }
     }
 
     public void mouseMoved(int x, int y) {
