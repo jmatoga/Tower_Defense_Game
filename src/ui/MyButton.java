@@ -78,31 +78,19 @@ public class MyButton {
     }
 
     private void drawText(Graphics g) {
+
+        try {
+            Inkfree = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/Inkfree.ttf")).deriveFont(Font.BOLD, 30f);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+
+
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
-
-        g.drawString(text, x - w / 2 + width / 2, y + height / 2);
-
-        //TODO ogarnać to zeby działało vvvv
-//        try {
-//
-//            String fontPath = "/res/Inkfree.ttf";
-//
-//            // Uzyskanie bezwzględnej ścieżki do pliku czcionki
-//            String absoluteFontPath = getClass().getClassLoader().getResource(fontPath).getPath();
-//            File fontFile = new File(absoluteFontPath);
-//
-//            // Ładowanie czcionki z pliku
-//            Inkfree = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(10f);
-//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("/res/Inkfree.ttf"))); //to w sumie nie iwem od czego jest
-//
-//            // Rysowanie tekstu
-//            g.setFont(Inkfree);
-//            g.drawString(text, x - w/2 + width/2, y + height/2);
-//        } catch (FontFormatException | IOException e) {
-//            e.printStackTrace();
-//        }
+        g.setFont(Inkfree);
+        g.setColor(Color.black);
+        g.drawString(text, x - w/2 + width/2, y + height/2);
     }
 
     public void resetBooleans() {
