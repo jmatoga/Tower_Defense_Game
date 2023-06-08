@@ -26,6 +26,7 @@ public class Game extends JFrame implements Runnable {
     private Playing playing;
     private Settings settings;
 
+
     public Game() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -39,6 +40,9 @@ public class Game extends JFrame implements Runnable {
         setVisible(true);
     }
 
+    /*
+    Funckja zaczynajaca nowy wątek
+     */
     public void start() {
         gameThread = new Thread(this) {
 
@@ -46,10 +50,16 @@ public class Game extends JFrame implements Runnable {
         gameThread.start();
     }
 
+    /*
+    Funckja informujaca update gry
+     */
     private void updateGame() {
         //System.out.println("Game Updated!");
     }
 
+    /*
+     Funckja inicjujaca klasy potrzebne do gry
+     */
     private void initClasses() {
         render = new Render(this);
         gameScreen = new GameScreen(this);
@@ -82,6 +92,9 @@ public class Game extends JFrame implements Runnable {
         return settings;
     }
 
+    /*
+     Funckja odpowiedzialna za wyswietlanie fps i ups po starcie gry
+     */
     @Override
     public void run() {
         long lastFrame = System.nanoTime();

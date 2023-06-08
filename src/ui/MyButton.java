@@ -14,7 +14,9 @@ public class MyButton {
 
     Font Inkfree;
 
-    // For normal buttons
+    /*
+    Funckja dla normalnych przycisków
+     */
     public MyButton(String text, int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -26,7 +28,9 @@ public class MyButton {
         setBorders();
     }
 
-    // For tile buttons
+    /*
+    Funkcja dla kafelkowych przyckisków
+     */
     public MyButton(String text, int x, int y, int width, int height, int id) {
         this.x = x;
         this.y = y;

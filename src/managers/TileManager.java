@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class TileManager {
-    public Tile PATH, BLANK_PATH, START_PATH, END_PATH;
+    public Tile PATH, BLANK_PATH, START_PATH, END_PATH, TEST;
     public BufferedImage resource;
     public BufferedImage img_bg;
     public ArrayList<Tile> tiles = new ArrayList<>();
@@ -24,7 +24,13 @@ public class TileManager {
         tiles.add(BLANK_PATH = new Tile(getSprite(2, 0), id++, "Blank_Path"));
         tiles.add(START_PATH = new Tile(getSprite(0, 1), id++, "Start_Path"));
         tiles.add(END_PATH = new Tile(getSprite(1, 1), id++, "End_Path"));
+
     }
+
+    public Tile getTile(int id){
+        return tiles.get(id);
+    }
+
 
     private void loadResource() {
         resource = LoadSave.getSpriteResource();

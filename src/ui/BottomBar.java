@@ -16,6 +16,8 @@ public class BottomBar {
     private Playing playing;
     private ArrayList<MyButton> tileButtons = new ArrayList<>();
 
+    private Tile selectedTile;
+
     public BottomBar(int x, int y, int width, int height, Playing playing) {
         this.x = x;
         this.y = y;
@@ -44,8 +46,18 @@ public class BottomBar {
 
     private void drawButtons(Graphics g) {
         bMENU.draw(g);
+
         drawTileButtons(g);
+        drawSelectedTile(g);
     }
+
+    private void drawSelectedTile(Graphics g) {
+
+        if (selectedTile != null){
+            //g.drawImage(selectedTile.getSprite(),)
+        }
+    }
+
     boolean flag=false;
 
     private void drawTileButtons(Graphics g) {
@@ -89,6 +101,17 @@ public class BottomBar {
     public void mouseClicked(int x, int y) {
         if (bMENU.getBorders().contains(x, y))
             SetGameState(MENU);
+        else
+        {
+            for(MyButton b : tileButtons)
+            {
+                if(b.getBorders().contains(x,y))
+                {
+                    selectedTile = playing.getTileManager().getTile(b.getId());
+                    return;
+                }
+            }
+        }
     }
 
     public void mouseMoved(int x, int y) {

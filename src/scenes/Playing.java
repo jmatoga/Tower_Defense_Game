@@ -22,7 +22,6 @@ public class Playing extends GameScene implements SceneMethods {
         lvl = LevelBuild.getLevelData();
         tileManager = new TileManager();
 
-        // TODO: sprawdzic czy dobre rozmiary
         bottomBar = new BottomBar(0, 750, 1200, 200, this);
     }
 

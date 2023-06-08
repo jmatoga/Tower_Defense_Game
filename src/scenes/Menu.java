@@ -21,6 +21,8 @@ public class Menu extends GameScene implements SceneMethods {
     private Random random;
     private MyButton bPLAY, bSETTINGS, bQUIT;
 
+
+
     public Menu(Game game) {
         super(game);
         random = new Random();
@@ -30,6 +32,9 @@ public class Menu extends GameScene implements SceneMethods {
         intButtons();
     }
 
+    /*
+     Funcja inicjujaca przyciski w menu
+     */
     private void intButtons() {
         bPLAY = new MyButton("PLAY", 450, 240, 300, 100);
         bSETTINGS = new MyButton("SETTINGS", 450, 480, 300, 100);
@@ -109,6 +114,9 @@ public class Menu extends GameScene implements SceneMethods {
         bQUIT.draw(g);
     }
 
+    /*
+    Fukcja importująca texture packa
+     */
     private void importImgage() {
         InputStream is = getClass().getResourceAsStream("/res/texture_pack_1.png");
 
@@ -119,8 +127,10 @@ public class Menu extends GameScene implements SceneMethods {
         }
     }
 
+    /*
+    Funckja importujaca tło menu
+     */
     private void importBG() {
-        // TODO: do zmiany plik @Kraisu
         InputStream is = getClass().getResourceAsStream("/res/menu_bg.png");
 
         try {
@@ -130,6 +140,10 @@ public class Menu extends GameScene implements SceneMethods {
         }
     }
 
+    /*
+    Funckja ładujaca duszki z texture packa
+    Chyba nie jest potrzebna już albo na razie
+     */
     private void loadSpirites() {
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
