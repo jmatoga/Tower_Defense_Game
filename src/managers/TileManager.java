@@ -12,6 +12,8 @@ public class TileManager {
     public BufferedImage img_bg;
     public ArrayList<Tile> tiles = new ArrayList<>();
 
+    //public Tile blank_path_visible = new Tile(getSprite(7, 2), 100, "Blank_Path_Visible");
+
     public TileManager() {
         loadBG();
         loadResource();
@@ -46,5 +48,9 @@ public class TileManager {
 
     private BufferedImage getSprite(int x, int y) {
         return resource.getSubimage(x * 50, y * 50, 50, 50);
+    }
+
+    public BufferedImage getSpriteBlankVisible() {
+        return resource.getSubimage(7 * 50, 2 * 50, 50, 50);
     }
 }
