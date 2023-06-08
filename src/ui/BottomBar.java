@@ -52,13 +52,12 @@ public class BottomBar {
     }
 
     private void drawSelectedTile(Graphics g) {
-
         if (selectedTile != null){
-            //g.drawImage(selectedTile.getSprite(),)
+            g.drawImage(selectedTile.getSprite(),1065,770,100,100,null);
+            g.setColor(Color.black);
+            g.drawRect(1065,770,100,100);
         }
     }
-
-    boolean flag=false;
 
     private void drawTileButtons(Graphics g) {
         for (MyButton b : tileButtons) {
@@ -101,13 +100,11 @@ public class BottomBar {
     public void mouseClicked(int x, int y) {
         if (bMENU.getBorders().contains(x, y))
             SetGameState(MENU);
-        else
-        {
-            for(MyButton b : tileButtons)
-            {
-                if(b.getBorders().contains(x,y))
-                {
+        else {
+            for(MyButton b : tileButtons) {
+                if(b.getBorders().contains(x,y)) {
                     selectedTile = playing.getTileManager().getTile(b.getId());
+                    playing.setSelectedTile(selectedTile);
                     return;
                 }
             }
