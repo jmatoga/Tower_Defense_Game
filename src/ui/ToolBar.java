@@ -72,6 +72,7 @@ public class ToolBar extends Bar{
         for (MyButton b : tileButtons) {
             // Image / Sprite
 
+            // żeby była ta czerwona strzałeczka
             if(b.getId() == 1)
                 g.drawImage(editing.getGame().getTileManager().getSpriteBlankVisible(),b.x, b.y, b.width, b.height, null);
             else
