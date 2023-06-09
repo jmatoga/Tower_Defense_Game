@@ -1,13 +1,18 @@
 package main;
 
+import help.LoadSave;
 import inputs.KeyboardListener;
 import inputs.MyMouseListener;
+import managers.TileManager;
+import scenes.Editing;
 import scenes.Menu;
 import scenes.Playing;
 import scenes.Settings;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -25,7 +30,8 @@ public class Game extends JFrame implements Runnable {
     private Menu menu;
     private Playing playing;
     private Settings settings;
-
+    private Editing editing;
+    private TileManager tileManager;
 
     public Game() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,6 +39,7 @@ public class Game extends JFrame implements Runnable {
         setResizable(false);
 
         initClasses();
+        createDefaultLevel();
 
         add(gameScreen);
         pack();
@@ -40,8 +47,19 @@ public class Game extends JFrame implements Runnable {
         setVisible(true);
     }
 
-    /*
-    Funckja zaczynajaca nowy wątek
+    /**
+     * Tworzenie nowego poziomu z wartościami domyślnymi
+     */
+    private void createDefaultLevel(){
+        int[] arr = new int[360];
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = 0; //pierwsza tekstura
+        }
+        LoadSave.CreateLevel("new_Level",arr);
+    }
+
+    /**
+    Rozpoczęcie nowego wątku
      */
     public void start() {
         gameThread = new Thread(this) {
@@ -50,22 +68,24 @@ public class Game extends JFrame implements Runnable {
         gameThread.start();
     }
 
-    /*
-    Funckja informujaca update gry
+    /**
+     Informowanie o update gry
      */
     private void updateGame() {
         //System.out.println("Game Updated!");
     }
 
-    /*
-     Funckja inicjujaca klasy potrzebne do gry
+    /**
+     Inicjacja klas potrzebnych do gry
      */
     private void initClasses() {
+        tileManager = new TileManager();
         render = new Render(this);
         gameScreen = new GameScreen(this);
         menu = new Menu(this);
         playing = new Playing(this);
         settings = new Settings(this);
+        editing = new Editing(this);
     }
 
     public static void main(String[] args) {
@@ -91,9 +111,15 @@ public class Game extends JFrame implements Runnable {
     public Settings getSettings() {
         return settings;
     }
+    public Editing getEditor() {
+        return editing;
+    }
+    public TileManager getTileManager(){
+        return tileManager;
+    }
 
-    /*
-     Funckja odpowiedzialna za wyswietlanie fps i ups po starcie gry
+    /**
+     * Wyświetlanie FPS i UPS po starcie gry
      */
     @Override
     public void run() {
