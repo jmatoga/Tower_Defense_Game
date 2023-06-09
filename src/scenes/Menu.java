@@ -19,7 +19,7 @@ public class Menu extends GameScene implements SceneMethods {
     private BufferedImage img_bg;
     private ArrayList<BufferedImage> spirites = new ArrayList<>();
     private Random random;
-    private MyButton bPLAY, bSETTINGS, bQUIT;
+    private MyButton bPLAY, bEDIT, bSETTINGS, bQUIT;
 
 
 
@@ -27,8 +27,8 @@ public class Menu extends GameScene implements SceneMethods {
         super(game);
         random = new Random();
         importBG();
-        importImgage();
-        loadSpirites();
+        //importImgage();
+        //loadSpirites();
         intButtons();
     }
 
@@ -36,9 +36,14 @@ public class Menu extends GameScene implements SceneMethods {
      Funcja inicjujaca przyciski w menu
      */
     private void intButtons() {
-        bPLAY = new MyButton("PLAY", 450, 240, 300, 100);
-        bSETTINGS = new MyButton("SETTINGS", 450, 480, 300, 100);
-        bQUIT = new MyButton("QUIT", 450, 720, 300, 100);
+        int w = 300, h = 100;
+        int x = 450, y = 200;
+
+        bPLAY = new MyButton("PLAY", x, y*1, w, h);
+        bEDIT = new MyButton("EDIT", x, y*2, w, h);
+        bSETTINGS = new MyButton("SETTINGS", x, y*3, w, h);
+        bQUIT = new MyButton("QUIT", x, y*4, w, h);
+
     }
 
     @Override
@@ -60,6 +65,10 @@ public class Menu extends GameScene implements SceneMethods {
         if (bQUIT.getBorders().contains(x, y)) {
             System.exit(120); //taki sobie kod wybrałe wyjscia z przycisku
         }
+
+        if (bEDIT.getBorders().contains(x, y)) {
+            SetGameState(EDIT);
+        }
     }
 
     @Override
@@ -67,17 +76,19 @@ public class Menu extends GameScene implements SceneMethods {
         bPLAY.setMouseOver(false);
         bSETTINGS.setMouseOver(false);
         bQUIT.setMouseOver(false);
+        bEDIT.setMouseOver(false);
 
         if (bPLAY.getBorders().contains(x, y)) {
             bPLAY.setMouseOver(true);
         }
-
         if (bSETTINGS.getBorders().contains(x, y)) {
             bSETTINGS.setMouseOver(true);
         }
-
         if (bQUIT.getBorders().contains(x, y)) {
             bQUIT.setMouseOver(true);
+        }
+        if (bEDIT.getBorders().contains(x, y)) {
+            bEDIT.setMouseOver(true);
         }
     }
 
@@ -86,15 +97,15 @@ public class Menu extends GameScene implements SceneMethods {
         if (bPLAY.getBorders().contains(x, y)) {
             bPLAY.setMousePress(true);
         }
-
         if (bSETTINGS.getBorders().contains(x, y)) {
             bSETTINGS.setMousePress(true);
         }
-
         if (bQUIT.getBorders().contains(x, y)) {
             bQUIT.setMousePress(true);
         }
-
+        if (bEDIT.getBorders().contains(x, y)) {
+            bEDIT.setMousePress(true);
+        }
     }
 
     @Override
@@ -111,17 +122,19 @@ public class Menu extends GameScene implements SceneMethods {
         bPLAY.resetBooleans();
         bSETTINGS.resetBooleans();
         bQUIT.resetBooleans();
+        bEDIT.resetBooleans();
     }
 
     private void drawButtons(Graphics g) {
         bPLAY.draw(g);
         bSETTINGS.draw(g);
         bQUIT.draw(g);
+        bEDIT.draw(g);
     }
 
     /*
-    Fukcja importująca texture packa
-     */
+    Importowanie texture packa
+
     private void importImgage() {
         InputStream is = getClass().getResourceAsStream("/res/texture_pack_1.png");
 
@@ -131,9 +144,9 @@ public class Menu extends GameScene implements SceneMethods {
             e.printStackTrace();
         }
     }
-
-    /*
-    Funckja importujaca tło menu
+    */
+    /**
+    Importowanie tła MENU
      */
     private void importBG() {
         InputStream is = getClass().getResourceAsStream("/res/menu_bg.png");
@@ -145,10 +158,10 @@ public class Menu extends GameScene implements SceneMethods {
         }
     }
 
-    /*
-    Funckja ładujaca duszki z texture packa
-    Chyba nie jest potrzebna już albo na razie
-     */
+    /**
+    Ładowanie Spiritsów z texture packa
+
+    //Chyba nie jest potrzebna już albo na razie//
     private void loadSpirites() {
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
@@ -156,8 +169,9 @@ public class Menu extends GameScene implements SceneMethods {
             }
         }
     }
-
+    */
     private int getRndInt() {
+
         return random.nextInt(20);
     }
 }
