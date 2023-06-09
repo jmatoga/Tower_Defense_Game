@@ -29,7 +29,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                     game.getSettings().mouseClicked(e.getX(), e.getY());
                     break;
                 case EDIT:
-                    game.getEditor().mouseClicked(e.getX(),e.getY());
+                    game.getSettings().mouseClicked(e.getX(),e.getY());
                     break;
                 default:
                     break;
@@ -50,7 +50,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 game.getPlaying().mousePressed(e.getX(), e.getY());
                 break;
             case EDIT:
-                game.getEditor().mousePressed(e.getX(),e.getY());
+                game.getSettings().mousePressed(e.getX(),e.getY());
                 break;
             default:
                 break;
@@ -70,7 +70,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 game.getSettings().mouseReleased(e.getX(), e.getY());
                 break;
             case EDIT:
-                game.getEditor().mouseReleased(e.getX(),e.getY());
+                game.getSettings().mouseReleased(e.getX(),e.getY());
                 break;
             default:
                 break;
@@ -100,7 +100,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 game.getSettings().mouseDragged(e.getX(), e.getY());
                 break;
             case EDIT:
-                game.getEditor().mouseDragged(e.getX(),e.getY());
+                game.getSettings().mouseDragged(e.getX(),e.getY());
             default:
                 break;
         }
@@ -119,7 +119,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 game.getSettings().mouseMoved(e.getX(), e.getY());
                 break;
             case EDIT:
-                game.getEditor().mouseMoved(e.getX(),e.getY());
+                game.getSettings().mouseMoved(e.getX(),e.getY());
                 break;
             default:
                 break;

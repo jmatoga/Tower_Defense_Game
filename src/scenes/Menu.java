@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 public class Menu extends GameScene implements SceneMethods {
     private BufferedImage img;
     private BufferedImage img_bg;

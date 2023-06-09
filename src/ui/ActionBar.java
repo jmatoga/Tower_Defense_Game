@@ -12,10 +12,10 @@ public class ActionBar extends Bar{
     public ActionBar(int x, int y, int width, int height, Playing playing) {
         super(x,y,width,height);
         this.playing = playing;
-        initButtons();
+        intButtons();
     }
 
-    private void initButtons() {
+    private void intButtons() {
         bMENU = new MyButton("MENU", 1040, 890, 150, 50);
     }
 

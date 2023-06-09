@@ -3,13 +3,11 @@ package scenes;
 import Objects.Tile;
 import help.LoadSave;
 import main.Game;
-import managers.TileManager;
 import ui.ToolBar;
 import java.awt.*;
 
 public class Editing extends GameScene implements SceneMethods{
     private int[][] lvl;
-    private TileManager tileManager;
     private Tile selectedTile;
     private int mouseX, mouseY;
     private int lastTileX,lastTileY,lastTileId;
@@ -19,7 +17,6 @@ public class Editing extends GameScene implements SceneMethods{
     public Editing(Game game) {
         super(game);
         loadDefaultLevel();
-        tileManager = new TileManager();
         toolBar = new ToolBar(0, 750, 1200, 200, this);
     }
 
@@ -32,8 +29,6 @@ public class Editing extends GameScene implements SceneMethods{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(tileManager.img_bg, 0, 0, null);
-
         toolBar.draw(g);
         drawSelectedTile(g);
     }
@@ -99,7 +94,7 @@ public class Editing extends GameScene implements SceneMethods{
 
     @Override
     public void mouseReleased(int x, int y) {
-        toolBar.mouseReleased(x, y);
+
     }
 
     @Override

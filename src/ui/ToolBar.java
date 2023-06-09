@@ -6,25 +6,24 @@ import scenes.Playing;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static main.GameStates.MENU;
 import static main.GameStates.SetGameState;
 
 public class ToolBar extends Bar{
-    private MyButton bMENU, bSave;
     private Editing editing;
+    private MyButton bMENU, bSave;
     private Tile selectedTile;
     private ArrayList<MyButton> tileButtons = new ArrayList<>();
 
     public ToolBar(int x, int y, int width, int height, Editing editing) {
         super(x, y, width, height);
         this.editing = editing;
-        initButtons();
+        intButtons();
     }
 
-    private void initButtons() {
+    private void intButtons() {
         bSave = new MyButton("SAVE", 880, 890, 150, 50);
         bMENU = new MyButton("MENU", 1040, 890, 150, 50);
 
@@ -104,10 +103,9 @@ public class ToolBar extends Bar{
     }
 
     public void mouseClicked(int x, int y) {
-
-        if (bMENU.getBorders().contains(x, y)) {
+        if (bMENU.getBorders().contains(x, y))
             SetGameState(MENU);
-        }else if(bSave.getBorders().contains(x,y)){
+        else if(bSave.getBorders().contains(x,y)){
             saveLevel();
         }
         else {
@@ -130,8 +128,8 @@ public class ToolBar extends Bar{
 
         if (bMENU.getBorders().contains(x, y))
             bMENU.setMouseOver(true);
-        //else if(bSave.getBorders().contains(x,y))
-        //    bSave.setMouseOver(true);
+        else if(bSave.getBorders().contains(x,y))
+            bSave.setMouseOver(true);
         else {
             for(MyButton b : tileButtons) {
                 if(b.getBorders().contains(x,y)) {

@@ -3,13 +3,19 @@ package scenes;
 import main.Game;
 import ui.MyButton;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static main.GameStates.MENU;
 import static main.GameStates.SetGameState;
 
 public class Settings extends GameScene implements SceneMethods {
     private MyButton bMENU;
+
+
 
     public Settings(Game game) {
         super(game);
@@ -26,6 +32,8 @@ public class Settings extends GameScene implements SceneMethods {
     private void intButtons() {
         bMENU = new MyButton("MENU", 1040, 890, 150, 50);
     }
+
+
 
     @Override
     public void mouseClicked(int x, int y) {
