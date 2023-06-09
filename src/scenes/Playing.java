@@ -2,6 +2,7 @@ package scenes;
 
 import Objects.Tile;
 import help.LevelBuild;
+import help.LoadSave;
 import main.Game;
 import managers.TileManager;
 import ui.BottomBar;
@@ -22,8 +23,38 @@ public class Playing extends GameScene implements SceneMethods {
 
         lvl = LevelBuild.getLevelData();
         tileManager = new TileManager();
-
         bottomBar = new BottomBar(0, 750, 1200, 200, this);
+        //LoadSave.CreateFile();
+        //LoadSave.WriteToFile();
+        //LoadSave.ReadFromFile();
+
+        createDefaultLevel();
+        loadDefaultLevel();
+    }
+
+    /**
+     * Zapis aktualnego poziomu
+     */
+    public void saveLevel(){
+        LoadSave.SaveLevel("new_level",lvl);
+    }
+
+    /**
+     * Wczytanie danego poziomu
+     */
+    private void loadDefaultLevel(){
+        lvl = LoadSave.GetLevelData("new_level");
+    }
+
+    /**
+     * Tworzenie nowego poziomu z wartościami domyślnymi
+     */
+    private void createDefaultLevel(){
+        int[] arr = new int[360];
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = 0; //pierwsza tekstura
+        }
+        LoadSave.CreateLevel("new_Level",arr);
     }
 
     @Override
