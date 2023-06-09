@@ -4,7 +4,12 @@ import Objects.Tile;
 import help.LoadSave;
 import main.Game;
 import ui.ToolBar;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Editing extends GameScene implements SceneMethods{
     private int[][] lvl;
@@ -13,6 +18,8 @@ public class Editing extends GameScene implements SceneMethods{
     private int lastTileX,lastTileY,lastTileId;
     private boolean drawSelect;
     private ToolBar toolBar;
+
+    private BufferedImage img_bg;
 
     public Editing(Game game) {
         super(game);
@@ -29,8 +36,22 @@ public class Editing extends GameScene implements SceneMethods{
 
     @Override
     public void render(Graphics g) {
+        importBG();
+        g.drawImage(img_bg, 0, 0, null);
         toolBar.draw(g);
         drawSelectedTile(g);
+    }
+
+    private void importBG() {
+
+        img_bg = null;
+        InputStream is = getClass().getResourceAsStream("/res/tlo.png");
+
+        try {
+            img_bg = ImageIO.read(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void drawSelectedTile(Graphics g) {
