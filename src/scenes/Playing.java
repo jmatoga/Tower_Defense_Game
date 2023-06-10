@@ -36,18 +36,24 @@ public class Playing extends GameScene implements SceneMethods {
         lvl = LoadSave.GetLevelData("new_level");
     }
 
+    public void setLevel(int[][] lvl){
+        this.lvl = lvl;
+    }
+
     @Override
     public void render(Graphics g) {
         g.drawImage(tileManager.img_bg, 0, 0, null);
+        drawLevel(g);
+        bottomBar.draw(g);
+    }
 
+    private void drawLevel(Graphics g) {
         for (int y = 0; y < lvl.length; y++) {
             for (int x = 0; x < lvl[y].length; x++) {
                 int id = lvl[y][x];
-                g.drawImage(getSprite(id), x * 50, y * 50, null);
+                g.drawImage(tileManager.getSprite(id),x *50,y*50,null );
             }
         }
-
-        bottomBar.draw(g);
     }
 
     private BufferedImage getSprite(int spriteID){
@@ -86,5 +92,6 @@ public class Playing extends GameScene implements SceneMethods {
     public void mouseDragged(int x, int y) {
 
     }
+
 
 }

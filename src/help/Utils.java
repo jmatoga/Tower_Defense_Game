@@ -16,7 +16,7 @@ public class Utils {
 
         for (int j = 0; j < newArr.length; j++) {
             for (int i = 0; i < newArr[j].length; i++) {
-                int index = j * ySize + i;
+                int index = j * xSize + i;
                 newArr[j][i] = list.get(index);
             }
         }
@@ -34,7 +34,7 @@ public class Utils {
 
         for (int j = 0; j < twoArr.length; j++) {
             for (int i = 0; i < twoArr[j].length; i++) {
-                int index = j * twoArr.length + i;
+                int index = j * twoArr[j].length + i;
                 oneArr[index] = twoArr[j][i];
             }
         }

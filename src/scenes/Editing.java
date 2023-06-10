@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLOutput;
+
 import managers.TileManager;
 
 public class Editing extends GameScene implements SceneMethods{
@@ -53,7 +55,9 @@ public class Editing extends GameScene implements SceneMethods{
             }
         }
     }
-
+    private BufferedImage getSprite(int spriteID){
+        return getGame().getTileManager().getSprite(spriteID);
+    }
     private void importBG() {
 
         img_bg = null;
@@ -74,6 +78,7 @@ public class Editing extends GameScene implements SceneMethods{
 
     public void saveLevel(){
         LoadSave.SaveLevel("new_level",lvl);
+        getGame().getPlaying().setLevel(lvl);
     }
 
     public void setSelectedTile(Tile tile) {
@@ -93,7 +98,7 @@ public class Editing extends GameScene implements SceneMethods{
             lastTileY = tileY;
             lastTileId = selectedTile.getId();
 
-            lvl[tileY][tileX] = selectedTile.getId();
+                lvl[tileY][tileX] = selectedTile.getId();
         }
     }
 
