@@ -109,7 +109,6 @@ public class LoadSave {
      * @param file Plik z poziomem
      * @return Zwraca ArrayListę z poziomem do wczytania
      */
-    //
     private static ArrayList<Integer> ReadFromFile(File file){
         ArrayList<Integer> list = new ArrayList<>();
 
