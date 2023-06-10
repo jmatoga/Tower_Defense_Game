@@ -1,13 +1,14 @@
 package managers;
 
 import Objects.Tile;
+import help.ImgFix;
 import help.LoadSave;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class TileManager {
-    public Tile PATH, BLANK_PATH, START_PATH, END_PATH, TEST;
+    public Tile PATH, BLANK_PATH, START_PATH, END_PATH, TEST, ROTATED_TEST;
     public BufferedImage resource;
     public BufferedImage img_bg;
     public ArrayList<Tile> tiles = new ArrayList<>();
@@ -26,7 +27,13 @@ public class TileManager {
         tiles.add(BLANK_PATH = new Tile(getSprite(2, 0), id++, "Blank_Path"));
         tiles.add(START_PATH = new Tile(getSprite(0, 1), id++, "Start_Path"));
         tiles.add(END_PATH = new Tile(getSprite(1, 1), id++, "End_Path"));
+        tiles.add(TEST = new Tile(ImgFix.buildImg(getImgs(0,0,1,2)),id++,"TEST"));
+        tiles.add(ROTATED_TEST = new Tile(ImgFix.getBuildRotImg(getImgs(0,0,1,2),90,0),id++,"ROTATED_TEST"));
+    }
 
+    private BufferedImage[] getImgs(int firstX, int firstY, int secondX, int secondY){
+
+        return new BufferedImage[]{getSprite(firstX, firstY), getSprite(secondX,secondY)};
     }
 
     public Tile getTile(int id){
