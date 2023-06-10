@@ -20,7 +20,6 @@ public class Editing extends GameScene implements SceneMethods{
     private boolean drawSelect;
     private ToolBar toolBar;
     private TileManager tileManager;
-
     private BufferedImage img_bg;
 
     public Editing(Game game) {
@@ -41,8 +40,18 @@ public class Editing extends GameScene implements SceneMethods{
     public void render(Graphics g) {
         importBG();
         g.drawImage(tileManager.img_bg, 0, 0, null);
+        drawLevel(g);
         toolBar.draw(g);
         drawSelectedTile(g);
+    }
+
+    private void drawLevel(Graphics g) {
+        for (int y = 0; y < lvl.length; y++) {
+            for (int x = 0; x < lvl[y].length; x++) {
+                int id = lvl[y][x];
+                g.drawImage(tileManager.getSprite(id),x *50,y*50,null );
+            }
+        }
     }
 
     private void importBG() {
@@ -62,9 +71,11 @@ public class Editing extends GameScene implements SceneMethods{
             g.drawImage(selectedTile.getSprite(), mouseX, mouseY, 50, 50, null);
         }
     }
+
     public void saveLevel(){
         LoadSave.SaveLevel("new_level",lvl);
     }
+
     public void setSelectedTile(Tile tile) {
         this.selectedTile = tile;
         drawSelect = true;
