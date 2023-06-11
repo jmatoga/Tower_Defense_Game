@@ -24,6 +24,27 @@ public class Constants {
         public static final int TUTORIAL_UNIT = 5;
         public static final int OWN_UNIT = 6;
 
+        public static int GetReward(int enemyType) {
+            switch (enemyType){
+                case TUTORIAL_UNIT:
+                    return 1;
+                case EASY_UNIT:
+                    return 5;
+                case NORMAL_UNIT:
+                    return 10;
+                case HARD_UNIT:
+                    return 20;
+                case SUPER_UNIT:
+                    return 40;
+                case TURBO_HARD_UNIT:
+                    return 45;
+                case OWN_UNIT:
+                    //TODO
+                    return 1;
+            }
+            return 0;
+        }
+
         public static float getSpeed(int enemyType){
             switch (enemyType){
                 case TUTORIAL_UNIT:
@@ -75,6 +96,31 @@ public class Constants {
         public static final int CRAZY_CANNON = 6; //najmocniejsza wieża
         public static final int DEUS_EX_MACHINA = 7; //testowy
         public static final int OWN_TOWER = 8;
+
+        public static int GetTowerCost(int towerType) {
+            switch (towerType){
+                case BASIC:
+                    return 30;
+                case MACHINE:
+                    return 45;
+                case BRUTAL:
+                    return 60;
+                case EXTRA:
+                    return 100;
+                case FAST_MACHINE:
+                    return  200;
+                case ONE_HIT:
+                    return 250;
+                case CRAZY_CANNON:
+                    return 400;
+                case DEUS_EX_MACHINA:
+                    return 450;
+                case OWN_TOWER:
+                    // TODO
+                    return 1;
+            }
+            return 0;
+        }
 
         public static String GetName(int towerType){
             switch (towerType){

@@ -165,6 +165,7 @@ public class Playing extends GameScene implements SceneMethods {
                 if(isNotRoad(mouseX,mouseY)){
                     if(getTowerAt(mouseX,mouseY) == null){
                         towerManager.addTower(selectedTower, mouseX,mouseY);
+                        removeGold(selectedTower.getTowerType());
                         selectedTower = null;
                     }
                 }
@@ -178,6 +179,11 @@ public class Playing extends GameScene implements SceneMethods {
             }
         }
     }
+
+    private void removeGold(int towerType) {
+        actionBar.payForTower(towerType);
+    }
+
     @Override
     public void mouseMoved(int x, int y) {
         if (y >= 750) {
