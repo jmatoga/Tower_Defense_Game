@@ -1,5 +1,7 @@
 package enemies;
 
+import help.Constants;
+
 import java.awt.*;
 
 import static help.Constants.Direction.*;
@@ -19,6 +21,11 @@ public abstract class Enemy {
         this.enemyType = enemyType;
         bounds = new Rectangle((int)x, (int)y, 50, 50);
         lastDir = -1;
+    }
+
+    protected void setStartHealth(){
+       health =  help.Constants.Enemies.GetStartHealth(enemyType);
+
     }
 
     public void move(float speed, int dir){

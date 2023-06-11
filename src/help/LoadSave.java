@@ -27,7 +27,7 @@ public class LoadSave {
 
     public static BufferedImage getImageBG() {
         BufferedImage img_bg = null;
-        InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("res/tlo.png");
+        InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("res/tlo_2.png");
 
         try {
             img_bg = ImageIO.read(is);
@@ -138,7 +138,7 @@ public class LoadSave {
             points.add(new PathPoint(list.get(362),list.get(363)));
             return points;
         }else{
-            System.out.println("File: " + name + "doesn't exists! ");
+            System.out.println("File: " + name + " doesn't exists! ");
             return null;
         }
     }
@@ -155,7 +155,7 @@ public class LoadSave {
             ArrayList<Integer> list = ReadFromFile(levelFile);
             return Utils.ArrayList2Dint(list,15,24);
         }else{
-            System.out.println("File: " + name + "doesn't exists! ");
+            System.out.println("File: " + name + " doesn't exists! ");
             return null;
         }
     }

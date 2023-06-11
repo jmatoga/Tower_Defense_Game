@@ -81,7 +81,7 @@ public class Editing extends GameScene implements SceneMethods{
     private void importBG() {
 
         img_bg = null;
-        InputStream is = getClass().getResourceAsStream("/res/tlo.png");
+        InputStream is = getClass().getResourceAsStream("/res/tlo_2.png");
 
         try {
             img_bg = ImageIO.read(is);
@@ -174,6 +174,11 @@ public class Editing extends GameScene implements SceneMethods{
         else {
             changeTile(x,y);
         }
+    }
+
+    public void keyPressed(KeyEvent e)
+    {
+        //if(e.getKeyCode() == KeyEvent.)
     }
 
 }

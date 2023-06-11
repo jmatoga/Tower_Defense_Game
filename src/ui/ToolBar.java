@@ -60,11 +60,11 @@ public class ToolBar extends Bar{
         bMENU.draw(g);
         bSave.draw(g);
 
-        //bPathStart.draw(g);
-        //bPathEnd.draw(g);
-
         drawPathButton(g,bPathStart,pathStart);
         drawPathButton(g,bPathEnd,pathEnd);
+
+        bPathStart.draw(g);
+        bPathEnd.draw(g);
 
         drawTileButtons(g);
         drawSelectedTile(g);
@@ -93,10 +93,6 @@ public class ToolBar extends Bar{
         for (MyButton b : tileButtons) {
             // Image / Sprite
 
-            // żeby była ta czerwona strzałeczka
-            if (b.getId() == 1)
-                g.drawImage(editing.getGame().getTileManager().getSpriteBlankVisible(), b.x, b.y, b.width, b.height, null);
-            else
                 g.drawImage(getButtImg(b.getId()), b.x, b.y, b.width, b.height, null);
 
             drawButtonFeedback(g, b);

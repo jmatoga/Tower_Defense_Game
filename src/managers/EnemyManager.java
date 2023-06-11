@@ -1,6 +1,7 @@
 package managers;
 
 import Objects.PathPoint;
+import Objects.Tower;
 import enemies.Enemy;
 import enemies.*;
 import help.LoadSave;
@@ -18,19 +19,19 @@ public class EnemyManager {
     private Playing playing;
     private BufferedImage[] enemyImgs; //tablica wrogów
     private ArrayList<Enemy> enemies = new ArrayList<>();
-    private float speed = 0.5f;
+    //private float speed = 0.5f;
     private PathPoint start,end;
     public EnemyManager(Playing playing, PathPoint start, PathPoint end) {
         this.playing = playing;
         enemyImgs = new BufferedImage[7];
         this.start = start;
         this.end = end;
-        addEnemy(TUTORIAL_UNIT);
         addEnemy(EASY_UNIT);
         addEnemy(NORMAL_UNIT);
         addEnemy(HARD_UNIT);
         addEnemy(SUPER_UNIT);
         addEnemy(TURBO_HARD_UNIT);
+        addEnemy(TUTORIAL_UNIT);
         addEnemy(OWN_UNIT);
         loadEnemyImgs();
     }
@@ -57,14 +58,14 @@ public class EnemyManager {
         if(e.getLastDir() == -1)
             setNewDirectionAndMove(e);
 
-        int newX = (int)(e.getX() + getSpeedAndWidth(e.getLastDir()));
-        int newY = (int)(e.getY() + getSpeedAndHeight(e.getLastDir()));
+        int newX = (int)(e.getX() + getSpeedAndWidth(e.getLastDir(),e.getEnemyType()));
+        int newY = (int)(e.getY() + getSpeedAndHeight(e.getLastDir(),e.getEnemyType()));
 
-        if(getTileType(newX,newY) == ROAD_TILE){
-            //idziemy dalej w tym samym kierunku
-            e.move(speed, e.getLastDir());
-        }else if(isAtEnd(e)){
+        if(isAtEnd(e)){
             System.out.println("END!");
+        }else if(getTileType(newX,newY) == ROAD_TILE){
+            //idziemy dalej w tym samym kierunku
+            e.move(getSpeed(e.getEnemyType()), e.getLastDir());
         }else{
             setNewDirectionAndMove(e);
         }
@@ -86,16 +87,16 @@ public class EnemyManager {
             return;
 
         if(dir == LEFT || dir == RIGHT) {
-            int newY = (int) (e.getY() + getSpeedAndHeight(UP));
+            int newY = (int) (e.getY() + getSpeedAndHeight(UP,e.getEnemyType()));
             if (getTileType((int) e.getX(), newY) == ROAD_TILE)
-                e.move(speed, UP);
+                e.move(getSpeed(e.getEnemyType()), UP);
             else
-                e.move(speed, DOWN);
+                e.move(getSpeed(e.getEnemyType()), DOWN);
         }else{
-            int newX = (int)(e.getX() + getSpeedAndWidth(RIGHT));
+            int newX = (int)(e.getX() + getSpeedAndWidth(RIGHT,e.getEnemyType()));
             if (getTileType(newX, (int) e.getY()) == ROAD_TILE)
-                e.move(speed,RIGHT);
-            else e.move(speed,LEFT);
+                e.move(getSpeed(e.getEnemyType()),RIGHT);
+            else e.move(getSpeed(e.getEnemyType()),LEFT);
         }
 
 
@@ -119,6 +120,11 @@ public class EnemyManager {
         e.setPos(xCord*50,yCord*50);
     }
 
+    /**
+     * Sprawdza czy na końcu (bloku końcowym)
+     * @param e Mob, który wykonuje ruch
+     * @return True jeśli na końcu
+     */
     private boolean isAtEnd(Enemy e) {
         if(e.getX() == end.getxCord()*50)
             if(e.getY() == end.getyCord()*50)
@@ -126,26 +132,46 @@ public class EnemyManager {
         return false;
     }
 
+    /**
+     * Zwraca numer typu bloku na podnaych współrzędnych
+     * @param x Kolumna
+     * @param y Wiersz
+     * @return Typ bloku (int)
+     */
     private int getTileType(int x, int y) {
         return playing.getTileType(x,y);
     }
 
-    private float getSpeedAndHeight(int dir) {
+    /**
+     * W zależności czy mob idzie do góry czy w dół, zwraca zmodyfikowaną współrzędną X-ową
+     * @param dir Kierunek w którym wykonuje ruch
+     * @param enemyType Typ moba który wykonuje ruch (int)
+     */
+    private float getSpeedAndHeight(int dir, int enemyType) {
         if(dir == UP)
-            return -speed;
+            return -getSpeed(enemyType);
         else if(dir == DOWN)
-            return speed + 50;
+            return getSpeed(enemyType) + 50;
         return 0;
     }
 
-    private float getSpeedAndWidth(int dir) {
+    /**
+     * W zależności czy mob idzie w prawo czy w lewo, zwraca zmodyfikowaną współrzędną Y-ową
+     * @param dir Kierunek w którym wykonuje ruch
+     * @param enemyType Typ moba który wykonuje ruch (int)
+     */
+    private float getSpeedAndWidth(int dir, int enemyType) {
         if(dir == LEFT)
-            return -speed;
+            return -getSpeed(enemyType);
         else if(dir == RIGHT)
-            return speed + 50;
+            return getSpeed(enemyType) + 50;
         return 0;
     }
 
+    /**
+     * Dodanie moba do tablicy enemies
+     * @param enemyType Typ moba który jest dodawany (int)
+     */
     public void addEnemy(int enemyType){
         int x = start.getxCord() * 50;
         int y = start.getyCord() * 50;

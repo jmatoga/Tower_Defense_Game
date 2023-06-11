@@ -148,7 +148,7 @@ public class Menu extends GameScene implements SceneMethods {
     Importowanie tła MENU
      */
     private void importBG() {
-        InputStream is = getClass().getResourceAsStream("/res/menu_bg.png");
+        InputStream is = getClass().getResourceAsStream("/res/menu_bg_2.png");
 
         try {
             img_bg = ImageIO.read(is);
