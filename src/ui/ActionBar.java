@@ -1,6 +1,7 @@
 package ui;
 
 import Objects.Tower;
+import help.Constants;
 import scenes.Playing;
 import java.awt.*;
 import java.io.File;
@@ -15,8 +16,10 @@ public class ActionBar extends Bar{
     private MyButton[] towerButtons;
     private Tower selectedTower; //obecnie wybrana wieża (gdy chcemy ją postawić)
     private Tower displayedTower; //gdy chcemy wyświetlić
-
     private Font pixelFont;
+    private int gold = 100; // pieniadze, zaczynamy z 100
+    private boolean showTowerCost;
+    private int towerCostType;
 
     public ActionBar(int x, int y, int width, int height, Playing playing) {
         super(x,y,width,height);
@@ -59,6 +62,58 @@ public class ActionBar extends Bar{
 
         //DisplayedTower
         drawDisplayTower(g);
+
+        // Wave info
+        // TODO
+
+        // Gold info
+        drawGoldAmount(g);
+
+        // Draw Tower Cost
+        if(showTowerCost)
+            drawTowerCost(g);
+    }
+
+    /**
+     * Wyświetlanie informacji o koszcie wieży
+     * @param g Obiekt Graphics na którym rysujemy
+     */
+    private void drawTowerCost(Graphics g) {
+        // TODO tu cos nie dziala z czcionka
+        g.setFont(new Font("",Font.BOLD,16));
+        g.setColor(Color.gray);
+        g.fillRect(250,775,120,50);
+        g.setColor(Color.black);
+        g.drawRect(250,775,120,50);
+        g.drawString("" + getTowerCostName(),255,795);
+        g.drawString("Cost: " + getTowerCostCost() + "g",255,815);
+
+        // Show this if player lack gold for the selected tower
+        if(isTowerCostMoreThanCurrentGold()) {
+            g.setColor(Color.red);
+            g.drawString("You can't afford!",250,845);
+        }
+    }
+
+    private boolean isTowerCostMoreThanCurrentGold() {
+        return getTowerCostCost() > gold;
+    }
+
+    private String getTowerCostName() {
+        return Constants.Towers.GetName(towerCostType);
+    }
+
+    private int getTowerCostCost() {
+        return Constants.Towers.GetTowerCost(towerCostType);
+    }
+
+    /**
+     * Wyświetlanie informacji o pieniadzach (goldzie)
+     * @param g Obiekt Graphics na którym rysujemy
+     */
+    private void drawGoldAmount(Graphics g) {
+        g.setColor(Color.decode("#8C4367"));
+        g.drawString("Gold: " + gold,45,867);
     }
 
     /**
@@ -108,6 +163,9 @@ public class ActionBar extends Bar{
         else{
             for(MyButton b : towerButtons){
                 if(b.getBorders().contains(x,y)){
+                    if(!isGoldEnoughForTower(b.getId()))
+                        return;
+                    
                     selectedTower = new Tower(0,0,-1,b.getId());
                     playing.setSelectedTower(selectedTower);
                     return;
@@ -116,16 +174,30 @@ public class ActionBar extends Bar{
         }
     }
 
+    private boolean isGoldEnoughForTower(int towerType) {
+        return gold >= Constants.Towers.GetTowerCost(towerType);
+    }
+
+    /**
+     * Gdy mysz nad obiektem
+     * @param x - szerokosc
+     * @param y - wysokosc
+     */
     public void mouseMoved(int x, int y) {
         bMENU.setMouseOver(false);
+        showTowerCost = false;
 
         if (bMENU.getBorders().contains(x, y))
             bMENU.setMouseOver(true);
         else{
             for(MyButton b : towerButtons) {
                 b.setMouseOver(false);
-                if (b.getBorders().contains(x,y))
+                if (b.getBorders().contains(x,y)) {
                     b.setMouseOver(true);
+                    showTowerCost = true;
+                    towerCostType = b.getId();
+                    return;
+                }
             }
         }
     }
@@ -146,4 +218,7 @@ public class ActionBar extends Bar{
                 b.resetBooleans();
     }
 
+    public void payForTower(int towerType) {
+        this.gold -= Constants.Towers.GetTowerCost(towerType);
+    }
 }
