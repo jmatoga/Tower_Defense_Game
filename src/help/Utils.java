@@ -31,7 +31,6 @@ public class Utils {
     public static int[] TwoDto1DintArr(int[][] twoArr) {
         int[] oneArr = new int[twoArr.length * twoArr[0].length];
 
-
         for (int j = 0; j < twoArr.length; j++) {
             for (int i = 0; i < twoArr[j].length; i++) {
                 int index = j * twoArr[j].length + i;

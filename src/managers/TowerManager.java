@@ -35,16 +35,21 @@ public class TowerManager {
         towerImgs[8] = atlas.getSubimage(0*50,2*50,50,50); // dodanie wiezy z dolu 3 rzędu
     }
     public void update(){
-        attackEnemyIfClose();
+        for(Tower t : towers){
+            t.update();
+            attackEnemyIfClose(t);
+        }
     }
 
-    private void attackEnemyIfClose() {
-        for(Tower t : towers){
-            for(Enemy e : playing.getEnemyManager().getEnemies()){
-                if(e.isAlive()) {
-                    if (isEnemyInRange(t, e))
+    private void attackEnemyIfClose(Tower t) {
+        for(Enemy e : playing.getEnemyManager().getEnemies()){
+            if(e.isAlive()) {
+                if (isEnemyInRange(t, e)) {
+                    if(t.isCooldownOver()) {
                         //e.hurt(1);
                         playing.shootEnemy(t,e);
+                        t.resetCooldown();
+                    }
                 }
             }
         }

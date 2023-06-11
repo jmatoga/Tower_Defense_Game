@@ -8,6 +8,7 @@ import help.LoadSave;
 import scenes.Playing;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -39,9 +40,9 @@ public class ProjectileManager {
         int type = getProjType(t);
         int xDist = (int) Math.abs(t.getX() - e.getX());
         int yDist = (int) Math.abs(t.getY() - e.getY());
-        int totDist = xDist + yDist;
+        int totDist = Math.abs(xDist) + Math.abs(yDist);
 
-        float xPer = (float) xDist / totDist;
+        float xPer = (float) Math.abs(xDist) / totDist;
 
         float xSpeed = xPer * Constants.Projectiles.GetSpeed(type);
         float ySpeed = Constants.Projectiles.GetSpeed(type) - xSpeed;
@@ -51,17 +52,41 @@ public class ProjectileManager {
         if(t.getY() > e.getY())
             ySpeed *= -1;
 
-        projectiles.add(new Projectile(t.getX()+25,t.getY()+25,xSpeed,ySpeed,projId++,type));
-    }
+        // zeby nie zasypywac projectilelist juz aktywnymi projectiles i smieciami
+        for(Projectile p : projectiles)
+            if(!p.isActive() && p.getProjectileType() == type) {
+                // t.getX()+4,t.getY()+3 - odpowiada za to gdzie sie pojawia strzal (ze srodka wiezy)
+                p.reuse(t.getX()+4,t.getY()+3,xSpeed,ySpeed,t.getDmg());
+                return;
+            }
+            // t.getX()+4,t.getY()+3 - odpowiada za to gdzie sie pojawia strzal (ze srodka wiezy)
+            projectiles.add(new Projectile(t.getX()+4,t.getY()+3,xSpeed,ySpeed,t.getDmg(),projId++,type));
+        }
 
     public void update() {
         for(Projectile p : projectiles)
-            p.move();
+            if(p.isActive()) {
+                p.move();
+                if(isProjHittingEnemy(p)) {
+                    p.setActive(false);
+                }
+            }
+    }
+
+    private boolean isProjHittingEnemy(Projectile p) {
+        for(Enemy e : playing.getEnemyManager().getEnemies()) {
+            if(e.getBounds().contains(p.getPos())) {
+                e.hurt(p.getDmg());
+                return true;
+            }
+        }
+        return false;
     }
 
     public void draw(Graphics g) {
         for(Projectile p : projectiles)
-            g.drawImage(proj_imgs[p.getProjectileType()],(int)p.getPos().x,(int)p.getPos().y,null);
+            if(p.isActive())
+                g.drawImage(proj_imgs[p.getProjectileType()],(int)p.getPos().x,(int)p.getPos().y,null);
     }
 
     private int getProjType(Tower t) {

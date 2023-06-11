@@ -177,11 +177,10 @@ public class Constants {
             return null;
         }
 
-
-        public static float getStartDmg(int towerType){
+        public static int getStartDmg(int towerType){
             switch (towerType){
                 case BASIC:
-                    return 10;
+                    return 1;
                 case MACHINE:
                     return 10;
                 case BRUTAL:
@@ -205,7 +204,7 @@ public class Constants {
         public static float getDefaultRange(int towerType){
             switch (towerType){
                 case BASIC:
-                    return 100;
+                    return 1000;
                 case MACHINE:
                     return 100;
                 case BRUTAL:
@@ -230,21 +229,21 @@ public class Constants {
         public static float getDefaultCooldown(int towerType){
             switch (towerType){
                 case BASIC:
-                    return 50;
+                    return 1;
                 case MACHINE:
-                    return 50;
+                    return 30;
                 case BRUTAL:
-                    return 50;
+                    return 30;
                 case EXTRA:
-                    return 50;
+                    return 30;
                 case FAST_MACHINE:
                     return 15;
                 case ONE_HIT:
-                    return 50;
+                    return 30;
                 case CRAZY_CANNON:
-                    return 50;
+                    return 30;
                 case DEUS_EX_MACHINA:
-                    return 50;
+                    return 30;
                 case OWN_TOWER:
                     return 1;
             }
@@ -264,7 +263,7 @@ public class Constants {
         public static float GetSpeed(int type){
             switch(type){
                 case BASIC_AMMO:
-                    return 1f;
+                    return 10f;
                 case MACHINE_AMMO:
                     return 1f;
                 case HEAVY_AMMO:
@@ -278,7 +277,5 @@ public class Constants {
             }
             return 0;
         }
-
-
     }
 }

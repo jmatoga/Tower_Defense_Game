@@ -59,6 +59,12 @@ public abstract class Enemy {
                 this.y += speed;
                 break;
         }
+        updateHitbox();
+    }
+
+    private void updateHitbox() {
+        bounds.x = (int) x;
+        bounds.y = (int) y;
     }
 
     /**

@@ -42,6 +42,7 @@ public class Game extends JFrame implements Runnable {
         //setBounds(100,100,450,300);
         setLocationRelativeTo(null);
         //setResizable(false);
+        setTitle("Tower Defense Game // By Jakub Matoga, Krzysztof Popiela, Daniel Minior");
         contentPane = new JPanel();
         //contentPane.setLayout(new BorderLayout(0,0));
         contentPane.setBorder(new EmptyBorder(5,5,5,5));
