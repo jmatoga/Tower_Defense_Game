@@ -17,7 +17,7 @@ public class ActionBar extends Bar{
     private MyButton[] towerButtons;
     private Tower selectedTower; //obecnie wybrana wieża (gdy chcemy ją postawić)
     private Tower displayedTower; //gdy chcemy wyświetlić
-    private Font pixelFont;
+    //private Font pixelFont = Constants.MyFont.setMyFont(10);
     private int gold = 100; // pieniadze, zaczynamy z 100
     private boolean showTowerCost;
     private int towerCostType;
@@ -46,8 +46,8 @@ public class ActionBar extends Bar{
     }
 
     private void drawButtons(Graphics g) {
-        bMENU.draw(g);
-        bPause.draw(g);
+        bMENU.draw(g, Constants.MyFont.SMALL_BUTTONS_SIZE);
+        bPause.draw(g, Constants.MyFont.SMALL_BUTTONS_SIZE);
 
         for(MyButton b : towerButtons) {
             g.setColor(Color.white);
@@ -79,9 +79,14 @@ public class ActionBar extends Bar{
 
         // Game Paused text
         if(playing.isGamePaused()) {
+            g.setColor(Color.red);
+            g.setFont(Constants.MyFont.setMyFont(60));
+            g.drawString("Game is paused!", 52, 748);
+
             g.setColor(Color.black);
-            //g.setFont("");
+            g.setFont(Constants.MyFont.setMyFont(60));
             g.drawString("Game is paused!", 50,750);
+
         }
     }
 
@@ -91,7 +96,7 @@ public class ActionBar extends Bar{
      */
     private void drawTowerCost(Graphics g) {
         // TODO tu cos nie dziala z czcionka
-        g.setFont(new Font("",Font.BOLD,16));
+        g.setFont(Constants.MyFont.setMyFont(16));
         g.setColor(Color.gray);
         g.fillRect(250,775,120,50);
         g.setColor(Color.black);
@@ -124,6 +129,7 @@ public class ActionBar extends Bar{
      */
     private void drawGoldAmount(Graphics g) {
         g.setColor(Color.decode("#AE8625"));
+        g.setFont(Constants.MyFont.setMyFont(40));
         g.drawString("Gold: " + gold,45,867);
     }
 
@@ -133,6 +139,7 @@ public class ActionBar extends Bar{
      */
     private void drawDisplayTower(Graphics g) {
         if(displayedTower != null){
+            g.setFont(Constants.MyFont.setMyFont(20));
             g.setColor(Color.decode("0x7f5415"));
             g.fillRect(850, 780, 300,70);
             g.setColor(Color.white);
@@ -140,8 +147,6 @@ public class ActionBar extends Bar{
             g.drawRect(850, 780, 300,70);
             g.drawImage(playing.getTowerManager().getTowerImgs()[displayedTower.getTowerType()],
                     850,780,70,70, null);
-            fontSetter();
-            g.setFont(pixelFont);
             g.drawString("Tower",930, 820);
             drawDisplaydTowerBorder(g);
             drawDisplaydTowerRange(g);
@@ -167,14 +172,6 @@ public class ActionBar extends Bar{
     private void drawDisplaydTowerBorder(Graphics g) {
         g.setColor(Color.GREEN);
         g.drawRect(displayedTower.getX(), displayedTower.getY(), 50, 50);
-    }
-
-    private void fontSetter(){
-        try {
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/PixelMplus12-Regular.ttf")).deriveFont(Font.BOLD, 30f);
-        } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

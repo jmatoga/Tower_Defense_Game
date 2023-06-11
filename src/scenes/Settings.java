@@ -1,5 +1,6 @@
 package scenes;
 
+import help.Constants;
 import main.Game;
 import ui.MyButton;
 
@@ -73,6 +74,6 @@ public class Settings extends GameScene implements SceneMethods {
     }
 
     private void drawButtons(Graphics g) {
-        bMENU.draw(g);
+        bMENU.draw(g, Constants.MyFont.SMALL_BUTTONS_SIZE);
     }
 }
