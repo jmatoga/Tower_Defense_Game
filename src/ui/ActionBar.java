@@ -3,6 +3,9 @@ package ui;
 import Objects.Tower;
 import scenes.Playing;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 import static main.GameStates.MENU;
 import static main.GameStates.SetGameState;
 
@@ -12,6 +15,8 @@ public class ActionBar extends Bar{
     private MyButton[] towerButtons;
     private Tower selectedTower; //obecnie wybrana wieża (gdy chcemy ją postawić)
     private Tower displayedTower; //gdy chcemy wyświetlić
+
+    private Font pixelFont;
 
     public ActionBar(int x, int y, int width, int height, Playing playing) {
         super(x,y,width,height);
@@ -62,8 +67,31 @@ public class ActionBar extends Bar{
      */
     private void drawDisplayTower(Graphics g) {
         if(displayedTower != null){
+            g.setColor(Color.decode("0x7f5415"));
+            g.fillRect(850, 780, 300,70);
+            g.setColor(Color.white);
+            g.drawRect(850, 780, 300,70);
+            g.drawRect(850, 780, 300,70);
             g.drawImage(playing.getTowerManager().getTowerImgs()[displayedTower.getId()],
-                    1065,770,50,50, null);
+                    850,780,70,70, null);
+            fontSetter();
+            g.setFont(pixelFont);
+            g.drawString("Tower",930, 820);
+
+            drawDisplaydTowerBorder(g);
+        }
+    }
+
+    private void drawDisplaydTowerBorder(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.drawRect(displayedTower.getX(), displayedTower.getY(), 50, 50);
+    }
+
+    private void fontSetter(){
+        try {
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/PixelMplus12-Regular.ttf")).deriveFont(Font.BOLD, 30f);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
         }
     }
 

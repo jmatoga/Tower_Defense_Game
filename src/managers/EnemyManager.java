@@ -26,12 +26,12 @@ public class EnemyManager {
         enemyImgs = new BufferedImage[7];
         this.start = start;
         this.end = end;
-        addEnemy(TUTORIAL_UNIT);
         addEnemy(EASY_UNIT);
         addEnemy(NORMAL_UNIT);
         addEnemy(HARD_UNIT);
         addEnemy(SUPER_UNIT);
         addEnemy(TURBO_HARD_UNIT);
+        addEnemy(TUTORIAL_UNIT);
         addEnemy(OWN_UNIT);
         loadEnemyImgs();
     }

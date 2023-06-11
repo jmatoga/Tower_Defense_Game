@@ -80,6 +80,10 @@ public class MyButton {
     }
 
     private void drawBody(Graphics g) {
+
+        g.setColor(Color.decode("0x7f5415"));
+        g.fillRect(x, y, width, height);
+
         if (mouseOver) {
             g.setColor(Color.white);
             g.fillRect(x, y, width, height);
@@ -92,7 +96,7 @@ public class MyButton {
     private void drawText(Graphics g) {
 
         try {
-            Inkfree = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/Inkfree.ttf")).deriveFont(Font.BOLD, 30f);
+            Inkfree = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/PixelMplus12-Regular.ttf")).deriveFont(Font.BOLD, 30f);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
@@ -101,7 +105,7 @@ public class MyButton {
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
         g.setFont(Inkfree);
-        g.setColor(Color.black);
+        g.setColor(Color.RED);
         g.drawString(text, x - w/2 + width/2, y + height/2);
     }
 

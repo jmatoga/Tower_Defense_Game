@@ -1,5 +1,6 @@
 package inputs;
 
+import main.Game;
 import main.GameStates;
 
 import java.awt.event.KeyEvent;
@@ -9,6 +10,12 @@ import static main.GameStates.*;
 
 public class KeyboardListener implements KeyListener {
 
+    private Game game;
+
+    public KeyboardListener(Game game) {
+        this.game = game;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -16,16 +23,20 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-            System.out.println("Escape is pressed");
-        else if (e.getKeyCode() == KeyEvent.VK_P)
-             System.out.println("P is pressed");
-        else if (e.getKeyCode() == KeyEvent.VK_A)
-            GameStates.gameState = MENU;
-        else if (e.getKeyCode() == KeyEvent.VK_S)
-            GameStates.gameState = SETTINGS;
-        else if (e.getKeyCode() == KeyEvent.VK_D)
-            GameStates.gameState = PLAYING;
+//        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+//            System.out.println("Escape is pressed");
+//        else if (e.getKeyCode() == KeyEvent.VK_P)
+//             System.out.println("P is pressed");
+//        else if (e.getKeyCode() == KeyEvent.VK_A)
+//            GameStates.gameState = MENU;
+//        else if (e.getKeyCode() == KeyEvent.VK_S)
+//            GameStates.gameState = SETTINGS;
+//        else if (e.getKeyCode() == KeyEvent.VK_D)
+//            GameStates.gameState = PLAYING;
+
+        if (GameStates.gameState == PLAYING)
+            game.getPlaying().keyPressed(e);
+
     }
 
     @Override

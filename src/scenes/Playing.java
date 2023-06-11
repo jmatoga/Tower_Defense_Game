@@ -10,6 +10,7 @@ import managers.TowerManager;
 import ui.ActionBar;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -81,7 +82,13 @@ public class Playing extends GameScene implements SceneMethods {
         enemyManager.draw(g);
         towerManager.draw(g);
         drawSelectedTower(g);
+        drawHighlight(g);
 
+    }
+
+    private void drawHighlight(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.drawRect(mouseX, mouseY, 50, 50);
     }
 
     /**
@@ -199,6 +206,15 @@ public class Playing extends GameScene implements SceneMethods {
     }
     public TowerManager getTowerManager(){
         return towerManager;
+    }
+
+
+    public void keyPressed(KeyEvent e)
+    {
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+            selectedTower = null;
+        }
     }
 
 
