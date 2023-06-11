@@ -1,5 +1,6 @@
 package scenes;
 
+import Objects.PathPoint;
 import enemies.TurboHardUnit;
 import help.LoadSave;
 import main.Game;
@@ -9,6 +10,7 @@ import ui.ActionBar;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Playing extends GameScene implements SceneMethods {
     private int[][] lvl;
@@ -16,28 +18,33 @@ public class Playing extends GameScene implements SceneMethods {
     private ActionBar bottomBar;
     private int mouseX, mouseY;
     private EnemyManager enemyManager;
+    private PathPoint start,end;
 
     public Playing(Game game) {
         super(game);
         loadDefaultLevel();
         tileManager = new TileManager();
         bottomBar = new ActionBar(0, 750, 1200, 200, this);
-        enemyManager = new EnemyManager(this);
+        enemyManager = new EnemyManager(this,start,end);
 
     }
 
-    /**
+    /*
      * Zapis aktualnego poziomu
-     */
+
     public void saveLevel(){
         LoadSave.SaveLevel("new_level",lvl);
-    }
+    }*/
 
     /**
      * Wczytanie danego poziomu
      */
     private void loadDefaultLevel(){
         lvl = LoadSave.GetLevelData("new_level");
+        ArrayList<PathPoint> points = LoadSave.GetLevelPathPoints("new_level");
+
+        start = points.get(0);
+        end = points.get(1);
     }
 
     public void setLevel(int[][] lvl){

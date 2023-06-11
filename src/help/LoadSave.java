@@ -1,9 +1,13 @@
 package help;
 
+import Objects.PathPoint;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.Array;
+import java.lang.reflect.Parameter;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,19 +38,6 @@ public class LoadSave {
     }
 
     /**
-     * Tworzenie pliku txt
-     */
-    public static void CreateFile(){
-        File txtFile = new File("src/res/testTextFile.txt");
-
-        try {
-            txtFile.createNewFile();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Tworzenie nowego poziomu (jego zapis w pliku) na podstawie tablicy tekstur idArr
      * @param name Nazwa pliku z poziomem i pliku do którego będzie zapisywany
      * @param idArr Tablica z poziomem
@@ -63,7 +54,7 @@ public class LoadSave {
             }catch(IOException e){
                 e.printStackTrace();
             }
-            WriteToFile(newLevel, idArr);
+            WriteToFile(newLevel, idArr,new PathPoint(0,0),new PathPoint(0,0)); //tworzenie defaultowego poziomu
         }
     }
 
@@ -73,13 +64,17 @@ public class LoadSave {
      * @param idArr Tablica z poziomem
      * @return Zapisuje tablicę 1D z poziomem do pliku
      */
-    private static void WriteToFile(File f, int[] idArr){
+    private static void WriteToFile(File f, int[] idArr, PathPoint start, PathPoint end){
 
         //sprawdza czy plik istnieje
         try {
             PrintWriter pw = new PrintWriter(f);
             for(Integer i : idArr)
                 pw.println(i);
+            pw.println(start.getxCord());
+            pw.println(start.getyCord());
+            pw.println(end.getxCord());
+            pw.println(end.getyCord());
 
             pw.close();
         }catch(FileNotFoundException e){
@@ -93,11 +88,11 @@ public class LoadSave {
      * @param idArr Tablica z poziomem
      * @return Zwraca ArrayListę z poziomem do wczytania
      */
-    public static void SaveLevel(String name, int[][] idArr){
+    public static void SaveLevel(String name, int[][] idArr, PathPoint start, PathPoint end){
         File levelFile = new File("src/res/" + name + ".txt");
 
         if(levelFile.exists()){
-            WriteToFile(levelFile,Utils.TwoDto1DintArr(idArr));
+            WriteToFile(levelFile,Utils.TwoDto1DintArr(idArr),start,end);
         }else{
             System.out.println("File: " + name + "doesn't exists! ");
             return;
@@ -124,6 +119,28 @@ public class LoadSave {
         }
 
         return list;
+    }
+
+    /**
+     * Pobieranie współrzędnych początku i końca drogi
+     * @param name Nazwa poziomu (i nazwa jego pliku)
+     * @return tablica współrzędnych, typu PathPoint
+     */
+    public static ArrayList<PathPoint> GetLevelPathPoints(String name){
+        File levelFile = new File("src/res/" + name + ".txt");
+
+        if(levelFile.exists()){
+            ArrayList<Integer> list = ReadFromFile(levelFile);
+            ArrayList<PathPoint> points = new ArrayList<>();
+
+            //pobieranie 4 punktów początka i końca
+            points.add(new PathPoint(list.get(360),list.get(361)));
+            points.add(new PathPoint(list.get(362),list.get(363)));
+            return points;
+        }else{
+            System.out.println("File: " + name + "doesn't exists! ");
+            return null;
+        }
     }
 
     /**

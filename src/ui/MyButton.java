@@ -47,6 +47,7 @@ public class MyButton {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.type = -1;
         this.text = text;
         this.id = id;
 
@@ -133,7 +134,7 @@ public class MyButton {
         return mouseOver;
     }
 
-    public boolean isMousePress() {
+    public boolean isMousePressed() {
         return mousePress;
     }
 }

@@ -1,5 +1,6 @@
 package managers;
 
+import Objects.PathPoint;
 import enemies.Enemy;
 import enemies.*;
 import help.LoadSave;
@@ -18,16 +19,19 @@ public class EnemyManager {
     private BufferedImage[] enemyImgs; //tablica wrogów
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private float speed = 0.5f;
-    public EnemyManager(Playing playing) {
+    private PathPoint start,end;
+    public EnemyManager(Playing playing, PathPoint start, PathPoint end) {
         this.playing = playing;
         enemyImgs = new BufferedImage[7];
-        addEnemy(50*0,50*5, TUTORIAL_UNIT);
-        addEnemy(50*6,50*7, EASY_UNIT);
-        addEnemy(50*8,50*7, NORMAL_UNIT);
-        addEnemy(50*11,50*12, HARD_UNIT);
-        addEnemy(50*13,50*12, SUPER_UNIT);
-        addEnemy(50*15,50*10, TURBO_HARD_UNIT);
-        addEnemy(50*20,50*2, OWN_UNIT);
+        this.start = start;
+        this.end = end;
+        addEnemy(TUTORIAL_UNIT);
+        addEnemy(EASY_UNIT);
+        addEnemy(NORMAL_UNIT);
+        addEnemy(HARD_UNIT);
+        addEnemy(SUPER_UNIT);
+        addEnemy(TURBO_HARD_UNIT);
+        addEnemy(OWN_UNIT);
         loadEnemyImgs();
     }
 
@@ -60,7 +64,7 @@ public class EnemyManager {
             //idziemy dalej w tym samym kierunku
             e.move(speed, e.getLastDir());
         }else if(isAtEnd(e)){
-            //
+            System.out.println("END!");
         }else{
             setNewDirectionAndMove(e);
         }
@@ -77,6 +81,9 @@ public class EnemyManager {
         int yCord = (int)e.getY() / 50;
 
         fixEnemyOffsetTile(e,dir,xCord,yCord);
+
+        if(isAtEnd(e))
+            return;
 
         if(dir == LEFT || dir == RIGHT) {
             int newY = (int) (e.getY() + getSpeedAndHeight(UP));
@@ -113,6 +120,9 @@ public class EnemyManager {
     }
 
     private boolean isAtEnd(Enemy e) {
+        if(e.getX() == end.getxCord()*50)
+            if(e.getY() == end.getyCord()*50)
+                return true;
         return false;
     }
 
@@ -136,7 +146,10 @@ public class EnemyManager {
         return 0;
     }
 
-    public void addEnemy(int x, int y, int enemyType){
+    public void addEnemy(int enemyType){
+        int x = start.getxCord() * 50;
+        int y = start.getyCord() * 50;
+
         switch (enemyType){
             case TUTORIAL_UNIT:
                 enemies.add(new TutorialUnit(x,y,0));

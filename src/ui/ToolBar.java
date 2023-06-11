@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import static help.Constants.Tiles.*;
 import static main.GameStates.MENU;
 import static main.GameStates.SetGameState;
 
@@ -28,7 +29,7 @@ public class ToolBar extends Bar{
     }
     private void initPathImgs(){
         pathStart = LoadSave.getSpriteResource().getSubimage(0*50,1*50,50,50);
-        pathEnd = LoadSave.getSpriteResource().getSubimage(0*50,2*50,50,50);
+        pathEnd = LoadSave.getSpriteResource().getSubimage(1*50,1*50,50,50);
     }
     private void intButtons() {
         bSave = new MyButton("SAVE", 880, 890, 150, 50);
@@ -46,8 +47,8 @@ public class ToolBar extends Bar{
             tileButtons.add(new MyButton(tile.getTileType(), xStart + xOffset * i, yStart, w, h, i));
             i++;
         }
-        bPathStart = new MyButton("PathStart", xStart, yStart + xOffset, w, h, i++);
-        bPathEnd = new MyButton("PathEnd", xStart + xOffset, yStart + xOffset, w, h, i++);
+        bPathStart = new MyButton("PathStart", xStart, yStart + xOffset, w, h, 3);
+        bPathEnd = new MyButton("PathEnd", xStart + xOffset, yStart + xOffset, w, h, 4);
 
     }
 
@@ -58,11 +59,20 @@ public class ToolBar extends Bar{
     private void drawButtons(Graphics g) {
         bMENU.draw(g);
         bSave.draw(g);
-        bPathStart.draw(g);
-        bPathEnd.draw(g);
+
+        //bPathStart.draw(g);
+        //bPathEnd.draw(g);
+
+        drawPathButton(g,bPathStart,pathStart);
+        drawPathButton(g,bPathEnd,pathEnd);
 
         drawTileButtons(g);
         drawSelectedTile(g);
+    }
+
+    private void drawPathButton(Graphics g, MyButton b, BufferedImage pathStart) {
+        g.drawImage(getButtImg(b.getId()), b.x, b.y, b.width, b.height, null);
+        drawButtonFeedback(g,b);
     }
 
     public void draw(Graphics g) {
@@ -84,30 +94,12 @@ public class ToolBar extends Bar{
             // Image / Sprite
 
             // żeby była ta czerwona strzałeczka
-            if(b.getId() == 1)
-                g.drawImage(editing.getGame().getTileManager().getSpriteBlankVisible(),b.x, b.y, b.width, b.height, null);
+            if (b.getId() == 1)
+                g.drawImage(editing.getGame().getTileManager().getSpriteBlankVisible(), b.x, b.y, b.width, b.height, null);
             else
                 g.drawImage(getButtImg(b.getId()), b.x, b.y, b.width, b.height, null);
 
-            // MouseOver
-            if(b.isMouseOver())
-                g.setColor(Color.red);
-            else if(!b.isMouseOver())
-                g.setColor(Color.black);
-
-            // Border
-            g.drawRect(b.x,b.y,b.width,b.height);
-
-            // TODO nie podoba mi sie to ze tutaj jak sie kliknie i nie ruszy myszki to nie ma mouseover tylko jakby nie wykrywalo myszki i dopiero trzeba przesunac
-            // MousePressed
-            if(b.isMousePress()) {
-                // żeby nie trzba było ruszać myszką żeby border się zmienił po kliknięciu kilka razy
-                g.setColor(Color.red);
-                g.drawRect(b.x,b.y,b.width,b.height);
-
-                g.drawRect(b.x+1,b.y+1,b.width-2,b.height-2);
-                g.drawRect(b.x+2,b.y+2,b.width-4,b.height-4);
-            }
+            drawButtonFeedback(g, b);
         }
     }
     public BufferedImage getButtImg(int id) {
@@ -117,8 +109,15 @@ public class ToolBar extends Bar{
     public void mouseClicked(int x, int y) {
         if (bMENU.getBorders().contains(x, y))
             SetGameState(MENU);
-        else if(bSave.getBorders().contains(x,y)){
+        else if(bSave.getBorders().contains(x,y))
             saveLevel();
+        else if(bPathStart.getBorders().contains(x,y)) {
+            selectedTile = new Tile(pathStart,3,-1);
+            editing.setSelectedTile(selectedTile);
+        }
+        else if(bPathEnd.getBorders().contains(x,y)){
+            selectedTile = new Tile(pathEnd,4,-2);
+            editing.setSelectedTile(selectedTile);
         }
         else {
             for(MyButton b : tileButtons) {
@@ -134,6 +133,8 @@ public class ToolBar extends Bar{
     public void mouseMoved(int x, int y) {
         bMENU.setMouseOver(false);
         bSave.setMouseOver(false);
+        bPathStart.setMouseOver(false);
+        bPathEnd.setMouseOver(false);
 
         for(MyButton b : tileButtons)
             b.setMouseOver(false);
@@ -142,6 +143,10 @@ public class ToolBar extends Bar{
             bMENU.setMouseOver(true);
         else if(bSave.getBorders().contains(x,y))
             bSave.setMouseOver(true);
+        else if(bPathStart.getBorders().contains(x,y))
+            bPathStart.setMouseOver(true);
+        else if(bPathEnd.getBorders().contains(x,y))
+            bPathEnd.setMouseOver(true);
         else {
             for(MyButton b : tileButtons) {
                 if(b.getBorders().contains(x,y)) {
@@ -157,6 +162,10 @@ public class ToolBar extends Bar{
             bMENU.setMousePress(true);
         else if(bSave.getBorders().contains(x,y))
             bSave.setMousePress(true);
+        else if(bPathStart.getBorders().contains(x,y))
+            bPathStart.setMousePress(true);
+        else if(bPathEnd.getBorders().contains(x,y))
+            bPathEnd.setMousePress(true);
         else {
             for(MyButton b : tileButtons) {
                 if(b.getBorders().contains(x,y)) {
@@ -170,7 +179,16 @@ public class ToolBar extends Bar{
     public void mouseReleased(int x, int y) {
         bMENU.resetBooleans(); // reset buttons
         bSave.resetBooleans();
+        bPathStart.resetBooleans();
+        bPathEnd.resetBooleans();
         for(MyButton b : tileButtons)
             b.resetBooleans();
+    }
+
+    public BufferedImage getStartPathImage() {
+        return pathStart;
+    }
+    public BufferedImage getEndPathImage() {
+        return pathEnd;
     }
 }
