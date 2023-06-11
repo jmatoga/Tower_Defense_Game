@@ -26,6 +26,9 @@ public class Playing extends GameScene implements SceneMethods {
     private TowerManager towerManager;
     private PathPoint start,end;
     private Tower selectedTower;
+    private int goldTick;
+    private boolean gamePaused;
+
 
     public Playing(Game game) {
         super(game);
@@ -34,7 +37,6 @@ public class Playing extends GameScene implements SceneMethods {
         actionBar = new ActionBar(0, 750, 1200, 200, this);
         enemyManager = new EnemyManager(this,start,end);
         towerManager = new TowerManager(this);
-
     }
 
     /*
@@ -63,8 +65,15 @@ public class Playing extends GameScene implements SceneMethods {
      * Wywołanie zmiany stanu gry
      */
     public void update(){
-        enemyManager.update();
-        towerManager.update();
+        if(!gamePaused) {
+            enemyManager.update();
+            towerManager.update();
+
+            // Gold tick (po 3 sekundach dodajemy 1 gold)
+            goldTick++;
+            if(goldTick % (60*3) == 0)
+                actionBar.addGold(1);
+        }
     }
 
     /**
@@ -73,6 +82,10 @@ public class Playing extends GameScene implements SceneMethods {
      */
     public void setSelectedTower(Tower selectedTower) {
         this.selectedTower = selectedTower;
+    }
+
+    public ActionBar getActionBar() {
+        return actionBar;
     }
 
     @Override
@@ -84,7 +97,6 @@ public class Playing extends GameScene implements SceneMethods {
         towerManager.draw(g);
         drawSelectedTower(g);
         drawHighlight(g);
-
     }
 
     private void drawHighlight(Graphics g) {
@@ -170,19 +182,19 @@ public class Playing extends GameScene implements SceneMethods {
                         selectedTower = null;
                     }
                 }
-            }else{ //
+            }else{ // wyswietlamy informacje o wiezy jesli na nia klikniemy a jak klikniemy gdzies indziej to nie
                 Tower t = getTowerAt(mouseX,mouseY);
-                if(t == null)
-                    return;
-                else{ //jeśli istnieje to wyświetlamy informacje o wieży
-                    actionBar.displayTower(t);
-                }
+                actionBar.displayTower(t);
             }
         }
     }
 
     private void removeGold(int towerType) {
         actionBar.payForTower(towerType);
+    }
+
+    public boolean isGamePaused() {
+        return gamePaused;
     }
 
     @Override
@@ -215,13 +227,14 @@ public class Playing extends GameScene implements SceneMethods {
         return towerManager;
     }
 
+    public void setGamePaused(boolean gamePaused) {
+        this.gamePaused = gamePaused;
+    }
 
     public void keyPressed(KeyEvent e)
     {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-        {
             selectedTower = null;
-        }
     }
 
     public EnemyManager getEnemyManager(){
