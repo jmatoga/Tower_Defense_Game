@@ -41,11 +41,8 @@ public class TowerManager {
         for(Tower t : towers){
             for(Enemy e : playing.getEnemyManager().getEnemies()){
                 if(e.isAlive()) {
-                    if (isEnemyInRange(t, e)) {
+                    if (isEnemyInRange(t, e))
                         e.hurt(1);
-                    } else {
-
-                    }
                 }
             }
         }
@@ -88,5 +85,4 @@ public class TowerManager {
     public BufferedImage[] getTowerImgs(){
         return towerImgs;
     }
-
 }

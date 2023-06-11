@@ -112,7 +112,7 @@ public class ActionBar extends Bar{
      * @param g Obiekt Graphics na którym rysujemy
      */
     private void drawGoldAmount(Graphics g) {
-        g.setColor(Color.decode("#8C4367"));
+        g.setColor(Color.decode("#AE8625"));
         g.drawString("Gold: " + gold,45,867);
     }
 
@@ -142,7 +142,7 @@ public class ActionBar extends Bar{
      * @param g
      */
     private void drawDisplaydTowerRange(Graphics g) {
-        g.setColor(Color.white);
+        g.setColor(Color.lightGray);
         g.drawOval(displayedTower.getX() + 25 - (int)(displayedTower.getRange()*2)/2,
                 displayedTower.getY() + 25 - (int)(displayedTower.getRange()*2)/2,
                 (int)displayedTower.getRange()*2, (int)displayedTower.getRange()*2);
@@ -225,7 +225,6 @@ public class ActionBar extends Bar{
             for(MyButton b : towerButtons)
                 if (b.getBorders().contains(x,y))
                     b.setMouseOver(true);
-
     }
 
     public void mouseReleased(int x, int y) {
