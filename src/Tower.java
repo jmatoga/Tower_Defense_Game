@@ -67,49 +67,49 @@ public class Tower {
                 this.fireSpeed = 0.66;
                 this.fireDamage = 10.0;
                 this.cost = 10.0;
-                this.fireRange = 50.0;
+                this.fireRange = 50.0; //1
             }
             case MACHINE -> {
                 this.fireSpeed = 2;
                 this.fireDamage = 10.0;
                 this.cost = 20.0;
-                this.fireRange = 60.0;
+                this.fireRange = 60.0; //1.2
             }
             case BRUTAL -> {
                 this.fireSpeed = 0.66;
                 this.fireDamage = 30.0;
                 this.cost = 25.0;
-                this.fireRange = 60.0;
+                this.fireRange = 60.0; //1.2
             }
             case EXTRA -> {
                 this.fireSpeed = 2.0;
                 this.fireDamage = 30.0;
                 this.cost = 40.0;
-                this.fireRange = 70.0;
+                this.fireRange = 70.0; //1.4
             }
             case FAST_MACHINE -> {
                 this.fireSpeed = 6.0;
                 this.fireDamage = 25.0;
                 this.cost = 45.0;
-                this.fireRange = 80.0;
+                this.fireRange = 80.0; //1.6
             }
             case ONE_HIT -> {
                 this.fireSpeed = 1.0;
                 this.fireDamage = 120.0;
                 this.cost = 60.0;
-                this.fireRange = 60.0;
+                this.fireRange = 60.0; //1.2
             }
             case CARZY_CANNON -> {
                 this.fireSpeed = 6.0;
                 this.fireDamage = 50.0;
                 this.cost = 100.0;
-                this.fireRange = 100.0;
+                this.fireRange = 100.0; //2
             }
             case DEUS_EX_MACHINE -> {
                 this.fireSpeed = 50.0;
                 this.fireDamage = 500.0;
                 this.cost = 1000.0;
-                this.fireRange = 100.0;
+                this.fireRange = 100.0; //2
             }
             default -> throw new IllegalArgumentException("Nieznany typ wieży");
         }

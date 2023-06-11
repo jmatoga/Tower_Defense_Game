@@ -132,11 +132,27 @@ public class ActionBar extends Bar{
             fontSetter();
             g.setFont(pixelFont);
             g.drawString("Tower",930, 820);
-
             drawDisplaydTowerBorder(g);
+            drawDisplaydTowerRange(g);
         }
     }
 
+    /**
+     * Funckja rysuje zasieg danej wiezy
+     * @param g
+     */
+    private void drawDisplaydTowerRange(Graphics g) {
+        g.setColor(Color.white);
+        g.drawOval(displayedTower.getX() + 25 - (int)(displayedTower.getRange()*2)/2,
+                displayedTower.getY() + 25 - (int)(displayedTower.getRange()*2)/2,
+                (int)displayedTower.getRange()*2, (int)displayedTower.getRange()*2);
+
+    }
+
+    /**
+     * Funckja robi obramówke zaznaczenia wieży na polu gry
+     * @param g
+     */
     private void drawDisplaydTowerBorder(Graphics g) {
         g.setColor(Color.GREEN);
         g.drawRect(displayedTower.getX(), displayedTower.getY(), 50, 50);

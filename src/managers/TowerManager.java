@@ -1,6 +1,7 @@
 package managers;
 
 import Objects.Tower;
+import enemies.Enemy;
 import help.LoadSave;
 import scenes.Playing;
 import help.Constants.Towers.*;
@@ -33,7 +34,27 @@ public class TowerManager {
 
     }
     public void update(){
+        attackEnemyIfClose();
+    }
 
+    private void attackEnemyIfClose() {
+        for(Tower t : towers){
+            for(Enemy e : playing.getEnemyManager().getEnemies()){
+                if(e.isAlive()) {
+                    if (isEnemyInRange(t, e)) {
+                        e.hurt(1);
+                    } else {
+
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isEnemyInRange(Tower t, Enemy e) {
+        int range = help.Utils.GetHypoDistance(t.getX(), t.getY(), e.getX(), e.getY());
+
+        return range < t.getRange();
     }
 
     public void addTower(Tower selectedTower, int xPos, int yPos) {

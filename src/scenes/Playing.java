@@ -223,6 +223,9 @@ public class Playing extends GameScene implements SceneMethods {
         }
     }
 
+    public EnemyManager getEnemyManager(){
+        return enemyManager;
+    }
 
 
 }
