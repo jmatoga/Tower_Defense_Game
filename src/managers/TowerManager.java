@@ -28,9 +28,11 @@ public class TowerManager {
      */
     private void loadTowerImgs() {
         BufferedImage atlas = LoadSave.getSpriteResource();
-        towerImgs = new BufferedImage[7]; //TODO Więcej rodzajów wież, na razie 3 szare
-        for(int i = 0; i < 7; i++)
-            towerImgs[i] = atlas.getSubimage((i+3)*50,1*50,50,50);
+        towerImgs = new BufferedImage[9];
+        for(int i = 0; i < 8; i++)
+            towerImgs[i] = atlas.getSubimage((i+2)*50,1*50,50,50);
+
+        towerImgs[8] = atlas.getSubimage(0*50,2*50,50,50); // dodanie wiezy z dolu 3 rzędu
     }
     public void update(){
         attackEnemyIfClose();
@@ -41,7 +43,8 @@ public class TowerManager {
             for(Enemy e : playing.getEnemyManager().getEnemies()){
                 if(e.isAlive()) {
                     if (isEnemyInRange(t, e))
-                        e.hurt(1);
+                        //e.hurt(1);
+                        playing.shootEnemy(t,e);
                 }
             }
         }

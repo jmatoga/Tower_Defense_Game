@@ -226,7 +226,7 @@ public class Constants {
         }
     }
 
-    public static class ProjectTiles{
+    public static class Projectiles {
         public static final int BASIC_AMMO = 0; //typ BASIC
         public static final int MACHINE_AMMO = 1; //typ MACHINE
         public static final int HEAVY_AMMO = 2; //typ BRUTAL

@@ -2,10 +2,12 @@ package scenes;
 
 import Objects.PathPoint;
 import Objects.Tower;
+import enemies.Enemy;
 import help.Constants;
 import help.LoadSave;
 import main.Game;
 import managers.EnemyManager;
+import managers.ProjectileManager;
 import managers.TileManager;
 import managers.TowerManager;
 import ui.ActionBar;
@@ -24,6 +26,7 @@ public class Playing extends GameScene implements SceneMethods {
     private int mouseX, mouseY;
     private EnemyManager enemyManager;
     private TowerManager towerManager;
+    private ProjectileManager projectileManager;
     private PathPoint start,end;
     private Tower selectedTower;
     private int goldTick;
@@ -37,6 +40,7 @@ public class Playing extends GameScene implements SceneMethods {
         actionBar = new ActionBar(0, 750, 1200, 200, this);
         enemyManager = new EnemyManager(this,start,end);
         towerManager = new TowerManager(this);
+        projectileManager = new ProjectileManager(this);
     }
 
     /*
@@ -68,6 +72,7 @@ public class Playing extends GameScene implements SceneMethods {
         if(!gamePaused) {
             enemyManager.update();
             towerManager.update();
+            projectileManager.update();
 
             // Gold tick (po 3 sekundach dodajemy 1 gold)
             goldTick++;
@@ -95,6 +100,7 @@ public class Playing extends GameScene implements SceneMethods {
         actionBar.draw(g);
         enemyManager.draw(g);
         towerManager.draw(g);
+        projectileManager.draw(g);
         drawSelectedTower(g);
         drawHighlight(g);
     }
@@ -243,5 +249,9 @@ public class Playing extends GameScene implements SceneMethods {
 
     public void rewardPlayer(int enemyType) {
         actionBar.addGold(Constants.Enemies.getReward(enemyType));
+    }
+
+    public void shootEnemy(Tower t, Enemy e) {
+        projectileManager.newProjectile(t,e);
     }
 }

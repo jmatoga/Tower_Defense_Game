@@ -27,7 +27,7 @@ public class KeyboardListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-            System.out.println("Escape is pressed");
+            SetGameState(MENU);
         else if (e.getKeyCode() == KeyEvent.VK_P)
            game.getPlaying().getActionBar().togglePause();
 //        else if (e.getKeyCode() == KeyEvent.VK_A)

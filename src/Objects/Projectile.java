@@ -2,21 +2,24 @@ package Objects;
 
 import java.awt.geom.Point2D;
 
-public class ProjectTile {
+public class Projectile {
 
     private Point2D.Float pos;
-    private int id, projectTileType;
+    private int id, projectileType;
+    private float xSpeed,ySpeed;
     private boolean active = true;
 
-    public ProjectTile(float x, float y, int id, int projectTileType) {
+    public Projectile(float x, float y, float xSpeed,float ySpeed,int id, int projectTileType) {
         this.pos = new Point2D.Float(x,y);
         this.id = id;
-        this.projectTileType = projectTileType;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+        this.projectileType = projectTileType;
     }
 
-    public void move(float x, float y){
-        pos.x += x;
-        pos.y += y;
+    public void move(){
+        pos.x += xSpeed;
+        pos.y += ySpeed;
     }
 
     public Point2D.Float getPos() {
@@ -31,8 +34,8 @@ public class ProjectTile {
         return id;
     }
 
-    public int getProjectTileType() {
-        return projectTileType;
+    public int getProjectileType() {
+        return projectileType;
     }
 
     public boolean isActive() {

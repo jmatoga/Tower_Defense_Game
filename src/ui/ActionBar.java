@@ -185,8 +185,6 @@ public class ActionBar extends Bar{
         displayedTower = t;
     }
 
-    //if(e.getKeyCode() == KeyEvent.VK_P)
-
     public void togglePause() {
         playing.setGamePaused(!playing.isGamePaused()); // zamiana na przeciwne
 
