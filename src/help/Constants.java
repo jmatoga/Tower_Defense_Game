@@ -226,8 +226,28 @@ public class Constants {
         public static final int BASIC_AMMO = 0; //typ BASIC
         public static final int MACHINE_AMMO = 1; //typ MACHINE
         public static final int HEAVY_AMMO = 2; //typ BRUTAL
-        public static final int EXTRA = 3; //ulepszony BASIC
-        public static final int FAST_MACHINE = 4; //szybszy niż MACHINE
-        public static final int ONE_HIT = 5; //mocniejszy niż BRUTAL
+        public static final int CRAZY_AMMO = 3; //typ CRAZY
+        public static final int DEM_AMMO = 4; //typ DEUS EX MACHINA
+        public static final int OWN_AMMO = 5;
+
+        public static float GetSpeed(int type){
+            switch(type){
+                case BASIC_AMMO:
+                    return 1f;
+                case MACHINE_AMMO:
+                    return 1f;
+                case HEAVY_AMMO:
+                    return 1f;
+                case CRAZY_AMMO:
+                    return 1f;
+                case DEM_AMMO:
+                    return 1f;
+                case OWN_AMMO:
+                    return 1f;
+            }
+            return 0;
+        }
+
+
     }
 }
