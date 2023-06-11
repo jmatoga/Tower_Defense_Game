@@ -1,5 +1,6 @@
 package scenes;
 
+import help.Constants;
 import main.Game;
 import ui.MyButton;
 
@@ -125,10 +126,10 @@ public class Menu extends GameScene implements SceneMethods {
     }
 
     private void drawButtons(Graphics g) {
-        bPLAY.draw(g);
-        bSETTINGS.draw(g);
-        bQUIT.draw(g);
-        bEDIT.draw(g);
+        bPLAY.draw(g, Constants.MyFont.BIG_BUTTONS_SIZE);
+        bSETTINGS.draw(g, Constants.MyFont.BIG_BUTTONS_SIZE);
+        bQUIT.draw(g, Constants.MyFont.BIG_BUTTONS_SIZE);
+        bEDIT.draw(g, Constants.MyFont.BIG_BUTTONS_SIZE);
     }
 
     /*

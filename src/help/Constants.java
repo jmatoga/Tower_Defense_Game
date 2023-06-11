@@ -1,6 +1,33 @@
 package help;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 public class Constants {
+
+    public static class MyFont {
+
+        public static final float BIG_BUTTONS_SIZE = 60;
+        public static final float SMALL_BUTTONS_SIZE = 30;
+        public static final float TILE_BUTTONS_SIZE = 14;
+
+        public static Font pixelFont;
+
+        public static Font setMyFont(float size) {
+            try {
+                pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/PixelMplus12-Regular.ttf")).deriveFont(Font.BOLD, size);
+            } catch (FontFormatException | IOException e) {
+                e.printStackTrace();
+            }
+
+            return pixelFont;
+        }
+
+
+    }
+
+
     public static class Direction{
         public static final int LEFT = 0;
         public static final int UP = 1;

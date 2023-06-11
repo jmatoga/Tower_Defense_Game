@@ -1,6 +1,7 @@
 package ui;
 
 import Objects.Tile;
+import help.Constants;
 import help.LoadSave;
 import scenes.Editing;
 import scenes.Playing;
@@ -57,14 +58,14 @@ public class ToolBar extends Bar{
     }
 
     private void drawButtons(Graphics g) {
-        bMENU.draw(g);
-        bSave.draw(g);
+        bMENU.draw(g, Constants.MyFont.SMALL_BUTTONS_SIZE);
+        bSave.draw(g, Constants.MyFont.SMALL_BUTTONS_SIZE);
 
         drawPathButton(g,bPathStart,pathStart);
         drawPathButton(g,bPathEnd,pathEnd);
 
-        bPathStart.draw(g);
-        bPathEnd.draw(g);
+        bPathStart.draw(g, Constants.MyFont.TILE_BUTTONS_SIZE);
+        bPathEnd.draw(g, Constants.MyFont.TILE_BUTTONS_SIZE);
 
         drawTileButtons(g);
         drawSelectedTile(g);

@@ -1,5 +1,7 @@
 package ui;
 
+import help.Constants;
+
 import java.awt.*;
 import java.io.File;
 import java.awt.Font;
@@ -12,7 +14,6 @@ public class MyButton {
     int type;
     private Rectangle borders;
     private boolean mouseOver, mousePress;
-    private Font Inkfree;
 
     /**
      * Funckja dla normalnych przycisków
@@ -58,7 +59,7 @@ public class MyButton {
         this.borders = new Rectangle(x, y, width, height);
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g, float text_size) {
         //body
         drawBody(g);
 
@@ -66,7 +67,7 @@ public class MyButton {
         drawBorder(g);
 
         //text
-        drawText(g);
+        drawText(g, text_size);
     }
 
     private void drawBorder(Graphics g) {
@@ -89,18 +90,14 @@ public class MyButton {
         }
     }
 
-    private void drawText(Graphics g) {
-        try {
-            Inkfree = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/PixelMplus12-Regular.ttf")).deriveFont(Font.BOLD, 30f);
-        } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
-        }
+    private void drawText(Graphics g, float text_size) {
 
+        Font pixelFont = Constants.MyFont.setMyFont(text_size);
+        g.setFont(pixelFont);
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
-        g.setFont(Inkfree);
         g.setColor(Color.RED);
-        g.drawString(text, x - w/2 + width/2, y + height/2);
+        g.drawString(text, x - w/2 + width/2, y + h/2 + height/2);
     }
 
     public void resetBooleans() {
