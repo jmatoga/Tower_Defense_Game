@@ -1,12 +1,14 @@
 package enemies;
 
 import help.Constants;
+import managers.EnemyManager;
 
 import java.awt.*;
 
 import static help.Constants.Direction.*;
 
 public abstract class Enemy {
+    protected EnemyManager enemyManager;
     protected float x, y;
     protected Rectangle bounds; //do hitboxów
     protected int health;
@@ -16,11 +18,12 @@ public abstract class Enemy {
     protected int lastDir;
     protected boolean alive = true;
 
-    public Enemy(float x, float y, int ID, int enemyType){
+    public Enemy(float x, float y, int ID, int enemyType, EnemyManager enemyManager){
         this.x = x;
         this.y = y;
         this.ID = ID;
         this.enemyType = enemyType;
+        this.enemyManager = enemyManager;
         bounds = new Rectangle((int)x, (int)y, 50, 50);
         lastDir = -1;
         setStartHealth();
@@ -34,8 +37,10 @@ public abstract class Enemy {
 
     public void hurt(int dmg){
         this.health -= dmg;
-        if(health <= 0)
+        if(health <= 0) {
             alive = false;
+            enemyManager.rewardPlayer(enemyType);
+        }
     }
 
     public void move(float speed, int dir){

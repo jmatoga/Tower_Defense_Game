@@ -2,6 +2,7 @@ package scenes;
 
 import Objects.PathPoint;
 import Objects.Tower;
+import help.Constants;
 import help.LoadSave;
 import main.Game;
 import managers.EnemyManager;
@@ -227,5 +228,7 @@ public class Playing extends GameScene implements SceneMethods {
         return enemyManager;
     }
 
-
+    public void rewardPlayer(int enemyType) {
+        actionBar.addGold(Constants.Enemies.getReward(enemyType));
+    }
 }

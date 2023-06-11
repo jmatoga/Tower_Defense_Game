@@ -242,4 +242,8 @@ public class EnemyManager {
     public ArrayList<Enemy> getEnemies(){
         return enemies;
     }
+
+    public void rewardPlayer(int enemyType) {
+        playing.rewardPlayer(enemyType);
+    }
 }
