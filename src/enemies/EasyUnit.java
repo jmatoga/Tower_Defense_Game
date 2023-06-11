@@ -7,3 +7,4 @@ public class EasyUnit extends Enemy{
         super(x,y,ID,EASY_UNIT);
     }
 }
+
