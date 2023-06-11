@@ -1,7 +1,9 @@
 package scenes;
 
+import enemies.TurboHardUnit;
 import help.LoadSave;
 import main.Game;
+import managers.EnemyManager;
 import managers.TileManager;
 import ui.ActionBar;
 
@@ -13,12 +15,14 @@ public class Playing extends GameScene implements SceneMethods {
     private TileManager tileManager;
     private ActionBar bottomBar;
     private int mouseX, mouseY;
+    private EnemyManager enemyManager;
 
     public Playing(Game game) {
         super(game);
         loadDefaultLevel();
         tileManager = new TileManager();
         bottomBar = new ActionBar(0, 750, 1200, 200, this);
+        enemyManager = new EnemyManager(this);
 
     }
 
@@ -40,11 +44,19 @@ public class Playing extends GameScene implements SceneMethods {
         this.lvl = lvl;
     }
 
+    /**
+     * Wywołanie zmiany stanu gry
+     */
+    public void update(){
+        enemyManager.update();
+    }
+
     @Override
     public void render(Graphics g) {
         g.drawImage(tileManager.img_bg, 0, 0, null);
         drawLevel(g);
         bottomBar.draw(g);
+        enemyManager.draw(g);
     }
 
     private void drawLevel(Graphics g) {
@@ -55,7 +67,23 @@ public class Playing extends GameScene implements SceneMethods {
             }
         }
     }
+    /**
+     * Sprawdzenie id bloku, na podstawie tego, zwrócenie typu bloku
+     * @param x Kolumna
+     * @param y Wiersz
+     */
+    public int getTileType(int x, int y){
+        int xCord = x/50;
+        int yCord = y/50;
 
+        if(xCord < 0 || xCord > 23)
+            return 0;
+        if(yCord < 0 || yCord > 14)
+            return 0;
+
+        int id = lvl[y/50][x/50];
+        return getGame().getTileManager().getTile(id).getTileType();
+    }
     private BufferedImage getSprite(int spriteID){
         return getGame().getTileManager().getSprite(spriteID);
     }

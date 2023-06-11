@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Menu extends GameScene implements SceneMethods {
-    private BufferedImage img;
+    //private BufferedImage img;
     private BufferedImage img_bg;
-    private ArrayList<BufferedImage> spirites = new ArrayList<>();
+    //private ArrayList<BufferedImage> spirites = new ArrayList<>();
     private Random random;
     private MyButton bPLAY, bEDIT, bSETTINGS, bQUIT;
 
@@ -31,8 +31,8 @@ public class Menu extends GameScene implements SceneMethods {
         intButtons();
     }
 
-    /*
-     Funcja inicjujaca przyciski w menu
+    /**
+     Funkcja inicjujaca przyciski w menu
      */
     private void intButtons() {
         int w = 300, h = 100;

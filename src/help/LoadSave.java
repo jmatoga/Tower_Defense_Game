@@ -11,7 +11,7 @@ public class LoadSave {
 
     public static BufferedImage getSpriteResource() {
         BufferedImage img = null;
-        InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("res/texture_pack_1.png");
+        InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("res/texture_pack_2.png");
 
         try {
             img = ImageIO.read(is);

@@ -7,8 +7,11 @@ import help.LoadSave;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import static help.Constants.Direction.*;
+import static help.Constants.Tiles.*;
+
 public class TileManager {
-    public Tile PATH, BLANK_PATH, START_PATH, END_PATH, TEST, ROTATED_TEST;
+    public Tile PATH, BLANK_PATH, START_PATH, END_PATH, ROTATED_PATH, CORNER_PATH1, CORNER_PATH2, CORNER_PATH3, CORNER_PATH4;
     public BufferedImage resource;
     public BufferedImage img_bg;
     public ArrayList<Tile> tiles = new ArrayList<>();
@@ -23,12 +26,16 @@ public class TileManager {
 
     private void createTiles() {
         int id = 0;
-        tiles.add(PATH = new Tile(getSprite(0, 0), id++, "Path"));
-        tiles.add(BLANK_PATH = new Tile(getSprite(2, 0), id++, "Blank_Path"));
-        tiles.add(START_PATH = new Tile(getSprite(0, 1), id++, "Start_Path"));
-        tiles.add(END_PATH = new Tile(getSprite(1, 1), id++, "End_Path"));
-        tiles.add(TEST = new Tile(ImgFix.buildImg(getImgs(0,0,1,2)),id++,"TEST"));
-        tiles.add(ROTATED_TEST = new Tile(ImgFix.getBuildRotImg(getImgs(0,0,1,2),90,0),id++,"ROTATED_TEST"));
+        tiles.add(PATH = new Tile(getSprite(0, 0), id++, ROAD_TILE));
+        tiles.add(BLANK_PATH = new Tile(getSprite(2, 0), id++, OTHER_TILE));
+        tiles.add(ROTATED_PATH = new Tile(ImgFix.getBuildRotImg(getImgs(2,0,0,0),45,0),id++,ROAD_TILE));
+        tiles.add(START_PATH = new Tile(getSprite(0, 1), id++, ROAD_TILE));
+        tiles.add(END_PATH = new Tile(getSprite(1, 1), id++, ROAD_TILE));
+        tiles.add(CORNER_PATH1 = new Tile(getSprite(1, 0), id++, ROAD_TILE));
+        tiles.add(CORNER_PATH2 = new Tile(ImgFix.getBuildRotImg(getImgs(2,0,1,0),45,0),id++,ROAD_TILE));
+        tiles.add(CORNER_PATH3 = new Tile(ImgFix.getBuildRotImg(getImgs(2,0,1,0),90,0),id++,ROAD_TILE));
+        tiles.add(CORNER_PATH4 = new Tile(ImgFix.getBuildRotImg(getImgs(2,0,1,0),135,0),id++,ROAD_TILE));
+
     }
 
     private BufferedImage[] getImgs(int firstX, int firstY, int secondX, int secondY){

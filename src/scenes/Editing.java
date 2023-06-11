@@ -7,6 +7,7 @@ import ui.ToolBar;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -146,4 +147,5 @@ public class Editing extends GameScene implements SceneMethods{
             changeTile(x,y);
         }
     }
+
 }

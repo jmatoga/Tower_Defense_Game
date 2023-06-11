@@ -1,6 +1,7 @@
 package ui;
 
 import Objects.Tile;
+import help.LoadSave;
 import scenes.Editing;
 import scenes.Playing;
 
@@ -14,15 +15,21 @@ import static main.GameStates.SetGameState;
 public class ToolBar extends Bar{
     private Editing editing;
     private MyButton bMENU, bSave;
+    private MyButton bPathStart, bPathEnd;
+    private BufferedImage pathStart, pathEnd;
     private Tile selectedTile;
     private ArrayList<MyButton> tileButtons = new ArrayList<>();
 
     public ToolBar(int x, int y, int width, int height, Editing editing) {
         super(x, y, width, height);
         this.editing = editing;
+        initPathImgs();
         intButtons();
     }
-
+    private void initPathImgs(){
+        pathStart = LoadSave.getSpriteResource().getSubimage(0*50,1*50,50,50);
+        pathEnd = LoadSave.getSpriteResource().getSubimage(0*50,2*50,50,50);
+    }
     private void intButtons() {
         bSave = new MyButton("SAVE", 880, 890, 150, 50);
         bMENU = new MyButton("MENU", 1040, 890, 150, 50);
@@ -36,10 +43,12 @@ public class ToolBar extends Bar{
         int i = 0;
 
         for (Tile tile : editing.getGame().getTileManager().tiles) {
-            tileButtons.add(new MyButton(tile.getName(), xStart + xOffset * i, yStart, w, h, i));
+            tileButtons.add(new MyButton(tile.getTileType(), xStart + xOffset * i, yStart, w, h, i));
             i++;
-
         }
+        bPathStart = new MyButton("PathStart", xStart, yStart + xOffset, w, h, i++);
+        bPathEnd = new MyButton("PathEnd", xStart + xOffset, yStart + xOffset, w, h, i++);
+
     }
 
     private void saveLevel() {
@@ -49,6 +58,8 @@ public class ToolBar extends Bar{
     private void drawButtons(Graphics g) {
         bMENU.draw(g);
         bSave.draw(g);
+        bPathStart.draw(g);
+        bPathEnd.draw(g);
 
         drawTileButtons(g);
         drawSelectedTile(g);

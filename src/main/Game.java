@@ -3,6 +3,7 @@ package main;
 import help.LoadSave;
 import inputs.KeyboardListener;
 import inputs.MyMouseListener;
+import managers.EnemyManager;
 import managers.TileManager;
 import scenes.Editing;
 import scenes.Menu;
@@ -69,10 +70,22 @@ public class Game extends JFrame implements Runnable {
     }
 
     /**
-     Informowanie o update gry
+     Aktualizacja stanu gry
      */
     private void updateGame() {
-        //System.out.println("Game Updated!");
+        switch(GameStates.gameState){
+            case PLAYING:
+                playing.update();
+                break;
+            case MENU:
+                break;
+            case SETTINGS:
+                break;
+            case EDIT:
+                break;
+            default:
+                break;
+        }
     }
 
     /**

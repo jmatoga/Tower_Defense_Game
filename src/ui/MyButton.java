@@ -9,6 +9,7 @@ import java.io.IOException;
 public class MyButton {
     public int x, y, width, height, id;
     String text;
+    int type;
     private Rectangle borders;
     private boolean mouseOver, mousePress;
 
@@ -29,8 +30,18 @@ public class MyButton {
     }
 
     /*
-    Funkcja dla kafelkowych przyckisków
+    Funkcja dla kafelkowych przycisków
      */
+    public MyButton(int type, int x, int y, int width, int height, int id) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.type = type;
+        this.id = id;
+
+        setBorders();
+    }
     public MyButton(String text, int x, int y, int width, int height, int id) {
         this.x = x;
         this.y = y;
