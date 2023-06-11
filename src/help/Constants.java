@@ -84,6 +84,10 @@ public class Constants {
             }
             return  0;
         }
+
+        public static int getReward(int enemyType) {
+            return 0;
+        }
     }
 
     public static class Towers{
