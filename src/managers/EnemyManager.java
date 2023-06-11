@@ -183,28 +183,28 @@ public class EnemyManager {
 
         switch (enemyType){
             case TUTORIAL_UNIT:
-                enemies.add(new TutorialUnit(x,y,0));
+                enemies.add(new TutorialUnit(x,y,0,this));
                 break;
             case EASY_UNIT:
-                enemies.add(new EasyUnit(x,y,0));
+                enemies.add(new EasyUnit(x,y,0,this));
                 break;
             case NORMAL_UNIT:
-                enemies.add(new NormalUnit(x,y,0));
+                enemies.add(new NormalUnit(x,y,0,this));
                 break;
             case HARD_UNIT:
-                enemies.add(new HardUnit(x,y,0));
+                enemies.add(new HardUnit(x,y,0,this));
                 break;
             case SUPER_UNIT:
-                enemies.add(new SuperUnit(x,y,0));
+                enemies.add(new SuperUnit(x,y,0,this));
                 break;
             case TURBO_HARD_UNIT:
-                enemies.add(new TurboHardUnit(x,y,0));
+                enemies.add(new TurboHardUnit(x,y,0,this));
                 break;
             case OWN_UNIT:
-                enemies.add(new OwnUnit(x,y,0));
+                enemies.add(new OwnUnit(x,y,0,this));
                 break;
         }
-        //enemies.add(new TutorialUnit(x,y,0));
+        //enemies.add(new TutorialUnit(x,y,0,this));
     }
 
     /**
@@ -241,5 +241,9 @@ public class EnemyManager {
 
     public ArrayList<Enemy> getEnemies(){
         return enemies;
+    }
+
+    public void rewardPlayer(int enemyType) {
+        playing.rewardPlayer(enemyType);
     }
 }
