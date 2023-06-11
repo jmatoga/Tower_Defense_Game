@@ -12,11 +12,10 @@ public class MyButton {
     int type;
     private Rectangle borders;
     private boolean mouseOver, mousePress;
+    private Font Inkfree;
 
-    Font Inkfree;
-
-    /*
-    Funckja dla normalnych przycisków
+    /**
+     * Funckja dla normalnych przycisków
      */
     public MyButton(String text, int x, int y, int width, int height) {
         this.x = x;
@@ -29,8 +28,8 @@ public class MyButton {
         setBorders();
     }
 
-    /*
-    Funkcja dla kafelkowych przycisków
+    /**
+     * Funkcja dla kafelkowych przycisków
      */
     public MyButton(int type, int x, int y, int width, int height, int id) {
         this.x = x;
@@ -42,6 +41,7 @@ public class MyButton {
 
         setBorders();
     }
+
     public MyButton(String text, int x, int y, int width, int height, int id) {
         this.x = x;
         this.y = y;
@@ -80,7 +80,6 @@ public class MyButton {
     }
 
     private void drawBody(Graphics g) {
-
         g.setColor(Color.decode("0x7f5415"));
         g.fillRect(x, y, width, height);
 
@@ -88,19 +87,14 @@ public class MyButton {
             g.setColor(Color.white);
             g.fillRect(x, y, width, height);
         }
-
-
-
     }
 
     private void drawText(Graphics g) {
-
         try {
             Inkfree = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/PixelMplus12-Regular.ttf")).deriveFont(Font.BOLD, 30f);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
-
 
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
@@ -112,6 +106,10 @@ public class MyButton {
     public void resetBooleans() {
         this.mousePress = false;
         this.mouseOver = false;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public void setMouseOver(boolean mouseOver) {

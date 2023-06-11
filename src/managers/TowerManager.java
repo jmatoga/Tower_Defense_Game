@@ -28,10 +28,9 @@ public class TowerManager {
      */
     private void loadTowerImgs() {
         BufferedImage atlas = LoadSave.getSpriteResource();
-        towerImgs = new BufferedImage[3+1]; //TODO Więcej rodzajów wież, na razie 3 szare
-        for(int i = 0; i < 3; i++)
+        towerImgs = new BufferedImage[7]; //TODO Więcej rodzajów wież, na razie 3 szare
+        for(int i = 0; i < 7; i++)
             towerImgs[i] = atlas.getSubimage((i+3)*50,1*50,50,50);
-
     }
     public void update(){
         attackEnemyIfClose();
@@ -41,11 +40,8 @@ public class TowerManager {
         for(Tower t : towers){
             for(Enemy e : playing.getEnemyManager().getEnemies()){
                 if(e.isAlive()) {
-                    if (isEnemyInRange(t, e)) {
+                    if (isEnemyInRange(t, e))
                         e.hurt(1);
-                    } else {
-
-                    }
                 }
             }
         }
@@ -88,5 +84,4 @@ public class TowerManager {
     public BufferedImage[] getTowerImgs(){
         return towerImgs;
     }
-
 }

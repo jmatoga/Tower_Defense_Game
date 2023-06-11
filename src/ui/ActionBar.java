@@ -4,6 +4,7 @@ import Objects.Tower;
 import help.Constants;
 import scenes.Playing;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -11,7 +12,7 @@ import static main.GameStates.MENU;
 import static main.GameStates.SetGameState;
 
 public class ActionBar extends Bar{
-    private MyButton bMENU;
+    private MyButton bMENU,bPause;
     private Playing playing;
     private MyButton[] towerButtons;
     private Tower selectedTower; //obecnie wybrana wieża (gdy chcemy ją postawić)
@@ -28,7 +29,9 @@ public class ActionBar extends Bar{
     }
 
     private void intButtons() {
-        bMENU = new MyButton("MENU", 1040, 890, 150, 50);
+        bMENU = new MyButton("MENU", 1040, 840, 150, 40);
+        bPause = new MyButton("PAUSE", 1040, 890, 150, 40);
+
         towerButtons = new MyButton[3]; //liczba wież
 
         int w = 70;
@@ -44,6 +47,7 @@ public class ActionBar extends Bar{
 
     private void drawButtons(Graphics g) {
         bMENU.draw(g);
+        bPause.draw(g);
 
         for(MyButton b : towerButtons) {
             g.setColor(Color.white);
@@ -72,6 +76,13 @@ public class ActionBar extends Bar{
         // Draw Tower Cost
         if(showTowerCost)
             drawTowerCost(g);
+
+        // Game Paused text
+        if(playing.isGamePaused()) {
+            g.setColor(Color.black);
+            //g.setFont("");
+            g.drawString("Game is paused!", 50,750);
+        }
     }
 
     /**
@@ -112,7 +123,7 @@ public class ActionBar extends Bar{
      * @param g Obiekt Graphics na którym rysujemy
      */
     private void drawGoldAmount(Graphics g) {
-        g.setColor(Color.decode("#8C4367"));
+        g.setColor(Color.decode("#AE8625"));
         g.drawString("Gold: " + gold,45,867);
     }
 
@@ -127,7 +138,7 @@ public class ActionBar extends Bar{
             g.setColor(Color.white);
             g.drawRect(850, 780, 300,70);
             g.drawRect(850, 780, 300,70);
-            g.drawImage(playing.getTowerManager().getTowerImgs()[displayedTower.getId()],
+            g.drawImage(playing.getTowerManager().getTowerImgs()[displayedTower.getTowerType()],
                     850,780,70,70, null);
             fontSetter();
             g.setFont(pixelFont);
@@ -142,7 +153,7 @@ public class ActionBar extends Bar{
      * @param g
      */
     private void drawDisplaydTowerRange(Graphics g) {
-        g.setColor(Color.white);
+        g.setColor(Color.lightGray);
         g.drawOval(displayedTower.getX() + 25 - (int)(displayedTower.getRange()*2)/2,
                 displayedTower.getY() + 25 - (int)(displayedTower.getRange()*2)/2,
                 (int)displayedTower.getRange()*2, (int)displayedTower.getRange()*2);
@@ -173,9 +184,23 @@ public class ActionBar extends Bar{
     public void displayTower(Tower t) {
         displayedTower = t;
     }
+
+    //if(e.getKeyCode() == KeyEvent.VK_P)
+
+    public void togglePause() {
+        playing.setGamePaused(!playing.isGamePaused()); // zamiana na przeciwne
+
+        if(playing.isGamePaused())
+            bPause.setText("UNPAUSE");
+        else
+            bPause.setText("PAUSE");
+    }
+
     public void mouseClicked(int x, int y) {
         if (bMENU.getBorders().contains(x, y))
             SetGameState(MENU);
+        else if(bPause.getBorders().contains(x,y))
+            togglePause();
         else{
             for(MyButton b : towerButtons){
                 if(b.getBorders().contains(x,y)){
@@ -201,10 +226,13 @@ public class ActionBar extends Bar{
      */
     public void mouseMoved(int x, int y) {
         bMENU.setMouseOver(false);
+        bPause.setMouseOver(false);
         showTowerCost = false;
 
         if (bMENU.getBorders().contains(x, y))
             bMENU.setMouseOver(true);
+        else if(bPause.getBorders().contains(x,y))
+            bPause.setMouseOver(true);
         else{
             for(MyButton b : towerButtons) {
                 b.setMouseOver(false);
@@ -221,15 +249,17 @@ public class ActionBar extends Bar{
     public void mousePressed(int x, int y) {
         if (bMENU.getBorders().contains(x, y))
             bMENU.setMousePress(true);
+        else if(bPause.getBorders().contains(x,y))
+            bPause.setMousePress(true);
         else
             for(MyButton b : towerButtons)
                 if (b.getBorders().contains(x,y))
                     b.setMouseOver(true);
-
     }
 
     public void mouseReleased(int x, int y) {
         bMENU.resetBooleans(); // reset buttons
+        bPause.resetBooleans();
         for(MyButton b : towerButtons)
                 b.resetBooleans();
     }
