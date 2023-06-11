@@ -128,21 +128,21 @@ public class Constants {
         public static float getDefaultRange(int towerType){
             switch (towerType){
                 case BASIC:
-                    return 50;
+                    return 100;
                 case MACHINE:
-                    return 50;
+                    return 100;
                 case BRUTAL:
-                    return 50;
+                    return 100;
                 case EXTRA:
-                    return 50;
+                    return 100;
                 case FAST_MACHINE:
-                    return 55;
+                    return 100;
                 case ONE_HIT:
-                    return 50;
+                    return 100;
                 case CRAZY_CANNON:
-                    return 50;
+                    return 100;
                 case DEUS_EX_MACHINA:
-                    return 50;
+                    return 100;
                 case OWN_TOWER:
                     return 1;
             }
@@ -153,26 +153,35 @@ public class Constants {
         public static float getDefaultCooldown(int towerType){
             switch (towerType){
                 case BASIC:
-                    return 10;
+                    return 50;
                 case MACHINE:
-                    return 10;
+                    return 50;
                 case BRUTAL:
-                    return 10;
+                    return 50;
                 case EXTRA:
-                    return 10;
+                    return 50;
                 case FAST_MACHINE:
                     return 15;
                 case ONE_HIT:
-                    return 10;
+                    return 50;
                 case CRAZY_CANNON:
-                    return 10;
+                    return 50;
                 case DEUS_EX_MACHINA:
-                    return 10;
+                    return 50;
                 case OWN_TOWER:
                     return 1;
             }
             return 0;
 
         }
+    }
+
+    public static class ProjectTiles{
+        public static final int BASIC_AMMO = 0; //typ BASIC
+        public static final int MACHINE_AMMO = 1; //typ MACHINE
+        public static final int HEAVY_AMMO = 2; //typ BRUTAL
+        public static final int EXTRA = 3; //ulepszony BASIC
+        public static final int FAST_MACHINE = 4; //szybszy niż MACHINE
+        public static final int ONE_HIT = 5; //mocniejszy niż BRUTAL
     }
 }
