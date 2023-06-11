@@ -240,5 +240,6 @@ public class ActionBar extends Bar{
 
     public void addGold(int getReward) {
         this.gold += getReward;
+
     }
 }
