@@ -9,6 +9,9 @@ import scenes.Playing;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static help.Constants.Tiles.*;
 import static java.lang.Thread.*;
@@ -64,12 +67,11 @@ public class ToolBar extends Bar{
     private void showString(Graphics g) {
         g.setColor(Color.red);
         g.setFont(Constants.MyFont.setMyFont(60));
-        g.drawString("Game is save!", 52, 748);
+        g.drawString("Game has been saved!", 52, 748);
 
         g.setColor(Color.black);
         g.setFont(Constants.MyFont.setMyFont(60));
-        g.drawString("Game is save!", 50,750);
-
+        g.drawString("Game has been saved!", 50,750);
     }
 
     private void drawButtons(Graphics g) {
@@ -97,11 +99,30 @@ public class ToolBar extends Bar{
 
         // String "Game is saved"
         if(isSavedToFile) {
-            System.out.println("oll");
-
+            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
             showString(g);
 
-               this.isSavedToFile = false;
+            // Uruchamianie funkcji po upływie określonego czasu
+            Runnable task = () -> {
+                this.isSavedToFile = false;
+                executor.shutdownNow(); // zamkniecie funkcji żeby nie powtarzała się co 3 sekundy
+            };
+
+            // Uruchamianie funkcji po 3 sekundach
+            executor.schedule(task, 3, TimeUnit.SECONDS);
+
+            // to sie buguje i zle dziala z tym
+            // Zamykanie executora po pewnym czasie
+            //long shutdownDelay = 4; // Czas w sekundach
+//            try {
+//                if (executor.awaitTermination(shutdownDelay, TimeUnit.SECONDS)) {
+//                    // Jeśli executor nie zostanie zamknięty po określonym czasie, można go zakończyć siłą
+//                    executor.shutdownNow();
+//                }
+//            } catch (InterruptedException e) {
+//                // Obsługa przerwania
+//                //e.printStackTrace();
+//            }
         }
     }
 

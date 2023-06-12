@@ -16,8 +16,6 @@ import static main.GameStates.SetGameState;
 public class Settings extends GameScene implements SceneMethods {
     private MyButton bMENU;
 
-
-
     public Settings(Game game) {
         super(game);
         intButtons();
@@ -33,8 +31,6 @@ public class Settings extends GameScene implements SceneMethods {
     private void intButtons() {
         bMENU = new MyButton("MENU", 1040, 890, 150, 50);
     }
-
-
 
     @Override
     public void mouseClicked(int x, int y) {

@@ -52,32 +52,10 @@ public class EnemyManager {
      * Aktualizacja moba
      */
     public void update(){
-        updateWaveManager();
-
-        if(isTimeForNewEnemy()) {
-            spawnEnemy();
-        }
-
         for(Enemy e : enemies)
             if(e.isAlive()) {
                 updateEnemyMove(e);
             }
-    }
-
-    private void updateWaveManager() {
-        playing.getWaveManager().update();
-    }
-
-    private void spawnEnemy() {
-        addEnemy(playing.getWaveManager().getNextEnemy());
-    }
-
-    private boolean isTimeForNewEnemy() {
-        if(playing.getWaveManager().isTimeForNewEnemy())
-            if(playing.getWaveManager().isThereMoreEnemiesInWave())
-                return true;
-
-        return false;
     }
 
     /**
@@ -196,6 +174,10 @@ public class EnemyManager {
         else if(dir == RIGHT)
             return getSpeed(enemyType) + 50;
         return 0;
+    }
+
+    public void spawnEnemy(int nextEnemy) {
+        addEnemy(nextEnemy);
     }
 
     /**
