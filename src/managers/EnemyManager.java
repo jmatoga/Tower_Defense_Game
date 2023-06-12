@@ -91,9 +91,11 @@ public class EnemyManager {
         int newX = (int)(e.getX() + getSpeedAndWidth(e.getLastDir(),e.getEnemyType()));
         int newY = (int)(e.getY() + getSpeedAndHeight(e.getLastDir(),e.getEnemyType()));
 
-        if(isAtEnd(e)){
+        if(isAtEnd(e)) {
+            e.kill();
             System.out.println("END!");
-        }else if(getTileType(newX,newY) == ROAD_TILE){
+        }
+        else if(getTileType(newX,newY) == ROAD_TILE){
             //idziemy dalej w tym samym kierunku
             e.move(getSpeed(e.getEnemyType()), e.getLastDir());
         }else{
@@ -128,8 +130,6 @@ public class EnemyManager {
                 e.move(getSpeed(e.getEnemyType()),RIGHT);
             else e.move(getSpeed(e.getEnemyType()),LEFT);
         }
-
-
     }
 
     /**

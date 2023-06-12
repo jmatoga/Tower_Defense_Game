@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import static help.Constants.Tiles.*;
+import static java.lang.Thread.*;
 import static main.GameStates.MENU;
 import static main.GameStates.SetGameState;
 
@@ -20,6 +21,7 @@ public class ToolBar extends Bar{
     private MyButton bPathStart, bPathEnd;
     private BufferedImage pathStart, pathEnd;
     private Tile selectedTile;
+    private boolean isSavedToFile;
     private ArrayList<MyButton> tileButtons = new ArrayList<>();
 
     public ToolBar(int x, int y, int width, int height, Editing editing) {
@@ -35,7 +37,6 @@ public class ToolBar extends Bar{
     private void intButtons() {
         bSave = new MyButton("SAVE", 880, 890, 150, 50);
         bMENU = new MyButton("MENU", 1040, 890, 150, 50);
-
 
         int w = 70;
         int h = 70;
@@ -55,6 +56,18 @@ public class ToolBar extends Bar{
 
     private void saveLevel() {
         editing.saveLevel();
+        setIfIsSavedToFile(true);
+    }
+
+    private void showString(Graphics g) {
+        g.setColor(Color.red);
+        g.setFont(Constants.MyFont.setMyFont(60));
+        g.drawString("Game is save!", 52, 748);
+
+        g.setColor(Color.black);
+        g.setFont(Constants.MyFont.setMyFont(60));
+        g.drawString("Game is save!", 50,750);
+
     }
 
     private void drawButtons(Graphics g) {
@@ -77,9 +90,20 @@ public class ToolBar extends Bar{
     }
 
     public void draw(Graphics g) {
-
         // Buttons
         drawButtons(g);
+
+        // String "Game is saved"
+        if(isSavedToFile) {
+            System.out.println("oll");
+            try {
+                showString(g);
+                Thread.sleep(500);
+                //setTimeout(isSavedToFile);// = false;
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private void drawSelectedTile(Graphics g) {
@@ -187,5 +211,9 @@ public class ToolBar extends Bar{
     }
     public BufferedImage getEndPathImage() {
         return pathEnd;
+    }
+
+    public void setIfIsSavedToFile(boolean setIfIsSavedToFile) {
+        isSavedToFile = setIfIsSavedToFile;
     }
 }

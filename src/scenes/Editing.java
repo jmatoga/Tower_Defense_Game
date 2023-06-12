@@ -2,6 +2,7 @@ package scenes;
 
 import Objects.PathPoint;
 import Objects.Tile;
+import help.Constants;
 import help.LoadSave;
 import main.Game;
 import ui.ToolBar;
