@@ -39,21 +39,22 @@ public class Game extends JFrame implements Runnable {
 
     public Game() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setBounds(100,100,450,300);
+        //setBounds(100,100,450,300); // - do suwaka
         setLocationRelativeTo(null);
-        //setResizable(false);
+        setResizable(false);
         setTitle("Tower Defense Game // By Jakub Matoga, Krzysztof Popiela, Daniel Minior");
-        contentPane = new JPanel();
+
+        // --- do suwaka
+        //contentPane = new JPanel();
         //contentPane.setLayout(new BorderLayout(0,0));
-        contentPane.setBorder(new EmptyBorder(5,5,5,5));
-        setContentPane(contentPane);
+        //contentPane.setBorder(new EmptyBorder(5,5,5,5));
+        //setContentPane(contentPane);
 
-        //JTextArea textArea = new JTextArea(10,20);
-        //contentPane.add(gameScreen,BorderLayout.CENTER);
-        JScrollPane scroll = new JScrollPane(gameScreen,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        //textArea.setLineWrap(true);
-        contentPane.add(scroll);
-
+        ////JTextArea textArea = new JTextArea(10,20);
+        ////contentPane.add(gameScreen,BorderLayout.CENTER);
+        //JScrollPane scroll = new JScrollPane(gameScreen,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        ////textArea.setLineWrap(true);
+        //contentPane.add(scroll);
 
         initClasses();
         createDefaultLevel();

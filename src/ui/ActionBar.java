@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 
 import static main.GameStates.MENU;
 import static main.GameStates.SetGameState;
@@ -26,10 +27,13 @@ public class ActionBar extends Bar{
     private int gold = 100; // pieniadze, zaczynamy z 100
     private boolean showTowerCost;
     private int towerCostType;
+    private DecimalFormat formatter;
 
     public ActionBar(int x, int y, int width, int height, Playing playing) {
         super(x,y,width,height);
         this.playing = playing;
+        formatter = new DecimalFormat("0.0"); // format wyswietlanych liczb
+
         intButtons();
     }
 
@@ -89,16 +93,60 @@ public class ActionBar extends Bar{
         if(showTowerCost)
             drawTowerCost(g);
 
+        // Wave info
+        drawWaveInfo(g);
+
         // Game Paused text
         if(playing.isGamePaused()) {
             g.setColor(Color.red);
             g.setFont(Constants.MyFont.setMyFont(60));
-            g.drawString("Game is paused!", 52, 748);
+            g.drawString("Game is paused!", 52, 738);
 
             g.setColor(Color.black);
             g.setFont(Constants.MyFont.setMyFont(60));
-            g.drawString("Game is paused!", 50,750);
+            g.drawString("Game is paused!", 50,740);
+        }
+    }
 
+    private void drawWaveInfo(Graphics g) {
+        g.setColor(Color.black);
+
+        drawWaveTimerInfo(g);
+        drawEnemiesLeftInfo(g);
+        drawWavesLeftInfo(g);
+    }
+
+    private void drawWavesLeftInfo(Graphics g) {
+        int current = playing.getWaveManager().getWaveIndex();
+        int size = playing.getWaveManager().getWaves().size();
+        g.setColor(Color.red);
+        g.setFont(Constants.MyFont.setMyFont(30));
+        g.drawString("Wave " + (current +1) + " / " + size,615,855);
+        g.setColor(Color.decode("#510404"));
+        g.setFont(Constants.MyFont.setMyFont(30));
+        g.drawString("Wave " + (current +1) + " / " + size,614,854);
+    }
+
+    private void drawEnemiesLeftInfo(Graphics g) {
+        int remaining = playing.getEnemyManager().getAmountOfAliveEnemies();
+        g.setColor(Color.red);
+        g.setFont(Constants.MyFont.setMyFont(30));
+        g.drawString("Enemies Left: " + remaining,570,895);
+        g.setColor(Color.decode("#510404"));
+        g.setFont(Constants.MyFont.setMyFont(30));
+        g.drawString("Enemies Left: " + remaining,569,894);
+    }
+
+    public void drawWaveTimerInfo(Graphics g) {
+        if(playing.getWaveManager().isWaveTimerStarted()) {
+            float timeLeft = playing.getWaveManager().getTimeLeft();
+            String formattedText = formatter.format(timeLeft); // zeby bylo tylko 0.0
+            g.setColor(Color.red);
+            g.setFont(Constants.MyFont.setMyFont(30));
+            g.drawString("Time left: " + formattedText,570,815);
+            g.setColor(Color.decode("#510404"));
+            g.setFont(Constants.MyFont.setMyFont(30));
+            g.drawString("Time left: " + formattedText,569,814);
         }
     }
 
@@ -173,7 +221,6 @@ public class ActionBar extends Bar{
         g.drawOval(displayedTower.getX() + 25 - (int)(displayedTower.getRange()*2)/2,
                 displayedTower.getY() + 25 - (int)(displayedTower.getRange()*2)/2,
                 (int)displayedTower.getRange()*2, (int)displayedTower.getRange()*2);
-
     }
 
     /**
@@ -276,6 +323,5 @@ public class ActionBar extends Bar{
 
     public void addGold(int getReward) {
         this.gold += getReward;
-
     }
 }
