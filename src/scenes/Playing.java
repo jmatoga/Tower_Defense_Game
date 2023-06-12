@@ -91,6 +91,9 @@ public class Playing extends GameScene implements SceneMethods {
     }
 
     private boolean isAllEnemiesDead() {
+        if(waveManager.isThereMoreEnemiesInWave())
+            return false;
+
         for(Enemy e : enemyManager.getEnemies())
             if(e.isAlive())
                 return false;

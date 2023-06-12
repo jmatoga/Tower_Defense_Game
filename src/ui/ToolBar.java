@@ -67,11 +67,11 @@ public class ToolBar extends Bar{
     private void showString(Graphics g) {
         g.setColor(Color.red);
         g.setFont(Constants.MyFont.setMyFont(60));
-        g.drawString("Game has been saved!", 52, 748);
+        g.drawString("Game has been saved!", 52, 728);
 
         g.setColor(Color.black);
         g.setFont(Constants.MyFont.setMyFont(60));
-        g.drawString("Game has been saved!", 50,750);
+        g.drawString("Game has been saved!", 50,730);
     }
 
     private void drawButtons(Graphics g) {
