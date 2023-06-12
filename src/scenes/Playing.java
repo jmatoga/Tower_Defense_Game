@@ -6,10 +6,7 @@ import enemies.Enemy;
 import help.Constants;
 import help.LoadSave;
 import main.Game;
-import managers.EnemyManager;
-import managers.ProjectileManager;
-import managers.TileManager;
-import managers.TowerManager;
+import managers.*;
 import ui.ActionBar;
 
 import java.awt.*;
@@ -27,6 +24,7 @@ public class Playing extends GameScene implements SceneMethods {
     private EnemyManager enemyManager;
     private TowerManager towerManager;
     private ProjectileManager projectileManager;
+    private WaveManager waveManager;
     private PathPoint start,end;
     private Tower selectedTower;
     private int goldTick;
@@ -41,9 +39,10 @@ public class Playing extends GameScene implements SceneMethods {
         enemyManager = new EnemyManager(this,start,end);
         towerManager = new TowerManager(this);
         projectileManager = new ProjectileManager(this);
+        waveManager = new WaveManager(this);
     }
 
-    /*
+/*
      * Zapis aktualnego poziomu
 
     public void saveLevel(){
@@ -237,6 +236,10 @@ public class Playing extends GameScene implements SceneMethods {
         this.gamePaused = gamePaused;
     }
 
+    public void shootEnemy(Tower t, Enemy e) {
+        projectileManager.newProjectile(t,e);
+    }
+
     public void keyPressed(KeyEvent e)
     {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
@@ -247,11 +250,11 @@ public class Playing extends GameScene implements SceneMethods {
         return enemyManager;
     }
 
-    public void rewardPlayer(int enemyType) {
-        actionBar.addGold(Constants.Enemies.getReward(enemyType));
+    public WaveManager getWaveManager() {
+        return waveManager;
     }
 
-    public void shootEnemy(Tower t, Enemy e) {
-        projectileManager.newProjectile(t,e);
+    public void rewardPlayer(int enemyType) {
+        actionBar.addGold(Constants.Enemies.getReward(enemyType));
     }
 }

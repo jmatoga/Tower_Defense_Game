@@ -30,13 +30,15 @@ public class EnemyManager {
         enemyImgs = new BufferedImage[7];
         this.start = start;
         this.end = end;
-        addEnemy(EASY_UNIT);
-        addEnemy(NORMAL_UNIT);
-        addEnemy(HARD_UNIT);
-        addEnemy(SUPER_UNIT);
-        addEnemy(TURBO_HARD_UNIT);
-        addEnemy(TUTORIAL_UNIT);
-        addEnemy(OWN_UNIT);
+
+//        addEnemy(EASY_UNIT);
+//        addEnemy(NORMAL_UNIT);
+//        addEnemy(HARD_UNIT);
+//        addEnemy(SUPER_UNIT);
+//        addEnemy(TURBO_HARD_UNIT);
+//        addEnemy(TUTORIAL_UNIT);
+//        addEnemy(OWN_UNIT);
+
         loadEnemyImgs();
     }
 
@@ -50,10 +52,32 @@ public class EnemyManager {
      * Aktualizacja moba
      */
     public void update(){
+        updateWaveManager();
+
+        if(isTimeForNewEnemy()) {
+            spawnEnemy();
+        }
+
         for(Enemy e : enemies)
             if(e.isAlive()) {
                 updateEnemyMove(e);
             }
+    }
+
+    private void updateWaveManager() {
+        playing.getWaveManager().update();
+    }
+
+    private void spawnEnemy() {
+        addEnemy(playing.getWaveManager().getNextEnemy());
+    }
+
+    private boolean isTimeForNewEnemy() {
+        if(playing.getWaveManager().isTimeForNewEnemy())
+            if(playing.getWaveManager().isThereMoreEnemiesInWave())
+                return true;
+
+        return false;
     }
 
     /**
