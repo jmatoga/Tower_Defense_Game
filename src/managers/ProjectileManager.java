@@ -61,14 +61,13 @@ public class ProjectileManager {
         if(t.getY() > e.getY())
             ySpeed *= -1;
 
-        // zeby nie zasypywac projectilelist juz aktywnymi projectiles i smieciami
-//        for(Projectile p : projectiles)
-//            if(!p.isActive() && p.getProjectileType() == type) {
-//                // t.getX()+4,t.getY()+3 - odpowiada za to gdzie sie pojawia strzal (ze srodka wiezy)
-//                p.reuse(t.getX()+4,t.getY()+3,xSpeed,ySpeed,t.getDmg());
-//                return;
-//            }
-            // t.getX()+4,t.getY()+3 - odpowiada za to gdzie sie pojawia strzal (ze srodka wiezy)
+        for (Projectile p : projectiles)
+            if (!p.isActive())
+                if (p.getProjectileType() == type) {
+                    p.reuse(t.getX(), t.getY(), xSpeed, ySpeed, t.getDmg());
+                    return;
+                }
+
             projectiles.add(new Projectile(t.getX(),t.getY(),xSpeed,ySpeed,t.getDmg(),projId++,type));
         }
 

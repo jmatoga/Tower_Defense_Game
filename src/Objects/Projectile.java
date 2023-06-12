@@ -19,7 +19,7 @@ public class Projectile {
     }
 
     public void reuse(int x, int y, float xSpeed, float ySpeed, int dmg) {
-        pos = new Point2D.Float(x,y);
+        this.pos = new Point2D.Float(x,y);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
         this.dmg = dmg;
