@@ -69,6 +69,16 @@ public class Playing extends GameScene implements SceneMethods {
      */
     public void update(){
         if(!gamePaused) {
+            waveManager.update();
+
+            if(isAllEnemiesDead()) {
+
+            }
+
+            if(isTimeForNewEnemy()) {
+                spawnEnemy();
+            }
+
             enemyManager.update();
             towerManager.update();
             projectileManager.update();
@@ -78,6 +88,26 @@ public class Playing extends GameScene implements SceneMethods {
             if(goldTick % (60*3) == 0)
                 actionBar.addGold(1);
         }
+    }
+
+    private boolean isAllEnemiesDead() {
+        for(Enemy e : enemyManager.getEnemies())
+            if(e.isAlive())
+                return false;
+
+        return true;
+    }
+
+    private void spawnEnemy() {
+        enemyManager.spawnEnemy(waveManager.getNextEnemy());
+    }
+
+    private boolean isTimeForNewEnemy() {
+        if(waveManager.isTimeForNewEnemy())
+            if(waveManager.isThereMoreEnemiesInWave())
+                return true;
+
+        return false;
     }
 
     /**
