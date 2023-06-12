@@ -1,6 +1,7 @@
 package enemies;
 
 import help.Constants;
+import help.ImgFix;
 import managers.EnemyManager;
 
 import java.awt.*;
@@ -48,6 +49,7 @@ public abstract class Enemy {
         switch(dir){
             case LEFT:
                 this.x -= speed;
+                //enemyManager.rotateEnemy( 90);
                 break;
             case UP:
                 this.y -= speed;

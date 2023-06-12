@@ -75,17 +75,17 @@ public class Constants {
         public static float getSpeed(int enemyType){
             switch (enemyType){
                 case TUTORIAL_UNIT:
-                    return 0.24f;
+                    return 0.12f;
                 case EASY_UNIT:
-                    return 0.4f;
+                    return 0.2f;
                 case NORMAL_UNIT:
-                    return 0.8f;
-                case HARD_UNIT:
-                    return 1f;
-                case SUPER_UNIT:
                     return 0.4f;
+                case HARD_UNIT:
+                    return 0.5f;
+                case SUPER_UNIT:
+                    return 0.2f;
                 case TURBO_HARD_UNIT:
-                    return 1.2f;
+                    return 0.6f;
                 case OWN_UNIT:
                     return 0.75f;
             }
@@ -204,21 +204,21 @@ public class Constants {
         public static float getDefaultRange(int towerType){
             switch (towerType){
                 case BASIC:
-                    return 1000;
+                    return 200;
                 case MACHINE:
-                    return 100;
+                    return 240;
                 case BRUTAL:
-                    return 100;
+                    return 240;
                 case EXTRA:
-                    return 100;
+                    return 280;
                 case FAST_MACHINE:
-                    return 100;
+                    return 320;
                 case ONE_HIT:
-                    return 100;
+                    return 240;
                 case CRAZY_CANNON:
-                    return 100;
+                    return 400;
                 case DEUS_EX_MACHINA:
-                    return 100;
+                    return 400;
                 case OWN_TOWER:
                     return 1;
             }
@@ -229,21 +229,21 @@ public class Constants {
         public static float getDefaultCooldown(int towerType){
             switch (towerType){
                 case BASIC:
-                    return 1;
+                    return 100f;
                 case MACHINE:
-                    return 30;
+                    return 30f;
                 case BRUTAL:
-                    return 30;
+                    return 100f;
                 case EXTRA:
-                    return 30;
+                    return 30f;
                 case FAST_MACHINE:
-                    return 15;
+                    return 10f;
                 case ONE_HIT:
-                    return 30;
+                    return 66f;
                 case CRAZY_CANNON:
-                    return 30;
+                    return 6f;
                 case DEUS_EX_MACHINA:
-                    return 30;
+                    return 1f;
                 case OWN_TOWER:
                     return 1;
             }
@@ -265,15 +265,15 @@ public class Constants {
                 case BASIC_AMMO:
                     return 10f;
                 case MACHINE_AMMO:
-                    return 1f;
+                    return 10f;
                 case HEAVY_AMMO:
-                    return 1f;
+                    return 10f;
                 case CRAZY_AMMO:
-                    return 1f;
+                    return 10f;
                 case DEM_AMMO:
-                    return 1f;
+                    return 10f;
                 case OWN_AMMO:
-                    return 1f;
+                    return 10f;
             }
             return 0;
         }
