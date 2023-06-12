@@ -49,10 +49,15 @@ public class ToolBar extends Bar{
             tileButtons.add(new MyButton(tile.getTileType(), xStart + xOffset * i, yStart, w, h, i));
             i++;
         }
+
         bPathStart = new MyButton("PathStart", xStart, yStart + xOffset, w, h, 3);
         bPathEnd = new MyButton("PathEnd", xStart + xOffset, yStart + xOffset, w, h, 4);
 
+
     }
+
+
+
 
     private void saveLevel() {
         editing.saveLevel();
@@ -96,13 +101,10 @@ public class ToolBar extends Bar{
         // String "Game is saved"
         if(isSavedToFile) {
             System.out.println("oll");
-            try {
-                showString(g);
-                Thread.sleep(500);
-                //setTimeout(isSavedToFile);// = false;
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+
+            showString(g);
+
+               this.isSavedToFile = false;
         }
     }
 
