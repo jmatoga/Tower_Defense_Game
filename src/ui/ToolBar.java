@@ -123,6 +123,7 @@ public class ToolBar extends Bar{
 //                // Obsługa przerwania
 //                //e.printStackTrace();
 //            }
+
         }
     }
 
