@@ -46,7 +46,6 @@ public class TowerManager {
             if(e.isAlive()) {
                 if (isEnemyInRange(t, e)) {
                     if(t.isCooldownOver()) {
-                        //e.hurt(1);
                         playing.shootEnemy(t,e);
                         t.resetCooldown();
                     }

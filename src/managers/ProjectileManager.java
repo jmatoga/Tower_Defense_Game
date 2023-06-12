@@ -19,27 +19,36 @@ public class ProjectileManager {
     private Playing playing;
     private ArrayList<Projectile> projectiles = new ArrayList<>();
     private BufferedImage[] proj_imgs;
+    private BufferedImage hit_img;
     private int projId=0;
+    private boolean drawHit;
+    private Point2D.Float hitPos;
 
     public ProjectileManager(Playing playing) {
         this.playing = playing;
         importImgs();
+
     }
 
     private void importImgs() {
         // x: 1-6 y:2
         BufferedImage atlas = LoadSave.getSpriteResource();
         proj_imgs = new BufferedImage[6];
-        for (int i = 0; i < 6; i++) {
-            proj_imgs[i] = atlas.getSubimage((1+i) *50,100,50,50);
 
-        }
+        for (int i = 0; i < 6; i++)
+            proj_imgs[i] = atlas.getSubimage((1+i) *50,100,50,50);
+        //importHits(atlas);
+
+    }
+
+    private void importHits(BufferedImage atlas) {
+        hit_img = atlas.getSubimage(50 * 7,100,50,50);
     }
 
     public void newProjectile(Tower t, Enemy e) {
         int type = getProjType(t);
-        int xDist = (int) Math.abs(t.getX() - e.getX());
-        int yDist = (int) Math.abs(t.getY() - e.getY());
+        int xDist = (int) (t.getX() - e.getX());
+        int yDist = (int) (t.getY() - e.getY());
         int totDist = Math.abs(xDist) + Math.abs(yDist);
 
         float xPer = (float) Math.abs(xDist) / totDist;
@@ -53,14 +62,14 @@ public class ProjectileManager {
             ySpeed *= -1;
 
         // zeby nie zasypywac projectilelist juz aktywnymi projectiles i smieciami
-        for(Projectile p : projectiles)
-            if(!p.isActive() && p.getProjectileType() == type) {
-                // t.getX()+4,t.getY()+3 - odpowiada za to gdzie sie pojawia strzal (ze srodka wiezy)
-                p.reuse(t.getX()+4,t.getY()+3,xSpeed,ySpeed,t.getDmg());
-                return;
-            }
+//        for(Projectile p : projectiles)
+//            if(!p.isActive() && p.getProjectileType() == type) {
+//                // t.getX()+4,t.getY()+3 - odpowiada za to gdzie sie pojawia strzal (ze srodka wiezy)
+//                p.reuse(t.getX()+4,t.getY()+3,xSpeed,ySpeed,t.getDmg());
+//                return;
+//            }
             // t.getX()+4,t.getY()+3 - odpowiada za to gdzie sie pojawia strzal (ze srodka wiezy)
-            projectiles.add(new Projectile(t.getX()+4,t.getY()+3,xSpeed,ySpeed,t.getDmg(),projId++,type));
+            projectiles.add(new Projectile(t.getX(),t.getY(),xSpeed,ySpeed,t.getDmg(),projId++,type));
         }
 
     public void update() {
@@ -69,8 +78,11 @@ public class ProjectileManager {
                 p.move();
                 if(isProjHittingEnemy(p)) {
                     p.setActive(false);
+                    //drawHit = true;
+                    //hitPos = p.getPos();
                 }
             }
+        //drawHit = false;
     }
 
     private boolean isProjHittingEnemy(Projectile p) {
@@ -84,10 +96,20 @@ public class ProjectileManager {
     }
 
     public void draw(Graphics g) {
+
+        Graphics2D g2d = (Graphics2D) g;
+
         for(Projectile p : projectiles)
             if(p.isActive())
-                g.drawImage(proj_imgs[p.getProjectileType()],(int)p.getPos().x,(int)p.getPos().y,null);
+                g2d.drawImage(proj_imgs[p.getProjectileType()],(int)p.getPos().x,(int)p.getPos().y,null);
+
+        //drawHit(g2d);
     }
+
+    private void drawHit(Graphics2D g2d) {
+        g2d.drawImage(hit_img, (int)hitPos.x, (int)hitPos.y, null);
+    }
+
 
     private int getProjType(Tower t) {
         switch (t.getTowerType()) {
@@ -107,4 +129,21 @@ public class ProjectileManager {
         }
         return 0;
     }
+
+
+//    public class Hit{
+//
+//        private Point2D.Float pos;
+//        public Hit(Point2D.Float pos ){
+//            this.pos = pos;
+//        }
+//
+//        public void update(){
+//
+//        }
+//
+//        public Point2D.Float getPos(){
+//            return pos;
+//        }
+//    }
 }

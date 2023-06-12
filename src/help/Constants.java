@@ -51,7 +51,7 @@ public class Constants {
         public static final int TUTORIAL_UNIT = 5;
         public static final int OWN_UNIT = 6;
 
-        public static int GetReward(int enemyType) {
+        public static int getReward(int enemyType) {
             switch (enemyType){
                 case TUTORIAL_UNIT:
                     return 1;
@@ -112,9 +112,9 @@ public class Constants {
             return  0;
         }
 
-        public static int getReward(int enemyType) {
-            return 0;
-        }
+//        public static int getReward(int enemyType) {
+//            return 0;
+//        }
     }
 
     public static class Towers{
@@ -180,7 +180,7 @@ public class Constants {
         public static int getStartDmg(int towerType){
             switch (towerType){
                 case BASIC:
-                    return 1;
+                    return 10;
                 case MACHINE:
                     return 10;
                 case BRUTAL:
@@ -263,19 +263,19 @@ public class Constants {
         public static float GetSpeed(int type){
             switch(type){
                 case BASIC_AMMO:
-                    return 10f;
+                    return 4f;
                 case MACHINE_AMMO:
-                    return 10f;
+                    return 6f;
                 case HEAVY_AMMO:
-                    return 10f;
+                    return 4f;
                 case CRAZY_AMMO:
-                    return 10f;
+                    return 4f;
                 case DEM_AMMO:
                     return 10f;
                 case OWN_AMMO:
                     return 10f;
             }
-            return 0;
+            return 0f;
         }
     }
 }
