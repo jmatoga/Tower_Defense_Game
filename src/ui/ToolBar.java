@@ -129,9 +129,9 @@ public class ToolBar extends Bar{
 
     private void drawSelectedTile(Graphics g) {
         if (selectedTile != null){
-            g.drawImage(selectedTile.getSprite(),1065,770,100,100,null);
+            g.drawImage(selectedTile.getSprite(),850,800,100,100,null);
             g.setColor(Color.black);
-            g.drawRect(1065,770,100,100);
+            g.drawRect(850,800,100,100);
         }
     }
 
