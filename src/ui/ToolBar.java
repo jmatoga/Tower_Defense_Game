@@ -56,9 +56,6 @@ public class ToolBar extends Bar{
 
     }
 
-
-
-
     private void saveLevel() {
         editing.saveLevel();
         setIfIsSavedToFile(true);

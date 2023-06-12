@@ -156,8 +156,8 @@ public class EnemyManager {
      * @return True jeśli na końcu
      */
     private boolean isAtEnd(Enemy e) {
-        if(e.getX() == end.getxCord()*50)
-            if(e.getY() == end.getyCord()*50)
+        if((int)e.getX() == end.getxCord()*50)
+            if((int)e.getY() == end.getyCord()*50)
                 return true;
         return false;
     }
