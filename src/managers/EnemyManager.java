@@ -4,6 +4,7 @@ import Objects.PathPoint;
 import Objects.Tower;
 import enemies.Enemy;
 import enemies.*;
+import help.ImgFix;
 import help.LoadSave;
 import scenes.Playing;
 
@@ -81,7 +82,7 @@ public class EnemyManager {
      * @param e Mob, który wykonuje ruch
      */
     private void setNewDirectionAndMove(Enemy e) {
-        int dir = e.getLastDir();
+       int dir = e.getLastDir();
 
         int xCord = (int)e.getX() / 50;
         int yCord = (int)e.getY() / 50;
@@ -241,6 +242,10 @@ public class EnemyManager {
 
     public ArrayList<Enemy> getEnemies(){
         return enemies;
+    }
+
+    public void rotateEnemy(Enemy e, int routeAngle){
+        ImgFix.getRotImg(enemyImgs[e.getEnemyType()], routeAngle);
     }
 
     public void rewardPlayer(int enemyType) {
