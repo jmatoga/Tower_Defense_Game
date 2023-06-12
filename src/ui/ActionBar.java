@@ -129,7 +129,7 @@ public class ActionBar extends Bar{
     private void drawGoldAmount(Graphics g) {
         g.setColor(Color.decode("#AE8625"));
         g.setFont(Constants.MyFont.setMyFont(45));
-        g.drawString("Gold: " + gold,52,890);
+        g.drawString("Gold: " + gold,60,895);
     }
 
     /**
