@@ -97,7 +97,7 @@ public class MyButton {
         int w = g.getFontMetrics().stringWidth(text);
         int h = g.getFontMetrics().getHeight();
         g.setColor(Color.RED);
-        g.drawString(text, x - w/2 + width/2, y + h/2 + height/2);
+        g.drawString(text, x - w/2 + width/2, y + h/2 + (int)(height/2.5));
     }
 
     public void resetBooleans() {
