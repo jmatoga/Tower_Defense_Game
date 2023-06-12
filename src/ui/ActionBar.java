@@ -29,16 +29,16 @@ public class ActionBar extends Bar{
     }
 
     private void intButtons() {
-        bMENU = new MyButton("MENU", 1040, 840, 150, 40);
-        bPause = new MyButton("PAUSE", 1040, 890, 150, 40);
+        bMENU = new MyButton("MENU", 1000, 840, 150, 40);
+        bPause = new MyButton("PAUSE", 1000, 890, 150, 40);
 
         towerButtons = new MyButton[3]; //liczba wież
 
         int w = 70;
         int h = 70;
-        int xStart = 12;
-        int yStart = 765;
-        int xOffset = (int) (w * 1.1f);
+        int xStart = 50;
+        int yStart = 780;
+        int xOffset = (int) (w * 1.2f);
 
         for(int i = 0; i < towerButtons.length; i++){
             towerButtons[i] = new MyButton("",xStart+xOffset*i,yStart,w,h,i);
@@ -95,19 +95,18 @@ public class ActionBar extends Bar{
      * @param g Obiekt Graphics na którym rysujemy
      */
     private void drawTowerCost(Graphics g) {
-        // TODO tu cos nie dziala z czcionka
-        g.setFont(Constants.MyFont.setMyFont(16));
+        g.setFont(Constants.MyFont.setMyFont(26));
         g.setColor(Color.gray);
-        g.fillRect(250,775,120,50);
+        g.fillRect(400,790,160,100);
         g.setColor(Color.black);
-        g.drawRect(250,775,120,50);
-        g.drawString("" + getTowerCostName(),255,795);
-        g.drawString("Cost: " + getTowerCostCost() + "g",255,815);
+        g.drawRect(400,790,160,100);
+        g.drawString("" + getTowerCostName(),412,825);
+        g.drawString("Cost: " + getTowerCostCost() + "g",412,865);
 
         // Show this if player lack gold for the selected tower
         if(isTowerCostMoreThanCurrentGold()) {
             g.setColor(Color.red);
-            g.drawString("You can't afford!",250,845);
+            g.drawString("You can't afford!",365,920);
         }
     }
 
@@ -129,8 +128,8 @@ public class ActionBar extends Bar{
      */
     private void drawGoldAmount(Graphics g) {
         g.setColor(Color.decode("#AE8625"));
-        g.setFont(Constants.MyFont.setMyFont(40));
-        g.drawString("Gold: " + gold,45,867);
+        g.setFont(Constants.MyFont.setMyFont(45));
+        g.drawString("Gold: " + gold,52,890);
     }
 
     /**
@@ -141,13 +140,13 @@ public class ActionBar extends Bar{
         if(displayedTower != null){
             g.setFont(Constants.MyFont.setMyFont(20));
             g.setColor(Color.decode("0x7f5415"));
-            g.fillRect(850, 780, 300,70);
-            g.setColor(Color.white);
-            g.drawRect(850, 780, 300,70);
-            g.drawRect(850, 780, 300,70);
+            g.fillRect(810, 780, 180,150);
+            g.setColor(Color.lightGray);
+            g.drawRect(810, 780, 180,150);
+            g.drawRect(810, 780, 180,150);
             g.drawImage(playing.getTowerManager().getTowerImgs()[displayedTower.getTowerType()],
-                    850,780,70,70, null);
-            g.drawString("Tower",930, 820);
+                    820,780,70,70, null);
+            g.drawString("Tower",900, 820);
             drawDisplaydTowerBorder(g);
             drawDisplaydTowerRange(g);
         }
