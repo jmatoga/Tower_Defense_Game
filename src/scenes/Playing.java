@@ -72,12 +72,19 @@ public class Playing extends GameScene implements SceneMethods {
             waveManager.update();
 
             if(isAllEnemiesDead()) {
-
+                if(isThereMoreWaves()) {
+                    waveManager.startWaveTimer();
+                    // Check timer
+                    if(isWaveTimerOver()) {
+                        waveManager.increaseWaveIndex();
+                        enemyManager.getEnemies().clear();
+                        waveManager.resetEnemyIndex();
+                    }
+                }
             }
 
-            if(isTimeForNewEnemy()) {
+            if(isTimeForNewEnemy())
                 spawnEnemy();
-            }
 
             enemyManager.update();
             towerManager.update();
@@ -88,6 +95,14 @@ public class Playing extends GameScene implements SceneMethods {
             if(goldTick % (60*3) == 0)
                 actionBar.addGold(1);
         }
+    }
+
+    private boolean isWaveTimerOver() {
+        return waveManager.isWaveTimerOver();
+    }
+
+    private boolean isThereMoreWaves() {
+        return waveManager.isThereMoreWaves();
     }
 
     private boolean isAllEnemiesDead() {
@@ -135,6 +150,11 @@ public class Playing extends GameScene implements SceneMethods {
         projectileManager.draw(g);
         drawSelectedTower(g);
         drawHighlight(g);
+        drawWaveInfo(g);
+    }
+
+    private void drawWaveInfo(Graphics g) {
+
     }
 
     private void drawHighlight(Graphics g) {

@@ -225,7 +225,6 @@ public class EnemyManager {
                 drawHealthBar(e, g);
             }
         }
-
     }
 
     private void drawHealthBar(Enemy e, Graphics g) {
@@ -256,5 +255,14 @@ public class EnemyManager {
 
     public void rewardPlayer(int enemyType) {
         playing.rewardPlayer(enemyType);
+    }
+
+    public int getAmountOfAliveEnemies() {
+        int size = 0;
+        for(Enemy e : enemies)
+            if(e.isAlive())
+                size++;
+
+        return size;
     }
 }
