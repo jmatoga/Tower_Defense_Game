@@ -37,7 +37,7 @@ public class Menu extends GameScene implements SceneMethods {
      */
     private void intButtons() {
         int w = 300, h = 100;
-        int x = 450, y = 200;
+        int x = 450, y = 170;
 
         bPLAY = new MyButton("PLAY", x, y*1, w, h);
         bEDIT = new MyButton("EDIT", x, y*2, w, h);

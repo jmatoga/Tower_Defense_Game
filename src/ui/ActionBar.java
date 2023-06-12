@@ -2,11 +2,16 @@ package ui;
 
 import Objects.Tower;
 import help.Constants;
+import help.LoadSave;
 import scenes.Playing;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static main.GameStates.MENU;
 import static main.GameStates.SetGameState;
@@ -49,9 +54,16 @@ public class ActionBar extends Bar{
         bMENU.draw(g, Constants.MyFont.SMALL_BUTTONS_SIZE);
         bPause.draw(g, Constants.MyFont.SMALL_BUTTONS_SIZE);
 
+        //BufferedImage atlas = LoadSave.getSpriteResource();
+        //BufferedImage img_bg = atlas.getSubimage(8*50,2*50,50,50);
+
+
         for(MyButton b : towerButtons) {
-            g.setColor(Color.white);
+            g.setColor(Color.decode("0x7f5415"));
             g.fillRect(b.x,b.y,b.width,b.height); //dodanie tła
+            g.setColor(Color.black);
+            g.drawRect(b.x, b.y, b.width, b.height);
+            //g.drawImage(img_bg, b.x, b.y, null);
             g.drawImage(playing.getTowerManager().getTowerImgs()[b.getId()], b.x, b.y, b.width, b.height, null);
             drawButtonFeedback(g, b);
         }
@@ -129,7 +141,7 @@ public class ActionBar extends Bar{
     private void drawGoldAmount(Graphics g) {
         g.setColor(Color.decode("#AE8625"));
         g.setFont(Constants.MyFont.setMyFont(45));
-        g.drawString("Gold: " + gold,52,890);
+        g.drawString("Gold: " + gold,60,895);
     }
 
     /**
