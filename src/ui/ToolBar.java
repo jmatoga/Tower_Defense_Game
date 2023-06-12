@@ -35,13 +35,13 @@ public class ToolBar extends Bar{
         pathEnd = LoadSave.getSpriteResource().getSubimage(1*50,1*50,50,50);
     }
     private void intButtons() {
-        bSave = new MyButton("SAVE", 880, 890, 150, 50);
-        bMENU = new MyButton("MENU", 1040, 890, 150, 50);
+        bSave = new MyButton("SAVE", 1000, 820, 150, 50);
+        bMENU = new MyButton("MENU", 1000, 880, 150, 50);
 
         int w = 70;
         int h = 70;
-        int xStart = 12;
-        int yStart = 765;
+        int xStart = 50;
+        int yStart = 780;
         int xOffset = (int) (w * 1.1f);
         int i = 0;
 

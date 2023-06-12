@@ -15,25 +15,34 @@ import static main.GameStates.SetGameState;
 
 public class Settings extends GameScene implements SceneMethods {
     private MyButton bMENU;
-
+    private BufferedImage img_bg;
 
 
     public Settings(Game game) {
         super(game);
+        importBG();
         intButtons();
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.BLUE);
-        g.fillRect(10, 0, 1200, 950);
+        g.drawImage(img_bg, 0, 0, null);
         drawButtons(g);
     }
 
     private void intButtons() {
-        bMENU = new MyButton("MENU", 1040, 890, 150, 50);
+        bMENU = new MyButton("MENU", 450, 740, 300, 100);
     }
 
+    private void importBG() {
+        InputStream is = getClass().getResourceAsStream("/res/menu_bg_2.png");
+
+        try {
+            img_bg = ImageIO.read(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -74,6 +83,6 @@ public class Settings extends GameScene implements SceneMethods {
     }
 
     private void drawButtons(Graphics g) {
-        bMENU.draw(g, Constants.MyFont.SMALL_BUTTONS_SIZE);
+        bMENU.draw(g, Constants.MyFont.BIG_BUTTONS_SIZE);
     }
 }
