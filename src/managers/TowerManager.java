@@ -72,6 +72,13 @@ public class TowerManager {
         }
     }
 
+    public void upgradeTower(Tower displayedTower) {
+        for(Tower t : towers) {
+            if(t.getId() == displayedTower.getId())
+                t.upgradeTower();
+        }
+    }
+
     /**
      * Wywołanie rysowania wież
      *
