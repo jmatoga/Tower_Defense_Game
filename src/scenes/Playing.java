@@ -332,4 +332,26 @@ public class Playing extends GameScene implements SceneMethods {
     public void rewardPlayer(int enemyType) {
         actionBar.addGold(Constants.Enemies.getReward(enemyType));
     }
+
+    public void removeOneLife() {
+        actionBar.removeOneLife();
+    }
+
+    public void resetEverythig() {
+        actionBar.resetEverything();
+
+        //managers
+        enemyManager.reset();
+        towerManager.reset();
+        projectileManager.reset();
+        waveManager.reset();
+
+        mouseX = 0;
+        mouseY = 0;
+
+        selectedTower = null;
+        goldTick = 0;
+        gamePaused = false;
+
+    }
 }

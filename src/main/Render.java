@@ -29,6 +29,10 @@ public class Render {
             case EDIT:
                 game.getEditor().render(g);
                 break;
+            case GAME_OVER:
+                game.getGameOver().render(g);
+                break;
+
         }
     }
 }

@@ -47,6 +47,7 @@ public class ProjectileManager {
 
     public void newProjectile(Tower t, Enemy e) {
         int type = getProjType(t);
+
         int xDist = (int) (t.getX() - e.getX());
         int yDist = (int) (t.getY() - e.getY());
         int totDist = Math.abs(xDist) + Math.abs(yDist);
@@ -56,15 +57,17 @@ public class ProjectileManager {
         float xSpeed = xPer * Constants.Projectiles.GetSpeed(type);
         float ySpeed = Constants.Projectiles.GetSpeed(type) - xSpeed;
 
+
         if(t.getX() > e.getX())
             xSpeed *= -1;
         if(t.getY() > e.getY())
             ySpeed *= -1;
 
+
         for (Projectile p : projectiles)
             if (!p.isActive())
                 if (p.getProjectileType() == type) {
-                    p.reuse(t.getX(), t.getY(), xSpeed, ySpeed, t.getDmg());
+                    p.reuse(t.getX() + 25, t.getY() + 25, xSpeed, ySpeed, t.getDmg());
                     return;
                 }
 
@@ -79,9 +82,21 @@ public class ProjectileManager {
                     p.setActive(false);
                     //drawHit = true;
                     //hitPos = p.getPos();
+                }else if(isProjOutsideBounds(p)){
+                    p.setActive(false);
                 }
             }
         //drawHit = false;
+    }
+
+    private boolean isProjOutsideBounds(Projectile p) {
+        if(p.getPos().x >= 0)
+            if(p.getPos().x <= 1200)
+                if(p.getPos().y >= 0)
+                    if(p.getPos().y <= 950)
+                        return false;
+
+            return true;
     }
 
     private boolean isProjHittingEnemy(Projectile p) {
@@ -99,8 +114,11 @@ public class ProjectileManager {
         Graphics2D g2d = (Graphics2D) g;
 
         for(Projectile p : projectiles)
-            if(p.isActive())
-                g2d.drawImage(proj_imgs[p.getProjectileType()],(int)p.getPos().x,(int)p.getPos().y,null);
+            if(p.isActive()) {
+                g2d.drawImage(proj_imgs[p.getProjectileType()], (int) p.getPos().x, (int) p.getPos().y, null);
+                //g2d.setColor(Color.yellow);
+                //g2d.drawRect((int) p.getPos().x, (int) p.getPos().y, 50, 50);
+            }
 
         //drawHit(g2d);
     }
@@ -127,6 +145,11 @@ public class ProjectileManager {
                 return OWN_AMMO;
         }
         return 0;
+    }
+
+    public void reset(){
+        projectiles.clear();
+        projId = 0;
     }
 
 

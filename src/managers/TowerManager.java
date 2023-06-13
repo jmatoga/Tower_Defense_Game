@@ -108,4 +108,9 @@ public class TowerManager {
     public BufferedImage[] getTowerImgs() {
         return towerImgs;
     }
+
+    public void reset(){
+        towers.clear();
+        towerAmount = 0;
+    }
 }

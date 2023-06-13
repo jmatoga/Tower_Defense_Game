@@ -25,7 +25,7 @@ public abstract class Enemy {
         this.ID = ID;
         this.enemyType = enemyType;
         this.enemyManager = enemyManager;
-        bounds = new Rectangle((int)x, (int)y, 50, 50);
+        bounds = new Rectangle((int)x, (int)y , 50, 50);
         lastDir = -1;
         setStartHealth();
     }
@@ -89,13 +89,13 @@ public abstract class Enemy {
         return health /(float) maxHealth;
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
+//    public void setX(float x) {
+//        this.x = x;
+//    }
 
-    public void setY(float y) {
-        this.y = y;
-    }
+//    public void setY(float y) {
+//        this.y = y;
+//    }
 
     public void setBounds(Rectangle bounds) {
         this.bounds = bounds;

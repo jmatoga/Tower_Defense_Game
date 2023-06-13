@@ -71,7 +71,7 @@ public class EnemyManager {
 
         if(isAtEnd(e)) {
             e.kill();
-            System.out.println("END!");
+            playing.removeOneLife();
         }
         else if(getTileType(newX,newY) == ROAD_TILE){
             //idziemy dalej w tym samym kierunku
@@ -88,8 +88,8 @@ public class EnemyManager {
     private void setNewDirectionAndMove(Enemy e) {
        int dir = e.getLastDir();
 
-        int xCord = (int)e.getX() / 50;
-        int yCord = (int)e.getY() / 50;
+        int xCord = (int)(e.getX() / 50);
+        int yCord = (int)(e.getY() / 50);
 
         fixEnemyOffsetTile(e,dir,xCord,yCord);
 
@@ -106,7 +106,8 @@ public class EnemyManager {
             int newX = (int)(e.getX() + getSpeedAndWidth(RIGHT,e.getEnemyType()));
             if (getTileType(newX, (int) e.getY()) == ROAD_TILE)
                 e.move(getSpeed(e.getEnemyType()),RIGHT);
-            else e.move(getSpeed(e.getEnemyType()),LEFT);
+            else
+                e.move(getSpeed(e.getEnemyType()),LEFT);
         }
     }
 
@@ -223,8 +224,15 @@ public class EnemyManager {
             if(e.isAlive()) {
                 drawEnemy(e, g);
                 drawHealthBar(e, g);
+               drawKwadrat(e, g);
             }
         }
+    }
+
+    private void drawKwadrat(Enemy e, Graphics g) {
+        g.setColor(Color.green);
+        //g.drawRect((int)e.getX(), (int) e.getY(), 50, 50);
+        //g.drawRect((int)e.getBounds().x, (int) e.getBounds().y, 50, 50);
     }
 
     private void drawHealthBar(Enemy e, Graphics g) {
@@ -264,5 +272,9 @@ public class EnemyManager {
                 size++;
 
         return size;
+    }
+
+    public void reset(){
+        enemies.clear();
     }
 }

@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 
-import static main.GameStates.MENU;
-import static main.GameStates.SetGameState;
+import static main.GameStates.*;
 
 public class ActionBar extends Bar {
+
     private MyButton bMENU, bPause;
     private Playing playing;
     private MyButton[] towerButtons;
@@ -27,6 +27,8 @@ public class ActionBar extends Bar {
     private int gold = 100; // pieniadze, zaczynamy z 100
     private boolean showTowerCost;
     private int towerCostType;
+
+    private int lives = 20;
     private DecimalFormat formatter;
     private MyButton sellTower, upgradeTower;
 
@@ -36,6 +38,15 @@ public class ActionBar extends Bar {
         formatter = new DecimalFormat("0.0"); // format wyswietlanych liczb
 
         intButtons();
+    }
+
+    public void resetEverything() {
+        lives = 20;
+        towerCostType = 0;
+        showTowerCost = false;
+        gold = 100;
+        selectedTower = null;
+        displayedTower = null;
     }
 
     private void intButtons() {
@@ -59,6 +70,12 @@ public class ActionBar extends Bar {
         // TODO kolorki i na srodek napisy
         sellTower = new MyButton("Sell", 820, 890, 75, 30);
         upgradeTower = new MyButton("Upgrade", 905, 890, 75, 30);
+    }
+
+    public void removeOneLife(){
+        lives--;
+        if(lives <= 0)
+         SetGameState(GAME_OVER);
     }
 
     private void drawButtons(Graphics g) {
@@ -109,6 +126,11 @@ public class ActionBar extends Bar {
         }
 
         // Game Saved text
+        g.setColor(Color.gray);
+        g.setFont(Constants.MyFont.setMyFont(36));
+        g.drawString("Lives: ", 60, 920);
+        g.setColor(Color.decode("185607"));
+        g.drawString("" + lives, 190, 920);
 
     }
 
@@ -202,8 +224,8 @@ public class ActionBar extends Bar {
      */
     private void drawGoldAmount(Graphics g) {
         g.setColor(Color.decode("#AE8625"));
-        g.setFont(Constants.MyFont.setMyFont(45));
-        g.drawString("Gold: " + gold, 60, 895);
+        g.setFont(Constants.MyFont.setMyFont(36));
+        g.drawString("Gold: " + gold, 60, 885);
     }
 
     /**
@@ -435,4 +457,10 @@ public class ActionBar extends Bar {
     public void addGold(int getReward) {
         this.gold += getReward;
     }
+
+    public int getLives() {
+        return lives;
+    }
+
+
 }

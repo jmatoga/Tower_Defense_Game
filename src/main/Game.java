@@ -5,10 +5,8 @@ import inputs.KeyboardListener;
 import inputs.MyMouseListener;
 import managers.EnemyManager;
 import managers.TileManager;
-import scenes.Editing;
+import scenes.*;
 import scenes.Menu;
-import scenes.Playing;
-import scenes.Settings;
 
 
 import javax.imageio.ImageIO;
@@ -34,6 +32,8 @@ public class Game extends JFrame implements Runnable {
     private Playing playing;
     private Settings settings;
     private Editing editing;
+    private GameOver gameOver;
+
     private TileManager tileManager;
     private JPanel contentPane;
 
@@ -116,6 +116,7 @@ public class Game extends JFrame implements Runnable {
         playing = new Playing(this);
         settings = new Settings(this);
         editing = new Editing(this);
+        gameOver = new GameOver(this);
     }
 
     public static void main(String[] args) {
@@ -143,6 +144,9 @@ public class Game extends JFrame implements Runnable {
     }
     public Editing getEditor() {
         return editing;
+    }
+    public GameOver getGameOver() {
+        return gameOver;
     }
     public TileManager getTileManager(){
         return tileManager;

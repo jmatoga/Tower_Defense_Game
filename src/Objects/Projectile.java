@@ -10,7 +10,7 @@ public class Projectile {
     private boolean active = true;
 
     public Projectile(float x, float y, float xSpeed,float ySpeed, int dmg, int id, int projectTileType) {
-        this.pos = new Point2D.Float(x,y);
+        pos = new Point2D.Float(x,y);
         this.id = id;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
@@ -19,7 +19,7 @@ public class Projectile {
     }
 
     public void reuse(int x, int y, float xSpeed, float ySpeed, int dmg) {
-        this.pos = new Point2D.Float(x,y);
+        pos = new Point2D.Float(x -25,y-25);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
         this.dmg = dmg;
