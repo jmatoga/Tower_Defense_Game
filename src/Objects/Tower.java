@@ -1,16 +1,19 @@
 package Objects;
 
 import help.Constants;
+import static help.Constants.Towers.*;
 
 public class Tower {
     private int x,y, id, towerType,cdTick, dmg; // cdTick - cooldown tick
     private float range, cooldown;
+    private int tier;
 
     public Tower(int x, int y, int id, int towerType) {
         this.x = x;
         this.y = y;
         this.id = id;
         this.towerType = towerType;
+        tier = 1;
         setDefaultDmg();
         setDefaultRange();
         setDefaultCooldown();
@@ -18,6 +21,40 @@ public class Tower {
 
     public void update() {
         cdTick++;
+    }
+
+    public void upgradeTower() {
+        this.tier++;
+
+        switch (getTowerType()){
+            case BASIC:
+                setTowerType(EXTRA);
+                break;
+            case EXTRA:
+                dmg += 2;
+                range += 10;
+                cooldown -= 2;
+                break;
+            case MACHINE:
+                setTowerType(FAST_MACHINE);
+                break;
+            case FAST_MACHINE:
+                dmg += 3;
+                range += 5;
+                cooldown -= 1;
+                break;
+            case BRUTAL:
+                setTowerType(ONE_HIT);
+                break;
+            case ONE_HIT:
+                dmg += 5;
+                range += 5;
+                cooldown -= 1;
+                break;
+            case OWN_TOWER:
+                // TODO
+        }
+        //return 0;
     }
 
     public boolean isCooldownOver() {
@@ -56,6 +93,10 @@ public class Tower {
         return towerType;
     }
 
+    public void setTowerType(int towerType) {
+        this.towerType = towerType;
+    }
+
     public int getDmg() {
         return dmg;
     }
@@ -66,5 +107,9 @@ public class Tower {
 
     public float getCooldown() {
         return cooldown;
+    }
+
+    public int getTier() {
+        return tier;
     }
 }

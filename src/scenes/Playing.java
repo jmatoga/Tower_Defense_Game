@@ -208,6 +208,10 @@ public class Playing extends GameScene implements SceneMethods {
         towerManager.removeTower(displayedTower);
     }
 
+    public void upgradeTower(Tower displayedTower) {
+        towerManager.upgradeTower(displayedTower);
+    }
+
     /**
      *
      * @param mouseX
