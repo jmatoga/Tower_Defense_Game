@@ -207,7 +207,7 @@ public class LoadSave {
 
     }
 
-    private static int ReadFromFileDL(File file) {
+    public static int ReadFromFileDL(File file) {
         int dificultyLevel = 1;
         try {
             Scanner sc = new Scanner(file);

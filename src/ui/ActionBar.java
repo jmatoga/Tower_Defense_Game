@@ -101,12 +101,15 @@ public class ActionBar extends Bar {
         if (playing.isGamePaused()) {
             g.setColor(Color.red);
             g.setFont(Constants.MyFont.setMyFont(60));
-            g.drawString("Game is paused!", 52, 738);
+            g.drawString("Game has been paused!", 52, 738);
 
             g.setColor(Color.black);
             g.setFont(Constants.MyFont.setMyFont(60));
-            g.drawString("Game is paused!", 50, 740);
+            g.drawString("Game has been paused!", 50, 740);
         }
+
+        // Game Saved text
+
     }
 
     private void drawWaveInfo(Graphics g) {

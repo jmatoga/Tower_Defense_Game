@@ -55,8 +55,6 @@ public class ToolBar extends Bar{
 
         bPathStart = new MyButton("PathStart", xStart, yStart + xOffset, w, h, 3);
         bPathEnd = new MyButton("PathEnd", xStart + xOffset, yStart + xOffset, w, h, 4);
-
-
     }
 
     private void saveLevel() {
