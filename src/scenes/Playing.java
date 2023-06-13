@@ -204,6 +204,10 @@ public class Playing extends GameScene implements SceneMethods {
         return getGame().getTileManager().getSprite(spriteID);
     }
 
+    public void removeTower(Tower displayedTower) {
+        towerManager.removeTower(displayedTower);
+    }
+
     /**
      *
      * @param mouseX
