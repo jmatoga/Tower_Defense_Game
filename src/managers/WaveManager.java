@@ -16,6 +16,7 @@ public class WaveManager {
     private int waveTickLimit = 60 * 5;
     private int waveTick = 0;
     private boolean waveTickTimerOver;
+    private int DifLev = 0;
 
     public WaveManager(Playing playing) {
         this.playing = playing;
@@ -54,9 +55,30 @@ public class WaveManager {
     }
 
     private void createWaves() {
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0, 0, 0, 0, 0, 1))));
-        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2, 0, 0, 0, 0, 3, 0, 0, 0, 1))));
 
+        switch (playing.getDificultyLevel()) {
+            case 0:
+                waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))));
+                waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))));
+                waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2))));
+                break;
+            case 1:
+                waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3 , 2, 2, 2, 2, 2, 2, 2, 2,2))));
+                waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3))));
+                waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4))));
+                break;
+            case 2:
+                waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(5, 5, 5, 5, 5, 5, 5, 5, 5, 5))));
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void setDifLev(int difLev) {
+        this.DifLev = difLev;
+        System.out.printf("Dif level:" + difLev);
     }
 
     public ArrayList<Wave> getWaves() {

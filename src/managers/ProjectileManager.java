@@ -37,7 +37,7 @@ public class ProjectileManager {
 
         for (int i = 0; i < 6; i++)
             proj_imgs[i] = atlas.getSubimage((1+i) *50,100,50,50);
-        //importHits(atlas);
+        importHits(atlas);
 
     }
 

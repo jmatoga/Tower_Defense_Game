@@ -29,11 +29,13 @@ public class Playing extends GameScene implements SceneMethods {
     private Tower selectedTower;
     private int goldTick;
     private boolean gamePaused;
+    private int DificultyLevel;
 
 
     public Playing(Game game) {
         super(game);
         loadDefaultLevel();
+        loadDificultyLevel();
         tileManager = new TileManager();
         actionBar = new ActionBar(0, 750, 1200, 200, this);
         enemyManager = new EnemyManager(this,start,end);
@@ -41,6 +43,14 @@ public class Playing extends GameScene implements SceneMethods {
         projectileManager = new ProjectileManager(this);
         waveManager = new WaveManager(this);
     }
+
+    public void setDificultyLevel(int dificultyLevel) {
+        DificultyLevel = dificultyLevel;
+    }
+    public int getDificultyLevel() {
+        return DificultyLevel;
+    }
+
 
 /*
      * Zapis aktualnego poziomu
@@ -58,6 +68,10 @@ public class Playing extends GameScene implements SceneMethods {
 
         start = points.get(0);
         end = points.get(1);
+    }
+
+    private void loadDificultyLevel(){
+        DificultyLevel = LoadSave.GetDifLevelData("Dif_lvl");
     }
 
     public void setLevel(int[][] lvl){
