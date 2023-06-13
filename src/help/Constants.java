@@ -135,7 +135,7 @@ public class Constants {
                 case ONE_HIT:
                     return (int) (60*1.6f); // koszt wiezy + upgrade
                 case CRAZY_CANNON:
-                    return 400;
+                    return 1000;
                 case DEUS_EX_MACHINA:
                     return 450;
                 case OWN_TOWER:
@@ -233,7 +233,7 @@ public class Constants {
                 case ONE_HIT:
                     return 66f;
                 case CRAZY_CANNON:
-                    return 6f;
+                    return 10f;
                 case DEUS_EX_MACHINA:
                     return 1f;
                 case OWN_TOWER:
