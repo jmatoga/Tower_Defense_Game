@@ -83,6 +83,24 @@ public class LoadSave {
     }
 
     /**
+     * Publiczna metoda zapisująca poziom do pliku
+     * @param f Plik z poziomem
+     * @param idArr Tablica z poziomem
+     * @return Zapisuje tablicę 1D z poziomem do pliku
+     */
+    private static void WriteToFileLvl(File f, int difLvl){
+
+        //sprawdza czy plik istnieje
+        try {
+            PrintWriter pw = new PrintWriter(f);
+                pw.println(difLvl);
+            pw.close();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Publiczna metoda zapisująca edytowany poziom do pliku
      * @param name Plik z poziomem
      * @param idArr Tablica z poziomem
@@ -93,6 +111,22 @@ public class LoadSave {
 
         if(levelFile.exists()){
             WriteToFile(levelFile,Utils.TwoDto1DintArr(idArr),start,end);
+        }else{
+            System.out.println("File: " + name + "doesn't exists! ");
+            return;
+        }
+    }
+
+    /**
+     * Publiczna metoda zapisująca level do pliku
+     * @param name Plik z poziomem
+     * @return Zwraca numer cieżkosci poziomu
+     */
+    public static void SaveDifLevel(String name, int difLvl){
+        File levelDifFile = new File("src/res/" + name + ".txt");
+
+        if(levelDifFile.exists()){
+            WriteToFileLvl(levelDifFile,difLvl);
         }else{
             System.out.println("File: " + name + "doesn't exists! ");
             return;
@@ -158,5 +192,35 @@ public class LoadSave {
             System.out.println("File: " + name + " doesn't exists! ");
             return null;
         }
+    }
+
+    public static int GetDifLevelData(String difLvl) {
+        File levelFile = new File("src/res/" + difLvl + ".txt");
+
+        if(levelFile.exists()){
+            int dificultyLevel = ReadFromFileDL(levelFile);
+            return dificultyLevel;
+        }else{
+            System.out.println("File: " + difLvl + " doesn't exists! ");
+            return 1;
+        }
+
+    }
+
+    private static int ReadFromFileDL(File file) {
+        int dificultyLevel = 1;
+        try {
+            Scanner sc = new Scanner(file);
+
+            while(sc.hasNextLine()){
+                dificultyLevel = Integer.parseInt(sc.nextLine());
+            }
+            sc.close();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return dificultyLevel;
+
     }
 }
