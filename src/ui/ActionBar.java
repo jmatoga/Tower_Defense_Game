@@ -121,20 +121,29 @@ public class ActionBar extends Bar {
         int size = playing.getWaveManager().getWaves().size();
         g.setColor(Color.red);
         g.setFont(Constants.MyFont.setMyFont(30));
-        g.drawString("Wave " + (current + 1) + " / " + size, 615, 855);
+        g.drawString("Wave " + (current + 1) + " / " + size, 600, 815);
         g.setColor(Color.decode("#510404"));
         g.setFont(Constants.MyFont.setMyFont(30));
-        g.drawString("Wave " + (current + 1) + " / " + size, 614, 854);
+        g.drawString("Wave " + (current + 1) + " / " + size, 599, 814);
     }
+
+    // 855
+    // 854
+
+    // 895
+    //894
+
+    //815
+    //814
 
     private void drawEnemiesLeftInfo(Graphics g) {
         int remaining = playing.getEnemyManager().getAmountOfAliveEnemies();
         g.setColor(Color.red);
         g.setFont(Constants.MyFont.setMyFont(30));
-        g.drawString("Enemies Left: " + remaining, 570, 895);
+        g.drawString("Enemies Left: " + remaining, 555, 855);
         g.setColor(Color.decode("#510404"));
         g.setFont(Constants.MyFont.setMyFont(30));
-        g.drawString("Enemies Left: " + remaining, 569, 894);
+        g.drawString("Enemies Left: " + remaining, 554, 854);
     }
 
     public void drawWaveTimerInfo(Graphics g) {
@@ -143,10 +152,10 @@ public class ActionBar extends Bar {
             String formattedText = formatter.format(timeLeft); // zeby bylo tylko 0.0
             g.setColor(Color.red);
             g.setFont(Constants.MyFont.setMyFont(30));
-            g.drawString("Time left: " + formattedText, 570, 815);
+            g.drawString("Time left: " + formattedText, 555, 895);
             g.setColor(Color.decode("#510404"));
             g.setFont(Constants.MyFont.setMyFont(30));
-            g.drawString("Time left: " + formattedText, 569, 814);
+            g.drawString("Time left: " + formattedText, 554, 894);
         }
     }
 
@@ -158,16 +167,16 @@ public class ActionBar extends Bar {
     private void drawTowerCost(Graphics g) {
         g.setFont(Constants.MyFont.setMyFont(26));
         g.setColor(Color.gray);
-        g.fillRect(400, 790, 160, 100);
+        g.fillRect(385, 790, 160, 100);
         g.setColor(Color.black);
-        g.drawRect(400, 790, 160, 100);
-        g.drawString("" + getTowerCostName(), 412, 825);
-        g.drawString("Cost: " + getTowerCostCost() + "g", 412, 865);
+        g.drawRect(385, 790, 160, 100);
+        g.drawString("" + getTowerCostName(), 397, 825);
+        g.drawString("Cost: " + getTowerCostCost() + "g", 397, 865);
 
         // Show this if player lack gold for the selected tower
         if (isTowerCostMoreThanCurrentGold()) {
             g.setColor(Color.red);
-            g.drawString("You can't afford!", 365, 920);
+            g.drawString("You can't afford!", 350, 920);
         }
     }
 

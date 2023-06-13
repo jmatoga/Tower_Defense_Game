@@ -107,7 +107,7 @@ public class Playing extends GameScene implements SceneMethods {
             // Gold tick (po 3 sekundach dodajemy 1 gold)
             goldTick++;
             if(goldTick % (60*3) == 0)
-                actionBar.addGold(1000);
+                actionBar.addGold(1);
         }
     }
 
