@@ -13,7 +13,12 @@ public class Tower {
         this.y = y;
         this.id = id;
         this.towerType = towerType;
-        tier = 1;
+
+        if(towerType == help.Constants.Towers.CRAZY_CANNON)
+            tier = 4;
+        else
+            tier = 1;
+
         setDefaultDmg();
         setDefaultRange();
         setDefaultCooldown();

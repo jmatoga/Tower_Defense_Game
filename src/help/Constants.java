@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Constants {
-
     public static class MyFont {
-
         public static final float BIG_BUTTONS_SIZE = 60;
         public static final float SMALL_BUTTONS_SIZE = 30;
         public static final float TILE_BUTTONS_SIZE = 14;
@@ -20,13 +18,9 @@ public class Constants {
             } catch (FontFormatException | IOException e) {
                 e.printStackTrace();
             }
-
             return pixelFont;
         }
-
-
     }
-
 
     public static class Direction{
         public static final int LEFT = 0;
@@ -38,11 +32,9 @@ public class Constants {
     public static class Tiles{
         public static final int ROAD_TILE = 0;
         public static final int OTHER_TILE = 1;
-
     }
 
     public static class Enemies {
-
         public static final int EASY_UNIT = 0;
         public static final int NORMAL_UNIT = 1;
         public static final int HARD_UNIT = 2;
@@ -137,11 +129,11 @@ public class Constants {
                 case BRUTAL:
                     return 60;
                 case EXTRA:
-                    return 100;
+                    return (int) (30*1.6f); // koszt wiezy + upgrade
                 case FAST_MACHINE:
-                    return  200;
+                    return (int) (45*1.6f); // koszt wiezy + upgrade
                 case ONE_HIT:
-                    return 250;
+                    return (int) (60*1.6f); // koszt wiezy + upgrade
                 case CRAZY_CANNON:
                     return 400;
                 case DEUS_EX_MACHINA:
@@ -168,7 +160,7 @@ public class Constants {
                 case ONE_HIT:
                     return  "One Hit";
                 case CRAZY_CANNON:
-                    return  "Crazy Cannon";
+                    return  "Crazy";
                 case DEUS_EX_MACHINA:
                     return  "Deus Ex Machina";
                 case OWN_TOWER:

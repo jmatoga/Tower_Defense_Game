@@ -42,7 +42,7 @@ public class ActionBar extends Bar {
         bMENU = new MyButton("MENU", 1000, 840, 150, 40);
         bPause = new MyButton("PAUSE", 1000, 890, 150, 40);
 
-        towerButtons = new MyButton[3]; //liczba wież
+        towerButtons = new MyButton[4]; //liczba wież
 
         int w = 70;
         int h = 70;
@@ -50,8 +50,11 @@ public class ActionBar extends Bar {
         int yStart = 780;
         int xOffset = (int) (w * 1.2f);
 
-        for (int i = 0; i < towerButtons.length; i++)
+        for (int i = 0; i < towerButtons.length-1; i++)
             towerButtons[i] = new MyButton("", xStart + xOffset * i, yStart, w, h, i);
+
+        towerButtons[3] = new MyButton("", xStart + xOffset * 3, yStart, w, h, 6); // Crazy Cannon
+
 
         // TODO kolorki i na srodek napisy
         sellTower = new MyButton("Sell", 820, 890, 75, 30);
@@ -65,7 +68,6 @@ public class ActionBar extends Bar {
         //BufferedImage atlas = LoadSave.getSpriteResource();
         //BufferedImage img_bg = atlas.getSubimage(8*50,2*50,50,50);
 
-
         for (MyButton b : towerButtons) {
             g.setColor(Color.decode("0x7f5415"));
             g.fillRect(b.x, b.y, b.width, b.height); //dodanie tła
@@ -76,7 +78,6 @@ public class ActionBar extends Bar {
             drawButtonFeedback(g, b);
         }
     }
-
 
     public void draw(Graphics g) {
 
@@ -227,7 +228,7 @@ public class ActionBar extends Bar {
                 upgradeTower.draw(g, 16);
                 drawButtonFeedback(g, upgradeTower);
             }
-            else if (displayedTower.getTier() == 3){
+            else if (displayedTower.getTier() >= 3){
                 g.setFont(Constants.MyFont.setMyFont(16));
                 g.setColor(Color.decode("#008dff"));
                 g.drawString("MAX LVL!",910,910);
@@ -250,13 +251,15 @@ public class ActionBar extends Bar {
     }
 
     private int getUpgradeAmount(Tower displayedTower) {
-        return (int) (help.Constants.Towers.GetTowerCost(displayedTower.getTowerType()) * 0.4f);
+        return (int) (help.Constants.Towers.GetTowerCost(displayedTower.getTowerType()) * 0.6f);
     }
 
     private int getSellAmount(Tower displayedTower) {
-        int upgradeCost = (displayedTower.getTier() -1) * getUpgradeAmount(displayedTower);
-        upgradeCost *= 0.5f;
-        return help.Constants.Towers.GetTowerCost(displayedTower.getTowerType()) / 2 + upgradeCost;
+        if(displayedTower.getTier() == 3) {
+            return (int) (help.Constants.Towers.GetTowerCost(displayedTower.getTowerType()) * 1.6f) / 2;
+        } else {
+            return help.Constants.Towers.GetTowerCost(displayedTower.getTowerType()) / 2;
+        }
     }
 
     /**
@@ -298,18 +301,15 @@ public class ActionBar extends Bar {
     }
 
     private void sellTowerClicked() {
-        playing.removeTower(displayedTower);
         // dodanie 50% golda po sprzedaży
-        int upgradeCost = (displayedTower.getTier() -1) * getUpgradeAmount(displayedTower);
-        upgradeCost *= 0.5f;
-        gold += help.Constants.Towers.GetTowerCost(displayedTower.getTowerType()) / 2;
-        gold += upgradeCost;
+        gold += getSellAmount(displayedTower);
+        playing.removeTower(displayedTower);
         displayedTower = null;
     }
 
     private void upgradeTowerClicked() {
-        playing.upgradeTower(displayedTower);
         gold -= getUpgradeAmount(displayedTower);
+        playing.upgradeTower(displayedTower);
     }
 
     public void mouseClicked(int x, int y) {
