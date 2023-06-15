@@ -40,6 +40,7 @@ public abstract class Enemy {
         this.health -= dmg;
         if(health <= 0) {
             alive = false;
+            health = 0;
             enemyManager.rewardPlayer(enemyType);
         }
     }

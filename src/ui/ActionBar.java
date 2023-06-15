@@ -29,8 +29,12 @@ public class ActionBar extends Bar {
     private int towerCostType;
 
     private int lives = 20;
+    private int current = 0;
+    private int size = -1;
+    private int remaining = 0;
     private DecimalFormat formatter;
     private MyButton sellTower, upgradeTower;
+
 
     public ActionBar(int x, int y, int width, int height, Playing playing) {
         super(x, y, width, height);
@@ -76,6 +80,13 @@ public class ActionBar extends Bar {
         lives--;
         if(lives <= 0)
          SetGameState(GAME_OVER);
+    }
+
+    public boolean WinGame(){
+        if(current == size && remaining == 0)
+            return true;
+        return false;
+            //SetGameState(YOU_WIN);
     }
 
     private void drawButtons(Graphics g) {
@@ -142,8 +153,8 @@ public class ActionBar extends Bar {
     }
 
     private void drawWavesLeftInfo(Graphics g) {
-        int current = playing.getWaveManager().getWaveIndex();
-        int size = playing.getWaveManager().getWaves().size();
+        current = playing.getWaveManager().getWaveIndex();
+        size = playing.getWaveManager().getWaves().size();
         g.setColor(Color.red);
         g.setFont(Constants.MyFont.setMyFont(30));
         g.drawString("Wave " + (current + 1) + " / " + size, 600, 815);
@@ -162,7 +173,7 @@ public class ActionBar extends Bar {
     //814
 
     private void drawEnemiesLeftInfo(Graphics g) {
-        int remaining = playing.getEnemyManager().getAmountOfAliveEnemies();
+        remaining = playing.getEnemyManager().getAmountOfAliveEnemies();
         g.setColor(Color.red);
         g.setFont(Constants.MyFont.setMyFont(30));
         g.drawString("Enemies Left: " + remaining, 555, 855);

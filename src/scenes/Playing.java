@@ -6,6 +6,7 @@ import enemies.Enemy;
 import help.Constants;
 import help.LoadSave;
 import main.Game;
+import main.GameStates;
 import managers.*;
 import ui.ActionBar;
 
@@ -29,6 +30,7 @@ public class Playing extends GameScene implements SceneMethods {
     private Tower selectedTower;
     private int goldTick;
     private boolean gamePaused;
+    private boolean gameWin = false;
     private int DificultyLevel;
 
 
@@ -108,7 +110,10 @@ public class Playing extends GameScene implements SceneMethods {
             goldTick++;
             if(goldTick % (60*3) == 0)
                 actionBar.addGold(1);
+
         }
+
+
     }
 
     private boolean isWaveTimerOver() {
@@ -335,6 +340,10 @@ public class Playing extends GameScene implements SceneMethods {
 
     public void removeOneLife() {
         actionBar.removeOneLife();
+    }
+
+    public void winGame(){
+        GameStates.SetGameState(GameStates.YOU_WIN);
     }
 
     public void resetEverythig() {
