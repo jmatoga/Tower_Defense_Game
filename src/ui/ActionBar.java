@@ -17,7 +17,6 @@ import java.text.DecimalFormat;
 import static main.GameStates.*;
 
 public class ActionBar extends Bar {
-
     private MyButton bMENU, bPause;
     private Playing playing;
     private MyButton[] towerButtons;
@@ -27,11 +26,10 @@ public class ActionBar extends Bar {
     private int gold = 100; // pieniadze, zaczynamy z 100
     private boolean showTowerCost;
     private int towerCostType;
-
     private int lives = 20;
-    private int current = 0;
-    private int size = -1;
-    private int remaining = 0;
+    private int current;
+    private int size;
+    private int remaining;
     private DecimalFormat formatter;
     private MyButton sellTower, upgradeTower;
 
@@ -82,11 +80,14 @@ public class ActionBar extends Bar {
          SetGameState(GAME_OVER);
     }
 
+    /**
+     * Funkcja do sprawdzania czy gracz wygrał
+     * @return true/false
+     */
     public boolean WinGame(){
-        if(current == size && remaining == 0)
+        if(current + 1 == size && remaining == 0)
             return true;
         return false;
-            //SetGameState(YOU_WIN);
     }
 
     private void drawButtons(Graphics g) {
@@ -162,15 +163,6 @@ public class ActionBar extends Bar {
         g.setFont(Constants.MyFont.setMyFont(30));
         g.drawString("Wave " + (current + 1) + " / " + size, 599, 814);
     }
-
-    // 855
-    // 854
-
-    // 895
-    //894
-
-    //815
-    //814
 
     private void drawEnemiesLeftInfo(Graphics g) {
         remaining = playing.getEnemyManager().getAmountOfAliveEnemies();
@@ -309,7 +301,6 @@ public class ActionBar extends Bar {
 
     /**
      * Funckja rysuje zasieg danej wiezy
-     *
      * @param g
      */
     private void drawDisplaydTowerRange(Graphics g) {
@@ -321,7 +312,6 @@ public class ActionBar extends Bar {
 
     /**
      * Funckja robi obramówke zaznaczenia wieży na polu gry
-     *
      * @param g
      */
     private void drawDisplaydTowerBorder(Graphics g) {
@@ -473,5 +463,9 @@ public class ActionBar extends Bar {
         return lives;
     }
 
-
+    public void reset() {
+        size = -1;
+        current = 0;
+        remaining = 0;
+    }
 }

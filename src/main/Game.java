@@ -33,6 +33,7 @@ public class Game extends JFrame implements Runnable {
     private Settings settings;
     private Editing editing;
     private GameOver gameOver;
+    private YouWin youWin;
 
     private TileManager tileManager;
     private JPanel contentPane;
@@ -100,6 +101,8 @@ public class Game extends JFrame implements Runnable {
                 break;
             case EDIT:
                 break;
+            case YOU_WIN:
+                break;
             default:
                 break;
         }
@@ -117,6 +120,7 @@ public class Game extends JFrame implements Runnable {
         settings = new Settings(this);
         editing = new Editing(this);
         gameOver = new GameOver(this);
+        youWin = new YouWin(this);
     }
 
     public static void main(String[] args) {
@@ -147,6 +151,9 @@ public class Game extends JFrame implements Runnable {
     }
     public GameOver getGameOver() {
         return gameOver;
+    }
+    public YouWin getYouWin() {
+        return youWin;
     }
     public TileManager getTileManager(){
         return tileManager;

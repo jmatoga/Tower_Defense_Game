@@ -33,7 +33,6 @@ public class Playing extends GameScene implements SceneMethods {
     private boolean gameWin = false;
     private int DificultyLevel;
 
-
     public Playing(Game game) {
         super(game);
         loadDefaultLevel();
@@ -110,10 +109,9 @@ public class Playing extends GameScene implements SceneMethods {
             goldTick++;
             if(goldTick % (60*3) == 0)
                 actionBar.addGold(1);
-
         }
-
-
+            if(actionBar.WinGame())
+                winGame();
     }
 
     private boolean isWaveTimerOver() {
@@ -202,6 +200,7 @@ public class Playing extends GameScene implements SceneMethods {
             }
         }
     }
+
     /**
      * Sprawdzenie id bloku, na podstawie tego, zwrócenie typu bloku
      * @param x Kolumna
@@ -219,6 +218,7 @@ public class Playing extends GameScene implements SceneMethods {
         int id = lvl[y/50][x/50];
         return getGame().getTileManager().getTile(id).getTileType();
     }
+
     private BufferedImage getSprite(int spriteID){
         return getGame().getTileManager().getSprite(spriteID);
     }
@@ -250,7 +250,6 @@ public class Playing extends GameScene implements SceneMethods {
     private boolean isNotRoad(int x, int y) {
         int id = lvl[y/50][x/50];
         int tileType = getGame().getTileManager().getTile(id).getTileType();
-        System.out.println("TYPE: " + tileType);
         return tileType == OTHER_TILE;
     }
 
@@ -308,6 +307,7 @@ public class Playing extends GameScene implements SceneMethods {
     public void mouseDragged(int x, int y) {
 
     }
+
     public TowerManager getTowerManager(){
         return towerManager;
     }
@@ -320,8 +320,7 @@ public class Playing extends GameScene implements SceneMethods {
         projectileManager.newProjectile(t,e);
     }
 
-    public void keyPressed(KeyEvent e)
-    {
+    public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
             selectedTower = null;
     }
@@ -354,6 +353,7 @@ public class Playing extends GameScene implements SceneMethods {
         towerManager.reset();
         projectileManager.reset();
         waveManager.reset();
+        actionBar.reset();
 
         mouseX = 0;
         mouseY = 0;

@@ -32,6 +32,9 @@ public class Render {
             case GAME_OVER:
                 game.getGameOver().render(g);
                 break;
+            case YOU_WIN:
+                game.getYouWin().render(g);
+                break;
 
         }
     }

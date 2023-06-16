@@ -38,7 +38,8 @@ public abstract class Enemy {
 
     public void hurt(int dmg){
         this.health -= dmg;
-        if(health <= 0) {
+        //System.out.println("hp: "+health + "a" + alive);
+        if(this.health <= 0) {
             alive = false;
             health = 0;
             enemyManager.rewardPlayer(enemyType);

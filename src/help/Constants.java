@@ -184,7 +184,7 @@ public class Constants {
                 case ONE_HIT:
                     return 120;
                 case CRAZY_CANNON:
-                    return 50;
+                    return 20;
                 case DEUS_EX_MACHINA:
                     return 500;
                 case OWN_TOWER:
